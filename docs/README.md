@@ -1,4 +1,4 @@
-# Duke
+# NUScents
 
 {Give product intro here}
 
