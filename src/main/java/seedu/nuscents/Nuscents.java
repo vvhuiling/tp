@@ -13,7 +13,7 @@ public class Nuscents {
                     + "|       |  |  |  | \\__   |  |   |   __|       |  |  |    \\__   |\n"
                     + "|       |  |__|  |/      |   \\__|     |       |  |  |   /      |\n"
                     + "|__|\\___|________|______/ \\_____|_____|__|\\___|  |__|   |_____/\n";
-        System.out.println("Welcome to \n" + logo);
+        System.out.println("Welcome to\n" + logo);
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
