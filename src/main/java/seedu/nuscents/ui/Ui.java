@@ -6,7 +6,10 @@ import seedu.nuscents.data.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.nuscents.ui.Messages.*;
+import static seedu.nuscents.ui.Messages.MESSAGE_BYE;
+import static seedu.nuscents.ui.Messages.LINE;
+import static seedu.nuscents.ui.Messages.LOGO;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_LIST;
 
 public class Ui {
     private final Scanner input;

@@ -4,7 +4,9 @@ import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.nuscents.ui.Messages.*;
+import static seedu.nuscents.ui.Messages.MESSAGE_MARK;
+import static seedu.nuscents.ui.Messages.LINE;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNMARK;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -20,19 +22,11 @@ public class TaskList {
         return tasks;
     }
 
-    /**
-     * Adds a task to the list of tasks.
-     * @param task task to be added
-     */
     public void addTask(Task task) {
         tasks.add(task);
         Ui.showTaskAddedMessage(task);
     }
 
-    /**
-     * Deletes a specific task based on the index.
-     * @param taskIndex index of the task to be deleted
-     */
     public void deleteTask(int taskIndex) {
         Task task = tasks.get(taskIndex-1);
         tasks.remove(task);
@@ -40,10 +34,6 @@ public class TaskList {
         Ui.showTaskRemovedMessage(task);
     }
 
-    /**
-     * Marks a specific task as done based on the index.
-     * @param taskIndex index of the task to be marked as done
-     */
     public void markTask(int taskIndex) {
         tasks.get(taskIndex-1).markTask();
         System.out.println(LINE);
@@ -52,10 +42,6 @@ public class TaskList {
         System.out.println(LINE);
     }
 
-    /**
-     * Marks a specific task as not done based on the index.
-     * @param taskIndex index of the task to be marked as not done
-     */
     public void unMarkTask(int taskIndex) {
         tasks.get(taskIndex-1).unMarkTask();
         System.out.println(LINE);
@@ -64,10 +50,6 @@ public class TaskList {
         System.out.println(LINE);
     }
 
-    /**
-     * Finds a list of tasks that contains the specified keyword provided by the user.
-     * @param keyword keyword to be searched
-     */
     public void findTask(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
         boolean isFound = false;

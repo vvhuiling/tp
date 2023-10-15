@@ -5,12 +5,23 @@ import seedu.nuscents.data.Task;
 import seedu.nuscents.data.Todo;
 import seedu.nuscents.data.exception.NuscentsException;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static seedu.nuscents.commands.ListOfCommands.*;
-import static seedu.nuscents.ui.Messages.*;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_BYE;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_MARK;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_UNMARK;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_TODO;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
+
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_TODO;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 
 public class Parser {
     private static final String DATE_TIME_PATTERN1 = "\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{4}"; // dd/mm/yyyy 1500
