@@ -4,9 +4,9 @@ package seedu.nuscents.data;
  * Represents a Task in the TaskList.
  */
 public class Task {
+    private static int count = 0;
     protected boolean isMarked;
     protected String description;
-    private static int count = 0;
 
     public Task (String description) {
         this.description = description;

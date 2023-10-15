@@ -1,6 +1,17 @@
 package seedu.nuscents.parser;
 
-import seedu.nuscents.commands.*;
+import seedu.nuscents.commands.Command;
+import seedu.nuscents.commands.ExitCommand;
+import seedu.nuscents.commands.ListCommand;
+import seedu.nuscents.commands.MarkCommand;
+import seedu.nuscents.commands.UnmarkCommand;
+import seedu.nuscents.commands.AddCommand;
+import seedu.nuscents.commands.DeleteCommand;
+import seedu.nuscents.commands.FindCommand;
+import seedu.nuscents.commands.HelpCommand;
+import seedu.nuscents.commands.InvalidCommand;
+
+
 import seedu.nuscents.data.Task;
 import seedu.nuscents.data.Todo;
 import seedu.nuscents.data.exception.NuscentsException;
@@ -121,4 +132,3 @@ public class Parser {
         }
     }
 }
-
