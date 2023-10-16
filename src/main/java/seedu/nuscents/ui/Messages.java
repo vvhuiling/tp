@@ -8,7 +8,7 @@ public class Messages {
             + "|       |  |  |  | \\__   |  |   |   __|       |  |  |    \\__   |\n"
             + "|       |  |__|  |/      |   \\__|     |       |  |  |   /      |\n"
             + "|__|\\___|________|______/ \\_____|_____|__|\\___|  |__|   |_____/\n";
-    public static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+    public static final String MESSAGE_EXIT = "Thank you for using NUScents. Hope to see you again soon!";
     public static final String MESSAGE_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_MARK = "Nice! I've marked this task as done:";
     public static final String MESSAGE_UNMARK = "OK, I've marked this task as not done yet:";

@@ -6,7 +6,7 @@ import seedu.nuscents.data.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.nuscents.ui.Messages.MESSAGE_BYE;
+import static seedu.nuscents.ui.Messages.MESSAGE_EXIT;
 import static seedu.nuscents.ui.Messages.LINE;
 import static seedu.nuscents.ui.Messages.LOGO;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_LIST;
@@ -35,7 +35,7 @@ public class Ui {
 
     public static void showGoodbyeMessage() {
         System.out.println(LINE);
-        System.out.println(MESSAGE_BYE);
+        System.out.println(MESSAGE_EXIT);
         System.out.println(LINE);
     }
 
