@@ -19,7 +19,7 @@ import seedu.nuscents.data.exception.NuscentsException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_BYE;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_MARK;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_UNMARK;
@@ -51,7 +51,7 @@ public class Parser {
         }
         try {
             switch (commandType){
-            case COMMAND_BYE:
+            case COMMAND_EXIT:
                 return new ExitCommand();
             case COMMAND_LIST:
                 return new ListCommand();
