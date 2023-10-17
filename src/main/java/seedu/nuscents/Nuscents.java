@@ -11,6 +11,7 @@ import seedu.nuscents.data.TransactionList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Nuscents {
     private Ui ui;
@@ -21,7 +22,7 @@ public class Nuscents {
      * Sets up the required objects and loads up the data from the storage file.
      * @param filePath path of the file used to store data
      */
-    public Nuscents(String filePath) throws IOException {
+    public Nuscents(String filePath) throws IOException, ParseException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -58,7 +59,7 @@ public class Nuscents {
                 storage.writeToFile(transactions);
             } catch (NuscentsException e) {
                 ui.showException(e);
-            } catch (IOException e) {
+            } catch (IOException | ParseException e) {
                 Ui.showLine();
                 System.out.println("Something went wrong: " + e.getMessage());
                 Ui.showLine();
@@ -68,7 +69,7 @@ public class Nuscents {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         new Nuscents("./data/nuscents.txt").run();
     }
 }
