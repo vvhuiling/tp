@@ -30,7 +30,7 @@ public class Storage {
     public ArrayList<Transaction> readDataFromFile() throws FileNotFoundException {
         ArrayList<Transaction> transactions = new ArrayList<>();
         File file = new File(filePath);
-        taskDecoder(file, transactions);
+        transactionDecoder(file, transactions);
         return transactions;
     }
 
@@ -40,7 +40,8 @@ public class Storage {
      * @param transactions arraylist of tasks
      * @throws FileNotFoundException If the storage data file does not exist.
      */
-    private static void taskDecoder(File file, ArrayList<Transaction> transactions) throws FileNotFoundException {
+    private static void transactionDecoder(File file, ArrayList<Transaction> transactions)
+            throws FileNotFoundException {
         Scanner data = new Scanner(file);
         while (data.hasNext()) {
             String transactionDetails = data.nextLine();
