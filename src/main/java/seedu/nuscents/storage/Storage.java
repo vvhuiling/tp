@@ -1,5 +1,6 @@
 package seedu.nuscents.storage;
 
+import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.data.Todo;
@@ -68,8 +69,8 @@ public class Storage {
         FileWriter fw = new FileWriter(file);
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
-            int markedIndex = encodeTaskStatus(transaction.getTaskStatus());
-            String output = toString(transaction, markedIndex);
+//            int markedIndex = encodeTaskStatus(transaction.getTaskStatus());
+            String output = toString(transaction);
             fw.write(output);
             fw.write("\n");
         }
@@ -96,9 +97,13 @@ public class Storage {
      * @param markedIndex integer indicator of the task status
      * @return a String object to be stored in the storage data file
      */
-    private static String toString(Transaction transaction, int markedIndex) {
-        if (transaction instanceof Todo) {
-            return "T | " + markedIndex + " | " + transaction.getDescription();
+    private static String toString(Transaction transaction) {
+        if (transaction instanceof Allowance) {
+            return "T" + " | "
+                    + transaction.getAmount() + " | "
+                    + transaction.getDate()  + " | "
+                    + transaction.getDescription() + " | "
+                    + transaction.getAdditionalInfo();
         } else {
             return null;
         }

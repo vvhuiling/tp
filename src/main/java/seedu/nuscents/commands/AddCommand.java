@@ -11,7 +11,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TransactionList tasks) {
-        tasks.addTransaction(transaction);
+    public void execute(TransactionList transactions) {
+        transactions.addTransaction(transaction);
     }
 }

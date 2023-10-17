@@ -21,7 +21,7 @@ public class Nuscents {
      * Sets up the required objects and loads up the data from the storage file.
      * @param filePath path of the file used to store data
      */
-    public Nuscents (String filePath) throws IOException {
+    public Nuscents(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
