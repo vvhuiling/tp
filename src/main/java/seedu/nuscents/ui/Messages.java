@@ -24,4 +24,5 @@ public class Messages {
     public static final String MESSAGE_EMPTY_LIST = "You have not made any transactions!";
     public static final String MESSAGE_EMPTY_KEYWORD = "OOPS!!! The keyword of a find command cannot be empty.";
     public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a mark/unmark command cannot be empty.";
+    public static final String MESSAGE_READ_ERROR = "OOPS!!! A problem occurred while reading the data file.";
 }

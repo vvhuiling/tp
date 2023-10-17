@@ -46,7 +46,7 @@ public class TransactionList {
             int resultCount = 1;
             System.out.println("Here are the matching tasks in your list:");
             for (Transaction transaction : results) {
-                System.out.println(resultCount + ". " + transaction.getDetails());
+                System.out.println(resultCount + ". " + transaction.getDescription());
             }
         } else {
             System.out.println("No matching tasks are found :/");
