@@ -3,8 +3,6 @@ package seedu.nuscents.parser;
 import seedu.nuscents.commands.Command;
 import seedu.nuscents.commands.ExitCommand;
 import seedu.nuscents.commands.ListCommand;
-import seedu.nuscents.commands.MarkCommand;
-import seedu.nuscents.commands.UnmarkCommand;
 import seedu.nuscents.commands.AddCommand;
 import seedu.nuscents.commands.DeleteCommand;
 import seedu.nuscents.commands.FindCommand;
@@ -12,8 +10,8 @@ import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
 
 
-import seedu.nuscents.data.Task;
-import seedu.nuscents.data.Todo;
+import seedu.nuscents.data.Transaction;
+import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.exception.NuscentsException;
 
 import java.time.LocalDateTime;
@@ -21,24 +19,23 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_MARK;
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_UNMARK;
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_TODO;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_ALLOWANCE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
-
-import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
-import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
-import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_TODO;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 
 public class Parser {
-    private static final String DATE_TIME_PATTERN1 = "\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{4}"; // dd/mm/yyyy 1500
-    private static final String DATE_TIME_PATTERN2 = "\\d{4}/\\d{1,2}/\\d{1,2}\\s+\\d{4}"; // yyyy/mm/dd 1500
-    private static final String DATE_TIME_PATTERN3 = "\\d{1,2}-\\d{1,2}-\\d{4}\\s+\\d{4}"; // dd-mm-yyyy 1500
-    private static final String DATE_TIME_PATTERN4 = "\\d{4}-\\d{1,2}-\\d{1,2}\\s+\\d{4}"; // yyyy-mm-dd 1500
+    private static final String DATE_TIME_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}\\s+\\d{4}"; // dd-mm-yyyy 1500
+    private static final String DATE_TIME_PATTERN2 = "\\d{4}-\\d{1,2}-\\d{1,2}\\s+\\d{4}"; // yyyy-mm-dd 1500
+    private static final String AMT_PATTERN = "/amt ([^/]+)";
+    private static final String DATE_PATTERN = "/date ([^/]+)";
+    private static final String DESC_PATTERN = "/desc ([^/]+)";
+    private static final String NOTE_PATTERN = "/note ([^/]+)";
 
     public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException {
         String[] commandTypeAndArgs = text.split(" ", 2);
@@ -50,17 +47,13 @@ public class Parser {
             arguments = null;
         }
         try {
-            switch (commandType){
+            switch (commandType) {
             case COMMAND_EXIT:
                 return new ExitCommand();
             case COMMAND_LIST:
                 return new ListCommand();
-            case COMMAND_MARK:
-                return new MarkCommand(parseTaskIndex(arguments));
-            case COMMAND_UNMARK:
-                return new UnmarkCommand(parseTaskIndex(arguments));
-            case COMMAND_TODO:
-                return new AddCommand(parseTodo(arguments));
+            case COMMAND_ALLOWANCE:
+                return new AddCommand(parseAllowance(arguments));
             case COMMAND_DELETE:
                 return new DeleteCommand(parseTaskIndex(arguments));
             case COMMAND_FIND:
@@ -77,12 +70,8 @@ public class Parser {
 
     private static String dateTimePatternValidation(String date) throws NuscentsException {
         if (date.matches(DATE_TIME_PATTERN1)) {
-            return "d/M/yyyy HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN2)) {
-            return "yyyy/M/d HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN3)) {
             return "d-M-yyyy HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN4)) {
+        } else if (date.matches(DATE_TIME_PATTERN2)) {
             return "yyyy-M-d HHmm";
         } else {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
@@ -104,11 +93,25 @@ public class Parser {
         return LocalDateTime.parse(date, formatter);
     }
 
-    public static Todo parseTodo(String arguments) throws NuscentsException {
+    /**
+     * Parsers arguments in the context of adding an allowance.
+     *
+     * @param arguments full command argument string
+     * @return a {@link Allowance} object
+     * @throws NuscentsException If the description of the allowance is empty.
+     */
+    public static Allowance parseAllowance(String arguments) throws NuscentsException {
         if (arguments == null) {
-            throw new NuscentsException(MESSAGE_EMPTY_TODO);
+            throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
         } else {
-            return new Todo(arguments);
+            String amount = extractValue(arguments, AMT_PATTERN, false);
+            String date = extractValue(arguments, DATE_PATTERN, false);
+            String description = extractValue(arguments, DESC_PATTERN, false);
+            String additionalInformation = extractValue(arguments, NOTE_PATTERN, true);
+            String format = dateTimePatternValidation(date);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            LocalDateTime formattedDate = parseDate(date, format, formatter);
+            return new Allowance(amount, formattedDate, description, additionalInformation);
         }
     }
 
@@ -118,7 +121,7 @@ public class Parser {
             throw new NuscentsException(MESSAGE_EMPTY_INDEX);
         }
         int taskIndex = Integer.parseInt(arguments);
-        if (taskIndex > Task.getTaskCount() || taskIndex <= 0) {
+        if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
             throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
         }
         return taskIndex;
@@ -130,5 +133,17 @@ public class Parser {
         } else {
             return arguments;
         }
+    }
+
+    private static String extractValue(String input, String pattern, boolean isOptional) throws NuscentsException {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
+        java.util.regex.Matcher m = p.matcher(input);
+
+        if (m.find()) {
+            return m.group(1).trim();
+        } else if (!isOptional) {
+            throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
+        }
+        return "";
     }
 }

@@ -6,7 +6,7 @@ import seedu.nuscents.data.exception.NuscentsException;
 import seedu.nuscents.parser.Parser;
 import seedu.nuscents.storage.Storage;
 import seedu.nuscents.ui.Ui;
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.TransactionList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,23 +15,23 @@ import java.io.IOException;
 public class Nuscents {
     private Ui ui;
     private Storage storage;
-    private TaskList tasks;
+    private TransactionList transactions;
 
     /**
      * Sets up the required objects and loads up the data from the storage file.
      * @param filePath path of the file used to store data
      */
-    public Nuscents (String filePath) throws IOException {
+    public Nuscents(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.readDataFromFile());
+            transactions = new TransactionList(storage.readDataFromFile());
         } catch (FileNotFoundException e) {
             Ui.showReadDataError();
             File file = new File(filePath);
             file.getParentFile().mkdirs();
             file.createNewFile();
-            tasks = new TaskList(storage.readDataFromFile());
+            transactions = new TransactionList(storage.readDataFromFile());
         }
     }
 
@@ -52,10 +52,10 @@ public class Nuscents {
         while (!isExit) {
             try {
                 String fullCommand = ui.getUserCommand();
-                Command command = Parser.parseCommand(fullCommand, tasks);
-                command.execute(tasks);
+                Command command = Parser.parseCommand(fullCommand, transactions);
+                command.execute(transactions);
                 isExit = ExitCommand.isExit(command);
-                storage.writeToFile(tasks);
+                storage.writeToFile(transactions);
             } catch (NuscentsException e) {
                 ui.showException(e);
             } catch (IOException e) {

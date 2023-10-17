@@ -1,17 +1,17 @@
 package seedu.nuscents.commands;
 
-import seedu.nuscents.data.Task;
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.Transaction;
+import seedu.nuscents.data.TransactionList;
 
 public class AddCommand extends Command {
-    private Task task;
+    private Transaction transaction;
 
-    public AddCommand(Task task) {
-        this.task = task;
+    public AddCommand(Transaction transaction) {
+        this.transaction = transaction;
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        tasks.addTask(task);
+    public void execute(TransactionList transactions) {
+        transactions.addTransaction(transaction);
     }
 }

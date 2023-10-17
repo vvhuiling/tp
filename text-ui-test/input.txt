@@ -1,3 +1,4 @@
 James
 help
+allowance not following format
 exit
