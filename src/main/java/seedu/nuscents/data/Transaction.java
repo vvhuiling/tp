@@ -1,19 +1,19 @@
 package seedu.nuscents.data;
 
 /**
- * Represents a Task in the TaskList.
+ * Represents a Transaction in the TransactionList
  */
-public class Task {
+public class Transaction {
     private static int count = 0;
     protected boolean isMarked;
     protected String description;
 
-    public Task (String description) {
+    public Transaction(String description) {
         this.description = description;
         count++;
     }
 
-    public Task (String description, int setMark) {
+    public Transaction(String description, int setMark) {
         this.description = description;
         if (setMark == 1) {
             isMarked = true;
@@ -49,14 +49,14 @@ public class Task {
         return description;
     }
 
-    public static int getTaskCount() {
+    public static int getTransactionCount() {
         return count;
     }
 
     /**
      * Decrease the task count by one when a task is deleted.
      */
-    public static void decreaseTaskCountByOne() {
+    public static void decreaseTransactionCountByOne() {
         count--;
     }
 

@@ -1,11 +1,11 @@
 package seedu.nuscents.commands;
 
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.ui.Ui;
 
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList tasks) {
+    public void execute(TransactionList tasks) {
         Ui.showGoodbyeMessage();
     }
 

@@ -1,7 +1,7 @@
 package seedu.nuscents.commands;
 
 
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.TransactionList;
 
 public class DeleteCommand extends Command {
     private int taskIndex;
@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        tasks.deleteTask(taskIndex);
+    public void execute(TransactionList tasks) {
+        tasks.deleteTransaction(taskIndex);
     }
 }

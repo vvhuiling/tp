@@ -1,7 +1,7 @@
 package seedu.nuscents.ui;
 
-import seedu.nuscents.data.Task;
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.Transaction;
+import seedu.nuscents.data.TransactionList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,37 +47,37 @@ public class Ui {
     }
 
     public static void showTaskCount( ) {
-        System.out.println("Now you have " + Task.getTaskCount() + " tasks in the list.");
+        System.out.println("Now you have " + Transaction.getTransactionCount() + " tasks in the list.");
     }
 
-    public static void showTaskAddedMessage(Task task) {
+    public static void showTaskAddedMessage(Transaction transaction) {
         System.out.println(LINE);
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task.getDetails());
+        System.out.println("  " + transaction.getDetails());
         showTaskCount();
         System.out.println(LINE);
     }
 
-    public static void showTaskRemovedMessage(Task task) {
+    public static void showTaskRemovedMessage(Transaction transaction) {
         System.out.println(LINE);
         System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task.getDetails());
+        System.out.println("  " + transaction.getDetails());
         showTaskCount();
         System.out.println(LINE);
     }
 
-    public static void showTaskList(TaskList taskList) {
+    public static void showTaskList(TransactionList transactionList) {
         System.out.println(LINE);
-        if (taskList.getTasks().isEmpty()) {
+        if (transactionList.getTasks().isEmpty()) {
             System.out.println(MESSAGE_EMPTY_LIST);
             System.out.println(LINE);
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        ArrayList<Task> tasks = taskList.getTasks();
-        for (Task task : tasks) {
-            int index = tasks.indexOf(task) + 1;
-            System.out.println(index + ". " + task.getDetails());
+        ArrayList<Transaction> transactions = transactionList.getTasks();
+        for (Transaction transaction : transactions) {
+            int index = transactions.indexOf(transaction) + 1;
+            System.out.println(index + ". " + transaction.getDetails());
         }
         System.out.println(LINE);
     }

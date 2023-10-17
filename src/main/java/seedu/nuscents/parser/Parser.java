@@ -12,7 +12,7 @@ import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
 
 
-import seedu.nuscents.data.Task;
+import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.Todo;
 import seedu.nuscents.data.exception.NuscentsException;
 
@@ -118,7 +118,7 @@ public class Parser {
             throw new NuscentsException(MESSAGE_EMPTY_INDEX);
         }
         int taskIndex = Integer.parseInt(arguments);
-        if (taskIndex > Task.getTaskCount() || taskIndex <= 0) {
+        if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
             throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
         }
         return taskIndex;

@@ -6,7 +6,7 @@ import seedu.nuscents.data.exception.NuscentsException;
 import seedu.nuscents.parser.Parser;
 import seedu.nuscents.storage.Storage;
 import seedu.nuscents.ui.Ui;
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.TransactionList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Nuscents {
     private Ui ui;
     private Storage storage;
-    private TaskList tasks;
+    private TransactionList tasks;
 
     /**
      * Sets up the required objects and loads up the data from the storage file.
@@ -25,13 +25,13 @@ public class Nuscents {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.readDataFromFile());
+            tasks = new TransactionList(storage.readDataFromFile());
         } catch (FileNotFoundException e) {
             Ui.showReadDataError();
             File file = new File(filePath);
             file.getParentFile().mkdirs();
             file.createNewFile();
-            tasks = new TaskList(storage.readDataFromFile());
+            tasks = new TransactionList(storage.readDataFromFile());
         }
     }
 

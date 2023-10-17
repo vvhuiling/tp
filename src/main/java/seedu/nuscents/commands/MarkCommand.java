@@ -1,6 +1,6 @@
 package seedu.nuscents.commands;
 
-import seedu.nuscents.data.TaskList;
+import seedu.nuscents.data.TransactionList;
 
 public class MarkCommand extends Command {
     private int taskIndex;
@@ -10,7 +10,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public void execute(TransactionList tasks) {
         tasks.markTask(taskIndex);
     }
 }

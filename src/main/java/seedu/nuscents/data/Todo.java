@@ -1,6 +1,6 @@
 package seedu.nuscents.data;
 
-public class Todo extends Task{
+public class Todo extends Transaction {
     public Todo (String description) {
         super(description);
         isMarked = false;
