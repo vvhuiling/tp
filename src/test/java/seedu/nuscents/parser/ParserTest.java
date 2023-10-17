@@ -58,7 +58,7 @@ public class ParserTest {
 
     @Test
     public void parseAllowance_invalidDateTime_exceptionThrown() {
-        String input = "allowance /amt 100 /date 15/10/2023 1500 /desc Lunch";
+        String input = "allowance /amt 100 /date 15/10/2023 /desc Lunch";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
@@ -67,7 +67,7 @@ public class ParserTest {
 
     @Test
     public void parseExpense_invalidDateTime_exceptionThrown() {
-        String input = "expense /amt 50 /date 16.10.2023 1700 /desc Dinner";
+        String input = "expense /amt 50 /date 16.10.2023 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
