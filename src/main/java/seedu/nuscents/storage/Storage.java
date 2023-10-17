@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,13 +44,19 @@ public class Storage {
     private static void taskDecoder(File file, ArrayList<Transaction> transactions) throws FileNotFoundException {
         Scanner data = new Scanner(file);
         while (data.hasNext()) {
-            String taskDetails = data.nextLine();
-            char taskType = taskDetails.charAt(0);
-            String[] descriptions = taskDetails.split("[|]");
-            int isMarked = Integer.parseInt(descriptions[1].trim());
-            switch (taskType) {
-            case 'T':
-                transactions.add(new Todo(descriptions[2].trim(), isMarked));
+            String transactionDetails = data.nextLine();
+            char transactionType = transactionDetails.charAt(0);
+            switch (transactionType) {
+            case 'A':
+                String[] columns = transactionDetails.split("\\s*\\|\\s*");
+                String amount = columns[1];
+                LocalDateTime date = LocalDateTime.parse(columns[2]);
+                String description = columns[3];
+                String note = "";
+                if (columns.length > 4) {
+                    note = columns[4];
+                }
+                transactions.add(new Allowance(amount, date, description, note));
                 break;
 
             default:
@@ -99,7 +106,7 @@ public class Storage {
      */
     private static String toString(Transaction transaction) {
         if (transaction instanceof Allowance) {
-            return "T" + " | "
+            return "A" + " | "
                     + transaction.getAmount() + " | "
                     + transaction.getDate()  + " | "
                     + transaction.getDescription() + " | "
