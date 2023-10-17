@@ -15,8 +15,9 @@ import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
@@ -34,14 +35,15 @@ import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 
 public class Parser {
-    private static final String DATE_TIME_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}\\s+\\d{4}"; // dd-mm-yyyy 1500
-    private static final String DATE_TIME_PATTERN2 = "\\d{4}-\\d{1,2}-\\d{1,2}\\s+\\d{4}"; // yyyy-mm-dd 1500
+    private static final String DATE_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}"; // dd-mm-yyyy
+    private static final String DATE_PATTERN2 = "\\d{4}-\\d{1,2}-\\d{1,2}"; // yyyy-mm-dd
     private static final String AMT_PATTERN = "/amt ([^/]+)";
     private static final String DATE_PATTERN = "/date ([^/]+)";
     private static final String DESC_PATTERN = "/desc ([^/]+)";
     private static final String NOTE_PATTERN = "/note ([^/]+)";
 
-    public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException {
+    public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException,
+            ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
         String commandType = commandTypeAndArgs[0];
         String arguments;
@@ -69,23 +71,23 @@ public class Parser {
             default:
                 return new InvalidCommand();
             }
-        } catch (NuscentsException e) {
+        } catch (NuscentsException | ParseException e) {
             throw e;
         }
     }
 
-    private static String dateTimePatternValidation(String date) throws NuscentsException {
-        if (date.matches(DATE_TIME_PATTERN1)) {
-            return "d-M-yyyy HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN2)) {
-            return "yyyy-M-d HHmm";
+    private static String datePatternValidation(String date) throws NuscentsException {
+        if (date.matches(DATE_PATTERN1)) {
+            return "d-M-yyyy";
+        } else if (date.matches(DATE_PATTERN2)) {
+            return "yyyy-M-d";
         } else {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
         }
     }
 
-    private static LocalDateTime parseDate(String date, String format, DateTimeFormatter formatter)
-            throws NuscentsException {
+    private static Date parseDate(String date, String format, SimpleDateFormat formatter)
+            throws NuscentsException, ParseException {
         String separator;
         if (format.contains("-")) {
             separator = "-";
@@ -96,7 +98,7 @@ public class Parser {
         if (Integer.parseInt(dateMonthYear[1]) > 12) {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
         }
-        return LocalDateTime.parse(date, formatter);
+        return formatter.parse(date);
     }
 
     /**
@@ -106,7 +108,7 @@ public class Parser {
      * @return a {@link Allowance} object
      * @throws NuscentsException If the description of the allowance is empty.
      */
-    public static Allowance parseAllowance(String arguments) throws NuscentsException {
+    public static Allowance parseAllowance(String arguments) throws NuscentsException, ParseException {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
         } else {
@@ -114,9 +116,9 @@ public class Parser {
             String date = extractValue("allowance", arguments, DATE_PATTERN, false);
             String description = extractValue("allowance", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("allowance", arguments, NOTE_PATTERN, true);
-            String format = dateTimePatternValidation(date);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-            LocalDateTime formattedDate = parseDate(date, format, formatter);
+            String format = datePatternValidation(date);
+            SimpleDateFormat formatter = new SimpleDateFormat(format);
+            Date formattedDate = parseDate(date, format, formatter);
             return new Allowance(amount, formattedDate, description, additionalInformation);
         }
     }
@@ -128,7 +130,7 @@ public class Parser {
      * @return a {@link Expense} object
      * @throws NuscentsException If the description of the expense is empty.
      */
-    public static Expense parseExpense(String arguments) throws NuscentsException {
+    public static Expense parseExpense(String arguments) throws NuscentsException, ParseException {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_EXPENSE);
         } else {
@@ -136,9 +138,9 @@ public class Parser {
             String date = extractValue("expense", arguments, DATE_PATTERN, false);
             String description = extractValue("expense", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("expense", arguments, NOTE_PATTERN, true);
-            String format = dateTimePatternValidation(date);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-            LocalDateTime formattedDate = parseDate(date, format, formatter);
+            String format = datePatternValidation(date);
+            SimpleDateFormat formatter = new SimpleDateFormat(format);
+            Date formattedDate = parseDate(date, format, formatter);
             return new Expense(amount, formattedDate, description, additionalInformation);
         }
     }

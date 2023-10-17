@@ -5,6 +5,7 @@ import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ParserTest {
 
     @Test
-    public void parseAllowance_validInput_success() throws NuscentsException {
+    public void parseAllowance_validInput_success() throws NuscentsException, ParseException {
         String arguments = "/amt 100 /date 15-10-2023 1500 /desc Birthday Gift /note From friends";
         Allowance allowance = Parser.parseAllowance(arguments);
         assertEquals("100", allowance.getAmount());
@@ -26,7 +27,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseExpense_validInput_success() throws NuscentsException {
+    public void parseExpense_validInput_success() throws NuscentsException, ParseException {
         String arguments = "/amt 50 /date 16-10-2023 1700 /desc Dinner /note Alone";
         Expense expense = Parser.parseExpense(arguments);
         assertEquals("50", expense.getAmount());

@@ -7,5 +7,5 @@ public abstract class Command {
     /**
      * Executes the command.
      */
-    public abstract void execute(TransactionList tasks) throws NuscentsException;
+    public abstract void execute(TransactionList transactionList) throws NuscentsException;
 }

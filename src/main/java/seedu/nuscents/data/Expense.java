@@ -1,9 +1,9 @@
 package seedu.nuscents.data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Expense extends Transaction {
-    public Expense(String amount, LocalDateTime date, String description, String additionalInfo) {
+    public Expense(String amount, Date date, String description, String additionalInfo) {
         super(amount, date, description, additionalInfo);
     }
 }

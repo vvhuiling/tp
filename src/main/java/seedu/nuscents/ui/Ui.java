@@ -1,5 +1,7 @@
 package seedu.nuscents.ui;
 
+import seedu.nuscents.data.Allowance;
+import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.TransactionList;
 
@@ -53,7 +55,7 @@ public class Ui {
     public static void showTransactionAddedMessage(Transaction transaction) {
         System.out.println(LINE);
         System.out.println("Got it. I've added this transaction:");
-        System.out.println("  " + transaction.getDetails());
+        System.out.println("  " + transaction.getDescription());
         showTransactionCount();
         System.out.println(LINE);
     }
@@ -61,7 +63,7 @@ public class Ui {
     public static void showTransactionRemovedMessage(Transaction transaction) {
         System.out.println(LINE);
         System.out.println("Noted. I've removed this transaction:");
-        System.out.println("  " + transaction.getDetails());
+        System.out.println("  " + transaction.getDescription());
         showTransactionCount();
         System.out.println(LINE);
     }
@@ -76,8 +78,12 @@ public class Ui {
         System.out.println("Here are the transactions in your list:");
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
-            int index = transactions.indexOf(transaction) + 1;
-            System.out.println(index + ". " + transaction.getDetails());
+            if (transaction instanceof Allowance) {
+                System.out.println("|A| " + transaction.toString());
+            } else if (transaction instanceof Expense) {
+                System.out.println("|E| " + transaction.toString());
+            }
+
         }
         System.out.println(LINE);
     }
