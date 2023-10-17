@@ -30,10 +30,8 @@ import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 
 public class Parser {
-    private static final String DATE_TIME_PATTERN1 = "\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{4}"; // dd/mm/yyyy 1500
-    private static final String DATE_TIME_PATTERN2 = "\\d{4}/\\d{1,2}/\\d{1,2}\\s+\\d{4}"; // yyyy/mm/dd 1500
-    private static final String DATE_TIME_PATTERN3 = "\\d{1,2}-\\d{1,2}-\\d{4}\\s+\\d{4}"; // dd-mm-yyyy 1500
-    private static final String DATE_TIME_PATTERN4 = "\\d{4}-\\d{1,2}-\\d{1,2}\\s+\\d{4}"; // yyyy-mm-dd 1500
+    private static final String DATE_TIME_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}\\s+\\d{4}"; // dd-mm-yyyy 1500
+    private static final String DATE_TIME_PATTERN2 = "\\d{4}-\\d{1,2}-\\d{1,2}\\s+\\d{4}"; // yyyy-mm-dd 1500
     private static final String AMT_PATTERN = "/amt ([^/]+)";
     private static final String DATE_PATTERN = "/date ([^/]+)";
     private static final String DESC_PATTERN = "/desc ([^/]+)";
@@ -72,12 +70,8 @@ public class Parser {
 
     private static String dateTimePatternValidation(String date) throws NuscentsException {
         if (date.matches(DATE_TIME_PATTERN1)) {
-            return "d/M/yyyy HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN2)) {
-            return "yyyy/M/d HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN3)) {
             return "d-M-yyyy HHmm";
-        } else if (date.matches(DATE_TIME_PATTERN4)) {
+        } else if (date.matches(DATE_TIME_PATTERN2)) {
             return "yyyy-M-d HHmm";
         } else {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
