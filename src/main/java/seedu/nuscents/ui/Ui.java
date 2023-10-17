@@ -76,14 +76,19 @@ public class Ui {
             return;
         }
         System.out.println("Here are the transactions in your list:");
+        System.out.println(LINE);
+        System.out.printf("%-5s  %-10s  %-8s  %-20s  %-5s %n", "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION");
+        System.out.println(LINE);
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
+            int index = transactions.indexOf(transaction) + 1;
             if (transaction instanceof Allowance) {
-                System.out.println("|A| " + transaction.toString());
+                System.out.printf("%-5s  %-10s  %-8s  %-20s  %-5s %n", index, "Allowance",
+                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription());
             } else if (transaction instanceof Expense) {
-                System.out.println("|E| " + transaction.toString());
+                System.out.printf("%-5s  %-10s  %-8s  %-20s  %-5s %n", index, "Expense",
+                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription());
             }
-
         }
         System.out.println(LINE);
     }
