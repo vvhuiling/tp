@@ -94,6 +94,22 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public static void showTransactionViewMessage(Transaction transaction) {
+        System.out.println(LINE);
+        System.out.println("Following are details of the transaction:");
+        if (transaction instanceof Allowance) {
+            System.out.println("TYPE: ALLOWANCE");
+        } else if (transaction instanceof Expense) {
+            System.out.println("TYPE: EXPENSE");
+        }
+        System.out.println("DATE: " + transaction.getFormattedDate());
+        System.out.println("AMOUNT: " + transaction.getAmount());
+        System.out.println("DESCRIPTION: " + transaction.getDescription());
+        System.out.println("NOTE: " + transaction.getAdditionalInfo());
+        System.out.println(LINE);
+    }
+
+
     public static void showHelpMenu() {
         System.out.println(LINE);
         System.out.println("- `list` :\n    Show a list of all entries.\n"

@@ -53,5 +53,10 @@ public class TransactionList {
         }
         System.out.println(LINE);
     }
+
+    public void viewTransaction(int transactionIndex) {
+        Transaction transaction = transactions.get(transactionIndex-1);
+        Ui.showTransactionViewMessage(transaction);
+    }
 }
 

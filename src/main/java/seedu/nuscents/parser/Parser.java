@@ -8,6 +8,7 @@ import seedu.nuscents.commands.DeleteCommand;
 import seedu.nuscents.commands.FindCommand;
 import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
+import seedu.nuscents.commands.ViewCommand;
 
 
 import seedu.nuscents.data.Transaction;
@@ -26,6 +27,7 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXPENSE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
@@ -66,6 +68,8 @@ public class Parser {
                 return new DeleteCommand(parseTaskIndex(arguments));
             case COMMAND_FIND:
                 return new FindCommand(parseFind(arguments));
+            case COMMAND_VIEW:
+                return new ViewCommand(parseTaskIndex(arguments));
             case COMMAND_HELP:
                 return new HelpCommand();
             default:
