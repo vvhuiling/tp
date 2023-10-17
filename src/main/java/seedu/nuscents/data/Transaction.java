@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  */
 public class Transaction {
     private static int count = 0;
-    protected boolean isMarked;
     protected String amount;
     protected LocalDateTime date;
     protected String description;
@@ -33,36 +32,8 @@ public class Transaction {
         count++;
     }
 
-    public Transaction(String description, int setMark) {
-        this.description = description;
-        if (setMark == 1) {
-            isMarked = true;
-        } else if (setMark == 0) {
-            isMarked = false;
-        }
-        count++;
-    }
-
-    public void markTask() {
-        isMarked = true;
-    }
-
-    public void unMarkTask() {
-        isMarked = false;
-    }
-
-    public boolean getTaskStatus() {
-        return isMarked;
-    }
-
     public String getDetails() {
-        String mark;
-        if (getTaskStatus()){
-            mark = "X";
-        } else {
-            mark = " ";
-        }
-        return "[" + mark + "] " + description;
+        return description;
     }
 
     public String getAmount() {

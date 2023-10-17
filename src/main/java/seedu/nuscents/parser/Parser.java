@@ -3,8 +3,6 @@ package seedu.nuscents.parser;
 import seedu.nuscents.commands.Command;
 import seedu.nuscents.commands.ExitCommand;
 import seedu.nuscents.commands.ListCommand;
-import seedu.nuscents.commands.MarkCommand;
-import seedu.nuscents.commands.UnmarkCommand;
 import seedu.nuscents.commands.AddCommand;
 import seedu.nuscents.commands.DeleteCommand;
 import seedu.nuscents.commands.FindCommand;
@@ -21,8 +19,6 @@ import java.time.format.DateTimeFormatter;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_MARK;
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_UNMARK;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_ALLOWANCE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
@@ -58,10 +54,6 @@ public class Parser {
                 return new ExitCommand();
             case COMMAND_LIST:
                 return new ListCommand();
-            case COMMAND_MARK:
-                return new MarkCommand(parseTaskIndex(arguments));
-            case COMMAND_UNMARK:
-                return new UnmarkCommand(parseTaskIndex(arguments));
             case COMMAND_ALLOWANCE:
                 return new AddCommand(parseAllowance(arguments));
             case COMMAND_DELETE:

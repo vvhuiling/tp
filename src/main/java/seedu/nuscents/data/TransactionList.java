@@ -4,9 +4,7 @@ import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.nuscents.ui.Messages.MESSAGE_MARK;
 import static seedu.nuscents.ui.Messages.LINE;
-import static seedu.nuscents.ui.Messages.MESSAGE_UNMARK;
 
 public class TransactionList {
     private ArrayList<Transaction> transactions;
@@ -32,22 +30,6 @@ public class TransactionList {
         transactions.remove(transaction);
         Transaction.decreaseTransactionCountByOne();
         Ui.showTransactionRemovedMessage(transaction);
-    }
-
-    public void markTask(int taskIndex) {
-        transactions.get(taskIndex-1).markTask();
-        System.out.println(LINE);
-        System.out.println(MESSAGE_MARK);
-        System.out.println("  " + transactions.get(taskIndex-1).getDetails());
-        System.out.println(LINE);
-    }
-
-    public void unMarkTask(int taskIndex) {
-        transactions.get(taskIndex-1).unMarkTask();
-        System.out.println(LINE);
-        System.out.println(MESSAGE_UNMARK);
-        System.out.println("  " + transactions.get(taskIndex-1).getDetails());
-        System.out.println(LINE);
     }
 
     public void findTask(String keyword) {
