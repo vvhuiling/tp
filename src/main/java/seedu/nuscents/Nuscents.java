@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Nuscents {
     private Ui ui;
     private Storage storage;
-    private TransactionList trasactions;
+    private TransactionList transactions;
 
     /**
      * Sets up the required objects and loads up the data from the storage file.
@@ -25,13 +25,13 @@ public class Nuscents {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            trasactions = new TransactionList(storage.readDataFromFile());
+            transactions = new TransactionList(storage.readDataFromFile());
         } catch (FileNotFoundException e) {
             Ui.showReadDataError();
             File file = new File(filePath);
             file.getParentFile().mkdirs();
             file.createNewFile();
-            trasactions = new TransactionList(storage.readDataFromFile());
+            transactions = new TransactionList(storage.readDataFromFile());
         }
     }
 
@@ -52,10 +52,10 @@ public class Nuscents {
         while (!isExit) {
             try {
                 String fullCommand = ui.getUserCommand();
-                Command command = Parser.parseCommand(fullCommand, trasactions);
-                command.execute(trasactions);
+                Command command = Parser.parseCommand(fullCommand, transactions);
+                command.execute(transactions);
                 isExit = ExitCommand.isExit(command);
-                storage.writeToFile(trasactions);
+                storage.writeToFile(transactions);
             } catch (NuscentsException e) {
                 ui.showException(e);
             } catch (IOException e) {
