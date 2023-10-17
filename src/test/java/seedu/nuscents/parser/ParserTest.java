@@ -1,8 +1,6 @@
 package seedu.nuscents.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.nuscents.commands.AddCommand;
-import seedu.nuscents.commands.Command;
 import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
@@ -10,7 +8,8 @@ import seedu.nuscents.data.exception.NuscentsException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
 
@@ -21,7 +20,8 @@ public class ParserTest {
         assertEquals("100", allowance.getAmount());
         assertEquals("Birthday Gift", allowance.getDescription());
         assertEquals("From friends", allowance.getAdditionalInfo());
-        LocalDateTime expectedDate = LocalDateTime.parse("15-10-2023 1500", DateTimeFormatter.ofPattern("d-M-yyyy HHmm"));
+        LocalDateTime expectedDate = LocalDateTime.parse("15-10-2023 1500",
+                DateTimeFormatter.ofPattern("d-M-yyyy HHmm"));
         assertEquals(expectedDate, allowance.getDate());
     }
 
@@ -32,7 +32,8 @@ public class ParserTest {
         assertEquals("50", expense.getAmount());
         assertEquals("Dinner", expense.getDescription());
         assertEquals("Alone", expense.getAdditionalInfo());
-        LocalDateTime expectedDate = LocalDateTime.parse("16-10-2023 1700", DateTimeFormatter.ofPattern("d-M-yyyy HHmm"));
+        LocalDateTime expectedDate = LocalDateTime.parse("16-10-2023 1700",
+                DateTimeFormatter.ofPattern("d-M-yyyy HHmm"));
         assertEquals(expectedDate, expense.getDate());
     }
 
