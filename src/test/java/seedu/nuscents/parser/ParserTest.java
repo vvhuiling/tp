@@ -78,13 +78,13 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_helpCommand_correctInput_helpCommandReturned() throws Exception {
+    public void parseCommand_helpCommandWithCorrectInput_returnsHelpCommand() throws Exception {
         Command result = Parser.parseCommand("help", null);
         assertTrue(result instanceof HelpCommand);
     }
 
     @Test
-    public void parseCommand_helpCommand_incorrectInput_exceptionThrown() {
+    public void parseCommand_helpCommandWithIncorrectInput_throwsException() {
         Exception exceptionWithSpace = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand("help ", null);
         });
