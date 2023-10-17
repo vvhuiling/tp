@@ -14,6 +14,7 @@ public class Messages {
     public static final String MESSAGE_UNMARK = "OK, I've marked this task as not done yet:";
     public static final String MESSAGE_EMPTY_TODO = "OOPS!!! The description of a todo cannot be empty.";
     public static final String MESSAGE_EMPTY_ALLOWANCE = "OOPS!!! Invalid input format for adding an allowance.";
+    public static final String MESSAGE_EMPTY_EXPENSE = "OOPS!!! Invalid input format for adding an expense.";
     public static final String MESSAGE_EMPTY_BY = "OOPS!!! The /by parameter of a deadline cannot be empty.";
     public static final String MESSAGE_EMPTY_EVENT = "OOPS!!! The description of an event cannot be empty.";
     public static final String MESSAGE_EMPTY_FROM = "OOPS!!! The /from parameter of an event cannot be empty.";

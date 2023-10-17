@@ -12,6 +12,7 @@ import seedu.nuscents.commands.InvalidCommand;
 
 import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.Allowance;
+import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
 
 import java.time.LocalDateTime;
@@ -20,10 +21,13 @@ import java.time.format.DateTimeFormatter;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_ALLOWANCE;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXPENSE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
+
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
@@ -54,6 +58,8 @@ public class Parser {
                 return new ListCommand();
             case COMMAND_ALLOWANCE:
                 return new AddCommand(parseAllowance(arguments));
+            case COMMAND_EXPENSE:
+                return new AddCommand(parseExpense(arguments));
             case COMMAND_DELETE:
                 return new DeleteCommand(parseTaskIndex(arguments));
             case COMMAND_FIND:
@@ -112,6 +118,28 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
             LocalDateTime formattedDate = parseDate(date, format, formatter);
             return new Allowance(amount, formattedDate, description, additionalInformation);
+        }
+    }
+
+    /**
+     * Parsers arguments in the context of adding an expense.
+     *
+     * @param arguments full command argument string
+     * @return a {@link Expense} object
+     * @throws NuscentsException If the description of the expense is empty.
+     */
+    public static Expense parseExpense(String arguments) throws NuscentsException {
+        if (arguments == null) {
+            throw new NuscentsException(MESSAGE_EMPTY_EXPENSE);
+        } else {
+            String amount = extractValue(arguments, AMT_PATTERN, false);
+            String date = extractValue(arguments, DATE_PATTERN, false);
+            String description = extractValue(arguments, DESC_PATTERN, false);
+            String additionalInformation = extractValue(arguments, NOTE_PATTERN, true);
+            String format = dateTimePatternValidation(date);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            LocalDateTime formattedDate = parseDate(date, format, formatter);
+            return new Expense(amount, formattedDate, description, additionalInformation);
         }
     }
 
