@@ -6,6 +6,6 @@ import seedu.nuscents.ui.Ui;
 public class ListCommand extends Command {
     @Override
     public void execute(TransactionList tasks) {
-        Ui.showTaskList(tasks);
+        Ui.showTransactionList(tasks);
     }
 }

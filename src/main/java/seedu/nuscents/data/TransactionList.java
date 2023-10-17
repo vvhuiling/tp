@@ -18,20 +18,20 @@ public class TransactionList {
         this.transactions = transactions;
     }
 
-    public ArrayList<Transaction> getTasks() {
+    public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
 
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
-        Ui.showTaskAddedMessage(transaction);
+        Ui.showTransactionAddedMessage(transaction);
     }
 
-    public void deleteTransaction(int taskIndex) {
-        Transaction transaction = transactions.get(taskIndex-1);
+    public void deleteTransaction(int transactionIndex) {
+        Transaction transaction = transactions.get(transactionIndex-1);
         transactions.remove(transaction);
         Transaction.decreaseTransactionCountByOne();
-        Ui.showTaskRemovedMessage(transaction);
+        Ui.showTransactionRemovedMessage(transaction);
     }
 
     public void markTask(int taskIndex) {

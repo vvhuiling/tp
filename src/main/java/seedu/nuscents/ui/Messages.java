@@ -19,8 +19,8 @@ public class Messages {
     public static final String MESSAGE_EMPTY_FROM = "OOPS!!! The /from parameter of an event cannot be empty.";
     public static final String MESSAGE_EMPTY_TO = "OOPS!!! The /to parameter of an event cannot be empty.";
     public static final String MESSAGE_INVALID_DATE = "OOPS!!! The format of the date is invalid.";
-    public static final String MESSAGE_INVALID_INDEX = "OOPS!!! This is an invalid task index.";
-    public static final String MESSAGE_EMPTY_LIST = "Yay! You currently have no tasks!";
+    public static final String MESSAGE_INVALID_INDEX = "OOPS!!! This is an invalid transaction index.";
+    public static final String MESSAGE_EMPTY_LIST = "You have not made any transactions!";
     public static final String MESSAGE_EMPTY_KEYWORD = "OOPS!!! The keyword of a find command cannot be empty.";
     public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a mark/unmark command cannot be empty.";
 }

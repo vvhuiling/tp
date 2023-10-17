@@ -66,7 +66,7 @@ public class Storage {
     public void writeToFile(TransactionList transactionList) throws IOException {
         File file = new File(filePath);
         FileWriter fw = new FileWriter(file);
-        ArrayList<Transaction> transactions = transactionList.getTasks();
+        ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
             int markedIndex = encodeTaskStatus(transaction.getTaskStatus());
             String output = toString(transaction, markedIndex);
