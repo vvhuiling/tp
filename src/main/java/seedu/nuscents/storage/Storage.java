@@ -3,7 +3,6 @@ package seedu.nuscents.storage;
 import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.TransactionList;
-import seedu.nuscents.data.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -76,7 +75,7 @@ public class Storage {
         FileWriter fw = new FileWriter(file);
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
-//            int markedIndex = encodeTaskStatus(transaction.getTaskStatus());
+            // int markedIndex = encodeTaskStatus(transaction.getTaskStatus());
             String output = toString(transaction);
             fw.write(output);
             fw.write("\n");

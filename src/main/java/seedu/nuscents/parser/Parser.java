@@ -27,7 +27,11 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_ALLOWANCE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
-import static seedu.nuscents.ui.Messages.*;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 
 public class Parser {
     private static final String DATE_TIME_PATTERN1 = "\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{4}"; // dd/mm/yyyy 1500
