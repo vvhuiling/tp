@@ -126,7 +126,7 @@ public class Parser {
      *
      * @param arguments full command argument string
      * @return a {@link Expense} object
-     * @throws NuscentsException If the description of the allowance is empty.
+     * @throws NuscentsException If the description of the expense is empty.
      */
     public static Expense parseExpense(String arguments) throws NuscentsException {
         if (arguments == null) {
