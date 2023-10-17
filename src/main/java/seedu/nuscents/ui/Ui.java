@@ -77,17 +77,27 @@ public class Ui {
         }
         System.out.println("Here are the transactions in your list:");
         System.out.println(LINE);
-        System.out.printf("%-5s  %-10s  %-8s  %-20s  %-5s %n", "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION");
+        System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n",
+                "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION", "NOTE");
         System.out.println(LINE);
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
             int index = transactions.indexOf(transaction) + 1;
+            String additionalInfo = transaction.getAdditionalInfo();
+            String note;
+            if (additionalInfo.isEmpty()) {
+                note = "-";
+            } else {
+                note = additionalInfo;
+            }
             if (transaction instanceof Allowance) {
-                System.out.printf("%-5s  %-10s  %-8s  %-20s  %-5s %n", index, "Allowance",
-                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription());
+                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Allowance",
+                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription(),
+                        note);
             } else if (transaction instanceof Expense) {
-                System.out.printf("%-5s  %-10s  %-8s  %-20s  %-5s %n", index, "Expense",
-                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription());
+                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Expense",
+                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription(),
+                        note);
             }
         }
         System.out.println(LINE);
