@@ -96,14 +96,7 @@ public class Ui {
 
     public static void showHelpMenu() {
         System.out.println(LINE);
-        System.out.println("- `list` :\n    Show a list of all entries.\n"
-                + "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION "
-                + "[/note ADDITIONAL_INFORMATION]` :\n    Add an allowance.\n"
-                + "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION "
-                + "[/note ADDITIONAL_INFORMATION]` :\n    Add an expense.\n"
-                + "- `delete ENTRY_NUMBER` :\n    Delete an entry.\n"
-                + "- `view ENTRY_NUMBER` :\n    View an entry detail.\n"
-                + "- `exit` :\n    Exit the program.");
+        System.out.println(Messages.HELP_MENU);
         System.out.println(LINE);
     }
 
