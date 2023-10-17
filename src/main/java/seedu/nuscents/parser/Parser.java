@@ -25,11 +25,11 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXPENSE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
-
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
+import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 
@@ -110,10 +110,10 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
         } else {
-            String amount = extractValue(arguments, AMT_PATTERN, false);
-            String date = extractValue(arguments, DATE_PATTERN, false);
-            String description = extractValue(arguments, DESC_PATTERN, false);
-            String additionalInformation = extractValue(arguments, NOTE_PATTERN, true);
+            String amount = extractValue("allowance", arguments, AMT_PATTERN, false);
+            String date = extractValue("allowance", arguments, DATE_PATTERN, false);
+            String description = extractValue("allowance", arguments, DESC_PATTERN, false);
+            String additionalInformation = extractValue("allowance", arguments, NOTE_PATTERN, true);
             String format = dateTimePatternValidation(date);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
             LocalDateTime formattedDate = parseDate(date, format, formatter);
@@ -132,10 +132,10 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_EXPENSE);
         } else {
-            String amount = extractValue(arguments, AMT_PATTERN, false);
-            String date = extractValue(arguments, DATE_PATTERN, false);
-            String description = extractValue(arguments, DESC_PATTERN, false);
-            String additionalInformation = extractValue(arguments, NOTE_PATTERN, true);
+            String amount = extractValue("expense", arguments, AMT_PATTERN, false);
+            String date = extractValue("expense", arguments, DATE_PATTERN, false);
+            String description = extractValue("expense", arguments, DESC_PATTERN, false);
+            String additionalInformation = extractValue("expense", arguments, NOTE_PATTERN, true);
             String format = dateTimePatternValidation(date);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
             LocalDateTime formattedDate = parseDate(date, format, formatter);
@@ -163,14 +163,22 @@ public class Parser {
         }
     }
 
-    private static String extractValue(String input, String pattern, boolean isOptional) throws NuscentsException {
+    private static String extractValue(String command, String input, String pattern, boolean isOptional)
+            throws NuscentsException {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
         java.util.regex.Matcher m = p.matcher(input);
 
         if (m.find()) {
             return m.group(1).trim();
         } else if (!isOptional) {
-            throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
+            switch (command) {
+            case "allowance":
+                throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
+            case "expense":
+                throw new NuscentsException(MESSAGE_EMPTY_EXPENSE);
+            default:
+                throw new NuscentsException(MESSAGE_FATAL_ERROR);
+            }
         }
         return "";
     }
