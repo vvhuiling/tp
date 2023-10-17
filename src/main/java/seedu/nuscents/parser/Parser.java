@@ -18,8 +18,6 @@ import seedu.nuscents.data.exception.NuscentsException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
@@ -44,7 +42,8 @@ public class Parser {
     private static final String DESC_PATTERN = "/desc ([^/]+)";
     private static final String NOTE_PATTERN = "/note ([^/]+)";
 
-    public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException, ParseException {
+    public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException,
+            ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
         String commandType = commandTypeAndArgs[0];
         String arguments;
