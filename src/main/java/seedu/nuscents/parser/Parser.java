@@ -67,6 +67,9 @@ public class Parser {
             case COMMAND_FIND:
                 return new FindCommand(parseFind(arguments));
             case COMMAND_HELP:
+                if (arguments != null) {
+                    throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
+                }
                 return new HelpCommand();
             default:
                 return new InvalidCommand();
