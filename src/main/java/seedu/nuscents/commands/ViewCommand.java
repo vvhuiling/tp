@@ -1,7 +1,6 @@
 package seedu.nuscents.commands;
 
 import seedu.nuscents.data.TransactionList;
-import seedu.nuscents.ui.Ui;
 
 public class ViewCommand extends Command {
     private int taskIndex;
