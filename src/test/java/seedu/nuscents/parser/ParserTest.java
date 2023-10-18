@@ -5,12 +5,16 @@ import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
+import seedu.nuscents.commands.Command;
+import seedu.nuscents.commands.HelpCommand;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
 
@@ -37,7 +41,6 @@ public class ParserTest {
         assertEquals("Dinner", expense.getDescription());
         assertEquals("Alone", expense.getAdditionalInfo());
     }
-
 
     @Test
     public void parseAllowance_missingArguments_exceptionThrown() {
@@ -107,5 +110,24 @@ public class ParserTest {
             Parser.parseTaskIndex(input);
         });
         assertEquals("OOPS!!! The index of a delete/view command cannot be empty.", exception.getMessage());
+    }
+
+    @Test
+    public void parseCommand_helpCommandWithCorrectInput_returnsHelpCommand() throws Exception {
+        Command result = Parser.parseCommand("help", null);
+        assertTrue(result instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_helpCommandWithIncorrectInput_throwsException() {
+        Exception exceptionWithSpace = assertThrows(NuscentsException.class, () -> {
+            Parser.parseCommand("help ", null);
+        });
+        assertEquals("OOPS!!! The correct format is 'help' alone.", exceptionWithSpace.getMessage());
+
+        Exception exceptionWithExtraChars = assertThrows(NuscentsException.class, () -> {
+            Parser.parseCommand("help extra", null);
+        });
+        assertEquals("OOPS!!! The correct format is 'help' alone.", exceptionWithExtraChars.getMessage());
     }
 }

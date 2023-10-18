@@ -72,6 +72,9 @@ public class Parser {
             case COMMAND_VIEW:
                 return new ViewCommand(parseTaskIndex(arguments));
             case COMMAND_HELP:
+                if (arguments != null) {
+                    throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
+                }
                 return new HelpCommand();
             default:
                 return new InvalidCommand();
