@@ -6,4 +6,4 @@ Display |      Name      |               Github Profile                | Portfol
 ![](https://via.placeholder.com/100.png?text=Photo) |   Joshua Lim   |    [Github](https://github.com/lckjosh)     | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Chung Zhi Xuan |   [Github](https://github.com/spaceman03)   | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) |    John Roe    |        [Github](https://github.com/)        | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) |    Don Roe     |        [Github](https://github.com/)        | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Huang Huiling  |   [Github](https://github.com/vvhuiling)    | [Portfolio](docs/team/huiling.md)
