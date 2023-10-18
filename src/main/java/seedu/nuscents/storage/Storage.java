@@ -26,6 +26,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public String getPath() {
+        return filePath;
+    }
+
     /**
      * Reads data from the storage file and return it.
      *
