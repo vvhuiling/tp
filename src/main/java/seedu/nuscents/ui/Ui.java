@@ -75,6 +75,7 @@ public class Ui {
             System.out.println(LINE);
             return;
         }
+        assert transactionList.getTransactions() != null;
         System.out.println("Here are the transactions in your list:");
         System.out.println(LINE);
         System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n",
