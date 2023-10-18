@@ -20,8 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Storage {
+    private static final Logger logger = Logger.getLogger(Storage.class.getName());
     private String filePath;
-    private final static Logger logger = Logger.getLogger(Storage.class.getName());
 
     public Storage(String filePath) {
         this.filePath = filePath;
