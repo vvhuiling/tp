@@ -1,6 +1,7 @@
 package seedu.nuscents.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.nuscents.data.Transaction;
 import seedu.nuscents.data.Allowance;
 import seedu.nuscents.data.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
@@ -72,5 +73,39 @@ public class ParserTest {
             Parser.parseCommand(input, null);
         });
         assertEquals("OOPS!!! The format of the date is invalid.", exception.getMessage());
+    }
+
+    @Test
+    public void parseTaskIndex_validInput_success() throws NuscentsException, IndexOutOfBoundsException {
+        String input = "1";
+        Transaction transaction = new Transaction("test description");
+        assertEquals(1, Parser.parseTaskIndex(input));
+    }
+
+    @Test
+    public void parseTaskIndex_outOfBoundsIndex_exceptionThrown() {
+        String input = "-6";
+        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+            Parser.parseTaskIndex(input);
+        });
+        assertEquals("OOPS!!! This is an invalid transaction index.", exception.getMessage());
+    }
+
+    @Test
+    public void parseTaskIndex_invalidArgument_exceptionThrown() {
+        String input = "InvalidArgument";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseTaskIndex(input);
+        });
+        assertEquals("OOPS!!! The input should consist only of digits.", exception.getMessage());
+    }
+
+    @Test
+    public void parseTaskIndex_emptyArgument_exceptionThrown() {
+        String input = null;
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseTaskIndex(input);
+        });
+        assertEquals("OOPS!!! The index of a delete/view command cannot be empty.", exception.getMessage());
     }
 }

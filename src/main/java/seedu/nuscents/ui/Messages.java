@@ -21,9 +21,10 @@ public class Messages {
     public static final String MESSAGE_EMPTY_TO = "OOPS!!! The /to parameter of an event cannot be empty.";
     public static final String MESSAGE_INVALID_DATE = "OOPS!!! The format of the date is invalid.";
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! This is an invalid transaction index.";
+    public static final String MESSAGE_INVALID_INDEX_ARGUMENTS = "OOPS!!! The input should consist only of digits.";
     public static final String MESSAGE_EMPTY_LIST = "You have not made any transactions!";
     public static final String MESSAGE_EMPTY_KEYWORD = "OOPS!!! The keyword of a find command cannot be empty.";
-    public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a mark/unmark command cannot be empty.";
+    public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a delete/view command cannot be empty.";
     public static final String MESSAGE_FATAL_ERROR = "OOPS!!! Fatal error occurred...";
     public static final String MESSAGE_READ_ERROR = "OOPS!!! A problem occurred while reading the data file.";
 }
