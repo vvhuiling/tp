@@ -93,7 +93,7 @@ public class Parser {
         }
     }
 
-    private static Date parseDate(String date, String format, SimpleDateFormat formatter)
+    public static Date parseDate(String date, String format, SimpleDateFormat formatter)
             throws NuscentsException, ParseException {
         String separator;
         if (format.contains("-")) {

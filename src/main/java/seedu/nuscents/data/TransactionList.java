@@ -10,6 +10,7 @@ public class TransactionList {
     private ArrayList<Transaction> transactions;
 
     public TransactionList() {
+        transactions = new ArrayList<Transaction>();
     }
 
     public TransactionList(ArrayList<Transaction> transactions) {
