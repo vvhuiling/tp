@@ -35,6 +35,7 @@ import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
 
 public class Parser {
     private static final String DATE_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}"; // dd-mm-yyyy
@@ -157,11 +158,15 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_INDEX);
         }
-        int taskIndex = Integer.parseInt(arguments);
-        if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
-            throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
+        try {
+            int taskIndex = Integer.parseInt(arguments);
+            if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
+                throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
+            }
+            return taskIndex;
+        } catch (NumberFormatException e) {
+            throw new NuscentsException(MESSAGE_INVALID_INDEX_ARGUMENTS);
         }
-        return taskIndex;
     }
 
     public static String parseFind(String arguments) throws NuscentsException {
