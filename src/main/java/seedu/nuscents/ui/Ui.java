@@ -75,6 +75,7 @@ public class Ui {
             System.out.println(LINE);
             return;
         }
+        assert transactionList.getTransactions() != null;
         System.out.println("Here are the transactions in your list:");
         System.out.println(LINE);
         System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n",
@@ -108,6 +109,22 @@ public class Ui {
         System.out.println("No previous data found /:");
         System.out.println(LINE);
     }
+
+    public static void showTransactionViewMessage(Transaction transaction) {
+        System.out.println(LINE);
+        System.out.println("Following are details of the transaction:");
+        if (transaction instanceof Allowance) {
+            System.out.println("TYPE: ALLOWANCE");
+        } else if (transaction instanceof Expense) {
+            System.out.println("TYPE: EXPENSE");
+        }
+        System.out.println("DATE: " + transaction.getFormattedDate());
+        System.out.println("AMOUNT: " + transaction.getAmount());
+        System.out.println("DESCRIPTION: " + transaction.getDescription());
+        System.out.println("NOTE: " + transaction.getAdditionalInfo());
+        System.out.println(LINE);
+    }
+
 
     public static void showHelpMenu() {
         System.out.println(LINE);

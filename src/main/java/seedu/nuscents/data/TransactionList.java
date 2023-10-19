@@ -10,6 +10,7 @@ public class TransactionList {
     private ArrayList<Transaction> transactions;
 
     public TransactionList() {
+        transactions = new ArrayList<Transaction>();
     }
 
     public TransactionList(ArrayList<Transaction> transactions) {
@@ -52,6 +53,11 @@ public class TransactionList {
             System.out.println("No matching tasks are found :/");
         }
         System.out.println(LINE);
+    }
+
+    public void viewTransaction(int transactionIndex) {
+        Transaction transaction = transactions.get(transactionIndex-1);
+        Ui.showTransactionViewMessage(transaction);
     }
 }
 

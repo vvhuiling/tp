@@ -8,6 +8,7 @@ import seedu.nuscents.commands.DeleteCommand;
 import seedu.nuscents.commands.FindCommand;
 import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
+import seedu.nuscents.commands.ViewCommand;
 
 
 import seedu.nuscents.data.Transaction;
@@ -26,6 +27,7 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXPENSE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
@@ -33,6 +35,7 @@ import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
 
 public class Parser {
     private static final String DATE_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}"; // dd-mm-yyyy
@@ -66,6 +69,8 @@ public class Parser {
                 return new DeleteCommand(parseTaskIndex(arguments));
             case COMMAND_FIND:
                 return new FindCommand(parseFind(arguments));
+            case COMMAND_VIEW:
+                return new ViewCommand(parseTaskIndex(arguments));
             case COMMAND_HELP:
                 if (arguments != null) {
                     throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
@@ -89,7 +94,7 @@ public class Parser {
         }
     }
 
-    private static Date parseDate(String date, String format, SimpleDateFormat formatter)
+    public static Date parseDate(String date, String format, SimpleDateFormat formatter)
             throws NuscentsException, ParseException {
         String separator;
         if (format.contains("-")) {
@@ -153,11 +158,15 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_INDEX);
         }
-        int taskIndex = Integer.parseInt(arguments);
-        if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
-            throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
+        try {
+            int taskIndex = Integer.parseInt(arguments);
+            if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
+                throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
+            }
+            return taskIndex;
+        } catch (NumberFormatException e) {
+            throw new NuscentsException(MESSAGE_INVALID_INDEX_ARGUMENTS);
         }
-        return taskIndex;
     }
 
     public static String parseFind(String arguments) throws NuscentsException {

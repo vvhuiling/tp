@@ -11,19 +11,24 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
+    private static final Logger logger = Logger.getLogger(Storage.class.getName());
     private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    public String getPath() {
+        return filePath;
     }
 
     /**
@@ -35,20 +40,23 @@ public class Storage {
     public ArrayList<Transaction> readDataFromFile() throws FileNotFoundException, ParseException {
         ArrayList<Transaction> transactions = new ArrayList<>();
         File file = new File(filePath);
+        logger.log(Level.INFO, "Creating a File object to read data from file");
         try {
             transactionDecoder(file, transactions);
         } catch (ParseException e) {
+            logger.log(Level.WARNING, "Something went wrong when reading data from file");
             Ui.showLine();
             System.out.println("Something went wrong: " + e.getMessage());
             Ui.showLine();
         }
+        logger.log(Level.INFO, "All data successfully loaded");
         return transactions;
     }
 
     /**
      * Decodes the storage data file and store it into the arraylist of tasks.
      *
-     * @param file         storage data file
+     * @param file storage data file
      * @param transactions arraylist of tasks
      * @throws FileNotFoundException If the storage data file does not exist.
      */
@@ -105,28 +113,16 @@ public class Storage {
     public void writeToFile(TransactionList transactionList) throws IOException {
         File file = new File(filePath);
         FileWriter fw = new FileWriter(file);
+        logger.log(Level.INFO, "Creating a File object to write data to file");
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
+            logger.log(Level.INFO, "Converting info to storage format");
             String output = toStorageFormat(transaction);
             fw.write(output);
             fw.write("\n");
         }
+        logger.log(Level.INFO, "Transaction data successfully stored");
         fw.close();
-    }
-
-    /**
-     * Encode task status to integers to be stored in the storage data file.
-     * A task marked as done is stored as 1, while a task marked as not done is stored as 0.
-     *
-     * @param isMarked boolean to indicate if the task is marked as done
-     * @return integer indicator of the task status
-     */
-    private static int encodeTaskStatus(boolean isMarked) {
-        if (isMarked) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     private static String toStorageFormat(Transaction transaction) {
@@ -137,6 +133,7 @@ public class Storage {
             return "E" + " | " + transaction.toString();
 
         } else {
+            logger.log(Level.WARNING, "Invalid transaction format");
             return null;
         }
     }
