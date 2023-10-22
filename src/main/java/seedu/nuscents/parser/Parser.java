@@ -123,7 +123,7 @@ public class Parser {
         } else {
             float amount = 0;
             try {
-                amount = Float.parseFloat(extractValue("expense", arguments, AMT_PATTERN, false));
+                amount = Float.parseFloat(extractValue("allowance", arguments, AMT_PATTERN, false));
             } catch (NumberFormatException e) {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
