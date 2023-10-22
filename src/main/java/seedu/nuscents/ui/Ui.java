@@ -69,6 +69,7 @@ public class Ui {
     }
 
     public static void showTransactionList(TransactionList transactionList) {
+        float netBalance = 0;
         System.out.println(LINE);
         if (transactionList.getTransactions().isEmpty()) {
             System.out.println(MESSAGE_EMPTY_LIST);
@@ -93,14 +94,18 @@ public class Ui {
             }
             if (transaction instanceof Allowance) {
                 System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Allowance",
-                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription(),
+                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), transaction.getDescription(),
                         note);
+                netBalance += transaction.getAmount();
             } else if (transaction instanceof Expense) {
                 System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Expense",
-                        "$" + transaction.getAmount(), transaction.getFormattedDate(), transaction.getDescription(),
+                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), transaction.getDescription(),
                         note);
+                netBalance -= transaction.getAmount();
             }
         }
+        System.out.println(LINE);
+        System.out.println("Net Balance = " + String.format("%.2f", netBalance));
         System.out.println(LINE);
     }
 
@@ -125,7 +130,6 @@ public class Ui {
         System.out.println(LINE);
     }
 
-
     public static void showHelpMenu() {
         System.out.println(LINE);
         System.out.println(Messages.HELP_MENU);
@@ -133,4 +137,3 @@ public class Ui {
     }
 
 }
-
