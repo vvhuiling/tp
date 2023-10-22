@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Transaction {
     private static int count = 0;
-    protected String amount;
+    protected float amount;
     protected Date date;
     protected String description;
     protected String additionalInfo;
@@ -18,14 +18,14 @@ public class Transaction {
         count++;
     }
 
-    public Transaction(String amount, Date date, String description) {
+    public Transaction(float amount, Date date, String description) {
         this.amount = amount;
         this.date = date;
         this.description = description;
         count++;
     }
 
-    public Transaction(String amount, Date date, String description, String additionalInfo) {
+    public Transaction(float amount, Date date, String description, String additionalInfo) {
         this.amount = amount;
         this.date = date;
         this.description = description;
@@ -33,7 +33,7 @@ public class Transaction {
         count++;
     }
 
-    public String getAmount() {
+    public float getAmount() {
         return amount;
     }
 
