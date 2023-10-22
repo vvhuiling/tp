@@ -94,13 +94,13 @@ public class Ui {
             }
             if (transaction instanceof Allowance) {
                 System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Allowance",
-                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), transaction.getDescription(),
-                        note);
+                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
+                        transaction.getDescription(), note);
                 netBalance += transaction.getAmount();
             } else if (transaction instanceof Expense) {
                 System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Expense",
-                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), transaction.getDescription(),
-                        note);
+                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
+                        transaction.getDescription(), note);
                 netBalance -= transaction.getAmount();
             }
         }

@@ -124,7 +124,9 @@ public class Parser {
             float amount = 0;
             try {
                 amount = Float.parseFloat(extractValue("expense", arguments, AMT_PATTERN, false));
-            } catch (NumberFormatException e) { throw new NuscentsException(MESSAGE_INVALID_AMOUNT); }
+            } catch (NumberFormatException e) {
+                throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
+            }
             String date = extractValue("allowance", arguments, DATE_PATTERN, false);
             String description = extractValue("allowance", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("allowance", arguments, NOTE_PATTERN, true);
@@ -149,7 +151,9 @@ public class Parser {
             float amount = 0;
             try {
                 amount = Float.parseFloat(extractValue("expense", arguments, AMT_PATTERN, false));
-            } catch (NumberFormatException e) { throw new NuscentsException(MESSAGE_INVALID_AMOUNT); }
+            } catch (NumberFormatException e) {
+                throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
+            }
             String date = extractValue("expense", arguments, DATE_PATTERN, false);
             String description = extractValue("expense", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("expense", arguments, NOTE_PATTERN, true);
