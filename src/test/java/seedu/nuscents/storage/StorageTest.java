@@ -55,9 +55,9 @@ public class StorageTest {
         TransactionList transactions = new TransactionList();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date formattedDate = parseDate("23-10-2023", "dd-MM-yyyy", formatter);
-        transactions.addTransaction(new Allowance("100", formattedDate, "Pocket money",
+        transactions.addTransaction(new Allowance(100, formattedDate, "Pocket money",
                 "October"));
-        transactions.addTransaction(new Expense("50", formattedDate, "Lunch", "Pasta"));
+        transactions.addTransaction(new Expense(50, formattedDate, "Lunch", "Pasta"));
         return transactions;
     }
 }

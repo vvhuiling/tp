@@ -34,6 +34,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_EVENT = "OOPS!!! The description of an event cannot be empty.";
     public static final String MESSAGE_EMPTY_FROM = "OOPS!!! The /from parameter of an event cannot be empty.";
     public static final String MESSAGE_EMPTY_TO = "OOPS!!! The /to parameter of an event cannot be empty.";
+    public static final String MESSAGE_INVALID_AMOUNT = "OOPS!!! The amount entered needs to be a float!";
     public static final String MESSAGE_INVALID_DATE = "OOPS!!! The format of the date is invalid.";
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! This is an invalid transaction index.";
     public static final String MESSAGE_INVALID_INDEX_ARGUMENTS = "OOPS!!! The input should consist only of digits.";

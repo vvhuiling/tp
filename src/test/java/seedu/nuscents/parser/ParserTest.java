@@ -20,9 +20,9 @@ public class ParserTest {
 
     @Test
     public void parseAllowance_validInput_success() throws NuscentsException, ParseException {
-        String arguments = "/amt 100 /date 15-10-2023 /desc Birthday Gift /note From friends";
+        String arguments = "/amt 100.0 /date 15-10-2023 /desc Birthday Gift /note From friends";
         Allowance allowance = Parser.parseAllowance(arguments);
-        assertEquals("100", allowance.getAmount());
+        assertEquals(100.0, allowance.getAmount());
         SimpleDateFormat formatter = new SimpleDateFormat("d-M-yyyy");
         String formattedDate = formatter.format(allowance.getDate());
         assertEquals("15-10-2023", formattedDate);
@@ -32,9 +32,9 @@ public class ParserTest {
 
     @Test
     public void parseExpense_validInput_success() throws NuscentsException, ParseException {
-        String arguments = "/amt 50 /date 16-10-2023 /desc Dinner /note Alone";
+        String arguments = "/amt 50.0 /date 16-10-2023 /desc Dinner /note Alone";
         Expense expense = Parser.parseExpense(arguments);
-        assertEquals("50", expense.getAmount());
+        assertEquals(50.0, expense.getAmount());
         SimpleDateFormat formatter = new SimpleDateFormat("d-M-yyyy");
         String formattedDate = formatter.format(expense.getDate());
         assertEquals("16-10-2023", formattedDate);
@@ -44,7 +44,7 @@ public class ParserTest {
 
     @Test
     public void parseAllowance_missingArguments_exceptionThrown() {
-        String input = "allowance /amt 100 /desc Pocket Money";
+        String input = "allowance /amt 100.0 /desc Pocket Money";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
@@ -53,7 +53,7 @@ public class ParserTest {
 
     @Test
     public void parseExpense_missingArguments_exceptionThrown() {
-        String input = "expense /amt 50 /desc Dinner";
+        String input = "expense /amt 50.0 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
@@ -62,7 +62,7 @@ public class ParserTest {
 
     @Test
     public void parseAllowance_invalidDateTime_exceptionThrown() {
-        String input = "allowance /amt 100 /date 15/10/2023 /desc Lunch";
+        String input = "allowance /amt 100.0 /date 15/10/2023 /desc Lunch";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
@@ -71,7 +71,7 @@ public class ParserTest {
 
     @Test
     public void parseExpense_invalidDateTime_exceptionThrown() {
-        String input = "expense /amt 50 /date 16.10.2023 /desc Dinner";
+        String input = "expense /amt 50.0 /date 16.10.2023 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });

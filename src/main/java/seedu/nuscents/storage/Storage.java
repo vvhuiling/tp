@@ -67,7 +67,7 @@ public class Storage {
             String transactionDetails = data.nextLine();
             char transactionType = transactionDetails.charAt(0);
             String[] columns;
-            String amount = "";
+            float amount;
             Date date;
             String description = "";
             String note = "";
@@ -75,7 +75,7 @@ public class Storage {
             switch (transactionType) {
             case 'A':
                 columns = transactionDetails.split("\\s*\\|\\s*");
-                amount = columns[1];
+                amount = Float.parseFloat(columns[1]);
                 date = formatter.parse(columns[2]);
                 description = columns[3];
                 note = "";
@@ -87,7 +87,7 @@ public class Storage {
 
             case 'E':
                 columns = transactionDetails.split("\\s*\\|\\s*");
-                amount = columns[1];
+                amount = Float.parseFloat(columns[1]);
                 date = formatter.parse(columns[2]);
                 description = columns[3];
                 note = "";
