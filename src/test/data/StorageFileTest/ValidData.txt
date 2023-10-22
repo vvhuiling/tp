@@ -1,2 +1,2 @@
-A | 100.00 | 23 October, 2023 | Pocket money | October
-E | 50.00 | 23 October, 2023 | Lunch | Pasta
+A | 100.0 | 23 October, 2023 | Pocket money | October
+E | 50.0 | 23 October, 2023 | Lunch | Pasta

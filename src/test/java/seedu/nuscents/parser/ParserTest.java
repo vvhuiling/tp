@@ -22,7 +22,7 @@ public class ParserTest {
     public void parseAllowance_validInput_success() throws NuscentsException, ParseException {
         String arguments = "/amt 100 /date 15-10-2023 /desc Birthday Gift /note From friends";
         Allowance allowance = Parser.parseAllowance(arguments);
-        assertEquals("100", allowance.getAmount());
+        assertEquals(100.0, allowance.getAmount());
         SimpleDateFormat formatter = new SimpleDateFormat("d-M-yyyy");
         String formattedDate = formatter.format(allowance.getDate());
         assertEquals("15-10-2023", formattedDate);
@@ -34,7 +34,7 @@ public class ParserTest {
     public void parseExpense_validInput_success() throws NuscentsException, ParseException {
         String arguments = "/amt 50 /date 16-10-2023 /desc Dinner /note Alone";
         Expense expense = Parser.parseExpense(arguments);
-        assertEquals("50", expense.getAmount());
+        assertEquals(50.0, expense.getAmount());
         SimpleDateFormat formatter = new SimpleDateFormat("d-M-yyyy");
         String formattedDate = formatter.format(expense.getDate());
         assertEquals("16-10-2023", formattedDate);
