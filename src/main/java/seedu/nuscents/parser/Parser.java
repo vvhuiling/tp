@@ -36,6 +36,7 @@ import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 
 public class Parser {
     private static final String DATE_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}"; // dd-mm-yyyy
@@ -120,7 +121,10 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
         } else {
-            String amount = extractValue("allowance", arguments, AMT_PATTERN, false);
+            float amount = 0;
+            try {
+                amount = Float.parseFloat(extractValue("expense", arguments, AMT_PATTERN, false));
+            } catch (NumberFormatException e) { throw new NuscentsException(MESSAGE_INVALID_AMOUNT); }
             String date = extractValue("allowance", arguments, DATE_PATTERN, false);
             String description = extractValue("allowance", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("allowance", arguments, NOTE_PATTERN, true);
@@ -142,7 +146,10 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_EXPENSE);
         } else {
-            String amount = extractValue("expense", arguments, AMT_PATTERN, false);
+            float amount = 0;
+            try {
+                amount = Float.parseFloat(extractValue("expense", arguments, AMT_PATTERN, false));
+            } catch (NumberFormatException e) { throw new NuscentsException(MESSAGE_INVALID_AMOUNT); }
             String date = extractValue("expense", arguments, DATE_PATTERN, false);
             String description = extractValue("expense", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("expense", arguments, NOTE_PATTERN, true);
