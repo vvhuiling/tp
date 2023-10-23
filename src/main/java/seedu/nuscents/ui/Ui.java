@@ -1,8 +1,10 @@
 package seedu.nuscents.ui;
 
-import seedu.nuscents.data.Allowance;
-import seedu.nuscents.data.Expense;
-import seedu.nuscents.data.Transaction;
+import seedu.nuscents.data.transaction.Transaction;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.Expense;
+import seedu.nuscents.data.transaction.TransactionCategory;
+import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.TransactionList;
 
 import java.util.ArrayList;
@@ -79,8 +81,8 @@ public class Ui {
         assert transactionList.getTransactions() != null;
         System.out.println("Here are the transactions in your list:");
         System.out.println(LINE);
-        System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n",
-                "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION", "NOTE");
+        System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n",
+                "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION", "NOTE", "CATEGORY");
         System.out.println(LINE);
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
@@ -98,9 +100,16 @@ public class Ui {
                         transaction.getDescription(), note);
                 netBalance += transaction.getAmount();
             } else if (transaction instanceof Expense) {
-                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Expense",
+                TransactionCategory expenseCategory = transaction.getCategory();
+                String category;
+                if (expenseCategory == ExpenseCategory.NO_EXPENSE_CATEGORY) {
+                    category = "-";
+                } else {
+                    category = expenseCategory.toString();
+                }
+                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n", index, "Expense",
                         "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
-                        transaction.getDescription(), note);
+                        transaction.getDescription(), note, category);
                 netBalance -= transaction.getAmount();
             }
         }
