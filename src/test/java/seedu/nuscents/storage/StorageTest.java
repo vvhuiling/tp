@@ -15,9 +15,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.nuscents.data.Allowance;
-import seedu.nuscents.data.Expense;
+import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.TransactionList;
+import seedu.nuscents.data.transaction.ExpenseCategory;
 
 public class StorageTest {
     @TempDir
@@ -55,9 +55,8 @@ public class StorageTest {
         TransactionList transactions = new TransactionList();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date formattedDate = parseDate("23-10-2023", "dd-MM-yyyy", formatter);
-        transactions.addTransaction(new Allowance(100, formattedDate, "Pocket money",
-                "October"));
-        transactions.addTransaction(new Expense(50, formattedDate, "Lunch", "Pasta"));
+        transactions.addTransaction(new Expense(50, formattedDate, "Lunch", "Pasta",
+                ExpenseCategory.FOOD));
         return transactions;
     }
 }

@@ -10,10 +10,11 @@ import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
 import seedu.nuscents.commands.ViewCommand;
 
-
-import seedu.nuscents.data.Transaction;
-import seedu.nuscents.data.Allowance;
-import seedu.nuscents.data.Expense;
+import seedu.nuscents.data.transaction.Transaction;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.Expense;
+import seedu.nuscents.data.transaction.ExpenseCategory;
+import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.exception.NuscentsException;
 
 import java.text.ParseException;
@@ -28,15 +29,16 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_CATEGORY;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
-import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
-import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
-import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
-import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
+import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 
 public class Parser {
     private static final String DATE_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}"; // dd-mm-yyyy
@@ -45,6 +47,7 @@ public class Parser {
     private static final String DATE_PATTERN = "/date ([^/]+)";
     private static final String DESC_PATTERN = "/desc ([^/]+)";
     private static final String NOTE_PATTERN = "/note ([^/]+)";
+    private static final String CATEGORY_PATTERN = "/cat ([^/]+)";
 
     public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException,
             ParseException {
@@ -130,10 +133,12 @@ public class Parser {
             String date = extractValue("allowance", arguments, DATE_PATTERN, false);
             String description = extractValue("allowance", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("allowance", arguments, NOTE_PATTERN, true);
+            String category = extractValue("allowance", arguments, CATEGORY_PATTERN, true);
+            AllowanceCategory allowanceCategory = parseAllowanceCategory(category);
             String format = datePatternValidation(date);
             SimpleDateFormat formatter = new SimpleDateFormat(format);
             Date formattedDate = parseDate(date, format, formatter);
-            return new Allowance(amount, formattedDate, description, additionalInformation);
+            return new Allowance(amount, formattedDate, description, additionalInformation, allowanceCategory);
         }
     }
 
@@ -157,11 +162,61 @@ public class Parser {
             String date = extractValue("expense", arguments, DATE_PATTERN, false);
             String description = extractValue("expense", arguments, DESC_PATTERN, false);
             String additionalInformation = extractValue("expense", arguments, NOTE_PATTERN, true);
+            String category = extractValue("expense", arguments, CATEGORY_PATTERN, true);
+            ExpenseCategory expenseCategory = parseExpenseCategory(category);
             String format = datePatternValidation(date);
             SimpleDateFormat formatter = new SimpleDateFormat(format);
             Date formattedDate = parseDate(date, format, formatter);
-            return new Expense(amount, formattedDate, description, additionalInformation);
+            return new Expense(amount, formattedDate, description, additionalInformation, expenseCategory);
         }
+    }
+
+    public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {
+        String expenseCategoryLowercase = expenseCategory.toLowerCase();
+        ExpenseCategory category = null;
+        switch (expenseCategoryLowercase) {
+        case "food":
+            category = ExpenseCategory.FOOD;
+            break;
+        case "entertainment":
+            category = ExpenseCategory.ENTERTAINMENT;
+            break;
+        case "transportation":
+            category = ExpenseCategory.TRANSPORTATION;
+            break;
+        case "utility":
+            category = ExpenseCategory.UTILITY;
+            break;
+        case "rent":
+            category = ExpenseCategory.RENT;
+            break;
+        case "others":
+            category = ExpenseCategory.OTHERS;
+            break;
+        case "":
+        case "no_expense_category":
+            category = ExpenseCategory.NO_EXPENSE_CATEGORY;
+            break;
+        default:
+            throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);
+        }
+        return category;
+    }
+
+    public static AllowanceCategory parseAllowanceCategory(String allowanceCategory) throws NuscentsException {
+        String allowanceCategoryLowerCase = allowanceCategory.toLowerCase();
+        AllowanceCategory category = null;
+        switch (allowanceCategoryLowerCase) {
+        case "work":
+            break;
+        case "":
+        case "no_allowance_category":
+            category = AllowanceCategory.NO_ALLOWANCE_CATEGORY;
+            break;
+        default:
+            throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);
+        }
+        return category;
     }
 
     public static int parseTaskIndex(String arguments) throws IndexOutOfBoundsException,

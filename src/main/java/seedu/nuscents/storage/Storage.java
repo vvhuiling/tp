@@ -1,8 +1,11 @@
 package seedu.nuscents.storage;
 
-import seedu.nuscents.data.Allowance;
-import seedu.nuscents.data.Expense;
-import seedu.nuscents.data.Transaction;
+import seedu.nuscents.data.exception.NuscentsException;
+import seedu.nuscents.data.transaction.Transaction;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.Expense;
+import seedu.nuscents.data.transaction.ExpenseCategory;
+import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.ui.Ui;
 
@@ -18,6 +21,9 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static seedu.nuscents.parser.Parser.parseAllowanceCategory;
+import static seedu.nuscents.parser.Parser.parseExpenseCategory;
 
 public class Storage {
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
@@ -43,7 +49,7 @@ public class Storage {
         logger.log(Level.INFO, "Creating a File object to read data from file");
         try {
             transactionDecoder(file, transactions);
-        } catch (ParseException e) {
+        } catch (ParseException | NuscentsException e) {
             logger.log(Level.WARNING, "Something went wrong when reading data from file");
             Ui.showLine();
             System.out.println("Something went wrong: " + e.getMessage());
@@ -61,7 +67,7 @@ public class Storage {
      * @throws FileNotFoundException If the storage data file does not exist.
      */
     private static void transactionDecoder(File file, ArrayList<Transaction> transactions)
-            throws FileNotFoundException, ParseException {
+            throws FileNotFoundException, ParseException, NuscentsException {
         Scanner data = new Scanner(file);
         while (data.hasNext()) {
             String transactionDetails = data.nextLine();
@@ -71,6 +77,7 @@ public class Storage {
             Date date;
             String description = "";
             String note = "";
+            String category= "";
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy");
             switch (transactionType) {
             case 'A':
@@ -82,7 +89,12 @@ public class Storage {
                 if (columns.length > 4) {
                     note = columns[4];
                 }
-                transactions.add(new Allowance(amount, date, description, note));
+                AllowanceCategory allowanceCategory = null;
+                if (columns.length > 5) {
+                    category = columns[5];
+                    allowanceCategory = parseAllowanceCategory(category);
+                }
+                transactions.add(new Allowance(amount, date, description, note, allowanceCategory));
                 break;
 
             case 'E':
@@ -90,11 +102,15 @@ public class Storage {
                 amount = Float.parseFloat(columns[1]);
                 date = formatter.parse(columns[2]);
                 description = columns[3];
-                note = "";
                 if (columns.length > 4) {
                     note = columns[4];
                 }
-                transactions.add(new Expense(amount, date, description, note));
+                ExpenseCategory expenseCategory = null;
+                if (columns.length > 5) {
+                    category = columns[5];
+                    expenseCategory = parseExpenseCategory(category);
+                }
+                transactions.add(new Expense(amount, date, description, note, expenseCategory));
                 break;
 
             default:

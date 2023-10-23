@@ -1,4 +1,4 @@
-package seedu.nuscents.data;
+package seedu.nuscents.data.transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +12,7 @@ public class Transaction {
     protected Date date;
     protected String description;
     protected String additionalInfo;
+    protected TransactionCategory category;
 
     public Transaction(String description) {
         this.description = description;
@@ -25,11 +26,13 @@ public class Transaction {
         count++;
     }
 
-    public Transaction(float amount, Date date, String description, String additionalInfo) {
+    public Transaction(float amount, Date date, String description, String additionalInfo,
+                       TransactionCategory category) {
         this.amount = amount;
         this.date = date;
         this.description = description;
         this.additionalInfo = additionalInfo;
+        this.category = category;
         count++;
     }
 
@@ -49,12 +52,18 @@ public class Transaction {
     public String getDescription() {
         return description;
     }
+
     public String getAdditionalInfo() {
         return additionalInfo;
     }
 
+    public TransactionCategory getCategory() {
+        return category;
+    }
+
     public String toString() {
-        return getAmount() + " | " + getFormattedDate() + " | " + getDescription() + " | " + getAdditionalInfo();
+        return getAmount() + " | " + getFormattedDate() + " | " + getDescription() + " | " + getAdditionalInfo()
+                + " | " + getCategory();
     }
 
     public static int getTransactionCount() {
