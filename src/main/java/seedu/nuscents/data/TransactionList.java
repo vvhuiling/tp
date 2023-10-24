@@ -1,5 +1,6 @@
 package seedu.nuscents.data;
 
+import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;

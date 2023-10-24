@@ -1,6 +1,6 @@
 package seedu.nuscents.commands;
 
-import seedu.nuscents.data.Transaction;
+import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.TransactionList;
 
 public class AddCommand extends Command {

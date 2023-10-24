@@ -4,9 +4,28 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+## **Implementation**
+
+### Add transaction feature
+
+The add transaction feature is facilitated by the `Parser` class which parses user input and creates a `Expense` or
+`Allowance` object which extends from the `Transaction` class. The created `Transaction` object will be stored in a 
+`TransactionList`.
+
+Given below is an example usage scenario and how the add transaction mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `TransactionList` will be initialized.
+
+Step 2. The user executes `expense /amt 20 /date 24-10-2023 /desc Lunch /note Pasta /cat Food` command to create a
+transaction. The `expense` command calls `Parser#parseExpense()` to create an `Expense` object. The 
+`AddCommand#execute()` is then called to store the `Expense` object in the `TransactionList`.
+
+The following sequence diagram shows how the add transaction operation works:
+
+<img src="images/AddTransactionSequenceDiagram.png" width="600" />
 
 
 ## Product scope

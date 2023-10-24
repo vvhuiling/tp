@@ -1,9 +1,9 @@
 package seedu.nuscents.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.nuscents.data.Transaction;
-import seedu.nuscents.data.Allowance;
-import seedu.nuscents.data.Expense;
+import seedu.nuscents.data.transaction.Transaction;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.exception.NuscentsException;
 import seedu.nuscents.commands.Command;
 import seedu.nuscents.commands.HelpCommand;
