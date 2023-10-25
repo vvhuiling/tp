@@ -12,10 +12,10 @@ public class Messages {
     public static final String HELP_MENU =
             "- `list` :" + System.lineSeparator() +
                     "    Show a list of all entries." + System.lineSeparator() +
-                    "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION " +
+                    "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY " +
                     "[/note ADDITIONAL_INFORMATION]` :" + System.lineSeparator() +
                     "    Add an allowance." + System.lineSeparator() +
-                    "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION " +
+                    "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY " +
                     "[/note ADDITIONAL_INFORMATION]` :" + System.lineSeparator() +
                     "    Add an expense." + System.lineSeparator() +
                     "- `delete ENTRY_NUMBER` :" + System.lineSeparator() +
@@ -24,6 +24,7 @@ public class Messages {
                     "    View an entry detail." + System.lineSeparator() +
                     "- `exit` :" + System.lineSeparator() +
                     "    Exit the program.";
+
     public static final String MESSAGE_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_MARK = "Nice! I've marked this task as done:";
     public static final String MESSAGE_UNMARK = "OK, I've marked this task as not done yet:";
