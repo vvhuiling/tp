@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.FileHandler;
 
 import static seedu.nuscents.parser.Parser.parseAllowanceCategory;
 import static seedu.nuscents.parser.Parser.parseExpenseCategory;
@@ -31,6 +32,13 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        try {
+            FileHandler fileHandler = new FileHandler("storage.log");
+            logger.addHandler(fileHandler);
+            logger.setUseParentHandlers(false);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Logging to file not working.", e);
+        }
     }
 
     public String getPath() {
