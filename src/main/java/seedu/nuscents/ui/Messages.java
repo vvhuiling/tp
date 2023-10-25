@@ -13,10 +13,10 @@ public class Messages {
     public static final String HELP_MENU =
             "- `list` :" + System.lineSeparator() +
                     "    Show a list of all entries." + System.lineSeparator() +
-                    "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION " +
+                    "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY " +
                     "[/note ADDITIONAL_INFORMATION]` :" + System.lineSeparator() +
                     "    Add an allowance." + System.lineSeparator() +
-                    "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION " +
+                    "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY " +
                     "[/note ADDITIONAL_INFORMATION]` :" + System.lineSeparator() +
                     "    Add an expense." + System.lineSeparator() +
                     "- `delete ENTRY_NUMBER` :" + System.lineSeparator() +
@@ -25,6 +25,7 @@ public class Messages {
                     "    View an entry detail." + System.lineSeparator() +
                     "- `exit` :" + System.lineSeparator() +
                     "    Exit the program.";
+
     public static final String MESSAGE_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_EMPTY_ALLOWANCE = "OOPS!!! Invalid input format for adding an allowance.";
     public static final String MESSAGE_EMPTY_EXPENSE = "OOPS!!! Invalid input format for adding an expense.";

@@ -19,9 +19,9 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
 ---------------------------------------------------------------------------------------------
 - `list` :
     Show a list of all entries.
-- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION]` :
+- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY [/note ADDITIONAL_INFORMATION]` :
     Add an allowance.
-- `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION]` :
+- `expense /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY [/note ADDITIONAL_INFORMATION]` :
     Add an expense.
 - `delete ENTRY_NUMBER` :
     Delete an entry.
