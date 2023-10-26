@@ -1,0 +1,42 @@
+@startuml
+!include Style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":Nuscents" as nuscents UI_COLOR_T1
+Participant ":Parser" as parser PARSER_COLOR
+Participant ":ListCommand" as ListCommand COMMAND_COLOR
+Participant ":TransactionList" as TransactionList UI_COLOR
+
+user -[USER_COLOR]> nuscents
+activate nuscents UI_COLOR_T1
+
+
+nuscents -> parser : parseCommand("list")
+activate parser PARSER_COLOR
+
+create ListCommand
+parser -> ListCommand
+activate ListCommand
+
+ListCommand --> parser
+deactivate ListCommand
+
+parser --> nuscents
+deactivate parser
+
+nuscents -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> TransactionList : getTransactions()
+activate TransactionList
+
+TransactionList --> ListCommand
+deactivate TransactionList
+
+ListCommand --> nuscents
+deactivate ListCommand
+
+nuscents --> user
+deactivate nuscents
+@enduml
