@@ -27,6 +27,24 @@ The following sequence diagram shows how the add transaction operation works:
 
 <img src="images/AddTransactionSequenceDiagram.png" width="600" />
 
+### List transactions feature
+
+The list transaction feature is facilitated by the `Parser` class which parses user input and creates a new
+`ListCommand` object. The `ListCommand` object will get all the transactions in the `TransactionList` and display them 
+to the user.
+
+Given below is the example usage scenario and how the list transaction mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TransactionList` will be initialized with the transactions stored in 
+the `nuscents.txt` file. If the file is empty or does not exist, the `TransactionList` will be empty. 
+
+Step 2. The user executes `list` command to list the transactions. The `list` command calls `ListCommand#execute()`, 
+which gets the transactions from the `TransactionList` and displays them to the user.
+
+The following sequence diagram shows how the list transaction operation works:
+
+<img src="images/ListTransactionSequenceDiagram.png" width="600" />
+
 
 ## Product scope
 ### Target user profile
