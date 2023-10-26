@@ -19,7 +19,7 @@ activate parser PARSER_COLOR
 parser -> AddCommand
 activate AddCommand
 
-AddCommand --> parser : parseExpense("/amt ...")
+AddCommand -> parser : parseExpense("/amt ...")
 deactivate AddCommand
 
 create expense
