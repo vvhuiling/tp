@@ -1,16 +1,13 @@
 # Developer Guide
 
 ## Acknowledgements
-
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design
 
-
 ## **Implementation**
 
 ### Add transaction feature
-
 The add transaction feature is facilitated by the `Parser` class which parses user input and creates a `Expense` or
 `Allowance` object which extends from the `Transaction` class. The created `Transaction` object will be stored in a 
 `TransactionList`.
@@ -27,10 +24,10 @@ The following sequence diagram shows how the add transaction operation works:
 
 <img src="images/AddTransactionSequenceDiagram.png" width="600" />
 
-
 ### View transaction feature
 In this section, I will describe the implementation of the "View Transaction" feature which allows users to 
 view transaction details by specifying an index.
+
 #### I. Architecture-Level Design
 The "View Transaction" feature primarily involves the following components:
 
@@ -45,8 +42,8 @@ The "View Transaction" feature primarily involves the following components:
 5. Transaction: Represents individual transactions.
 
 6. UI: Handles user interface and messaging.
-#### II. Component-Level Design
 
+#### II. Component-Level Design
 1. Parser
 
 The Parser class identifies the "view" command and extracts the taskIndex (transaction index) from the user's input.
@@ -81,7 +78,6 @@ The following sequence diagram shows how the add transaction operation works:
 <img src="images/ViewSequenceDiagram.png" width="600" />
 
 ### List transactions feature
-
 The list transaction feature is facilitated by the `Parser` class which parses user input and creates a new
 `ListCommand` object. The `ListCommand` object will get all the transactions in the `TransactionList` and display them 
 to the user.
@@ -98,32 +94,33 @@ The following sequence diagram shows how the list transaction operation works:
 
 <img src="images/ListTransactionSequenceDiagram.png" width="600" />
 
-
+In addition to that, the list transaction feature further computes and displays the net balance amount based on the 
+following formula (net balance = total allowance amount - total expense amount). The `showTransactionList()` method in 
+the `Ui` class, it utilizes the float `netBalance` to store the net balance amount. When the `TransactionList` is
+iterated to print the transactions, it does a simple calculation based on whether it is an allowance or expense, to add
+or minus off respectively from the net balance.
 
 ## Product scope
-### Target user profile
 
-{Describe the target user profile}
+### Target user profile
+SOC students at NUS who are tech-savvy, with limited allowance to monitor their finances and expense management
+while balancing aspects of university-life, academics and social activities. SOC students are known to be familiar with 
+CLI applications, which are often built to be efficient and clutter-free.
 
 ### Value proposition
-
 {Describe the value proposition: what problem does it solve?}
 
 ## User Stories
-
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
-
 {Give non-functional requirements}
 
 ## Glossary
-
 * *glossary item* - Definition
 
 ## Instructions for manual testing
-
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
