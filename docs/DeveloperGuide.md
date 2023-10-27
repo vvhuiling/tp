@@ -100,6 +100,41 @@ the `Ui` class, it utilizes the float `netBalance` to store the net balance amou
 iterated to print the transactions, it does a simple calculation based on whether it is an allowance or expense, to add
 or minus off respectively from the net balance.
 
+### `helpCommand` Feature
+
+#### I. Architecture-Level Design
+The `helpCommand` feature serves as an informative component to assist users unfamiliar with the application commands. It integrates the following components:
+
+1. **Parser**: Determines if the user input matches the `help` command.
+2. **HelpCommand**: A subclass of the Command class. Represents the `help` command, and provides command details when executed.
+3. **Nuscents**: The main application class that receives and executes commands. It invokes the `execute()` method of the `HelpCommand`.
+4. **UI**: Manages user interface interactions, such as displaying the help menu.
+
+#### II. Component-Level Design
+1. **Parser**:  
+   The `Parser` class recognizes the user's intention to access the help menu through the `help` keyword.
+
+2. **HelpCommand**:  
+   When the `Parser` identifies a `help` command, it instantiates a `HelpCommand` object. This object encapsulates the user's request to view the command instructions.
+
+3. **Nuscents**:  
+   Upon receiving the `HelpCommand` object, the `Nuscents` class triggers the `execute()` method of the `HelpCommand`.
+
+4. **UI**:  
+   The `UI` class is then responsible for fetching the `HELP_MENU` static string from the `HelpCommand` class and displaying it to the user. This ensures the user receives a comprehensive list of commands available in the application.
+
+#### III. Alternatives Considered
+Initially, we pondered over embedding the help details directly within the main application class, `Nuscents`. This would eliminate the need for a separate `HelpCommand` class. However, segregating the `HelpCommand` ensures better modularity, making future expansions or modifications seamless.
+
+### `helpCommand` Usage Scenario
+
+1. **Step 1**: The user launches the application. The initial screen appears.
+2. **Step 2**: Unsure of the commands, the user inputs the `help` command.
+3. **Step 3**: The application recognizes the command through the `Parser` and creates a `HelpCommand` object.
+4. **Step 4**: The `Nuscents` class invokes the `execute()` method of the `HelpCommand`.
+5. **Step 5**: The `UI` fetches the `HELP_MENU` string and displays the comprehensive list of commands to the user.
+
+
 ## Product scope
 
 ### Target user profile
