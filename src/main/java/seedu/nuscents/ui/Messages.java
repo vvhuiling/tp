@@ -23,6 +23,8 @@ public class Messages {
                     "    Delete an entry." + System.lineSeparator() +
                     "- `view ENTRY_NUMBER` :" + System.lineSeparator() +
                     "    View an entry detail." + System.lineSeparator() +
+                    "- `filter CATEGORY` :" + System.lineSeparator() +
+                    "    Filter a list of transactions by a specific category." + System.lineSeparator() +
                     "- `exit` :" + System.lineSeparator() +
                     "    Exit the program.";
 
