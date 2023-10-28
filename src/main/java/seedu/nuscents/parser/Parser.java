@@ -9,12 +9,14 @@ import seedu.nuscents.commands.FindCommand;
 import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
 import seedu.nuscents.commands.ViewCommand;
+import seedu.nuscents.commands.FilterCommand;
 
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.transaction.AllowanceCategory;
+import seedu.nuscents.data.transaction.TransactionCategory;
 import seedu.nuscents.data.exception.NuscentsException;
 
 import java.text.ParseException;
@@ -29,6 +31,7 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_FILTER;
 import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_CATEGORY;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
@@ -75,6 +78,8 @@ public class Parser {
                 return new FindCommand(parseFind(arguments));
             case COMMAND_VIEW:
                 return new ViewCommand(parseTaskIndex(arguments));
+            case COMMAND_FILTER:
+                return new FilterCommand(parseCategory(arguments));
             case COMMAND_HELP:
                 if (arguments != null) {
                     throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
@@ -212,6 +217,36 @@ public class Parser {
         case "":
         case "no_allowance_category":
             category = AllowanceCategory.NO_ALLOWANCE_CATEGORY;
+            break;
+        default:
+            throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);
+        }
+        return category;
+    }
+
+    public static TransactionCategory parseCategory(String transactionCategory) throws NuscentsException {
+        String allowanceCategoryLowerCase = transactionCategory.toLowerCase();
+        TransactionCategory category = null;
+        switch (allowanceCategoryLowerCase) {
+        case "work":
+            break;
+        case "food":
+            category = ExpenseCategory.FOOD;
+            break;
+        case "entertainment":
+            category = ExpenseCategory.ENTERTAINMENT;
+            break;
+        case "transportation":
+            category = ExpenseCategory.TRANSPORTATION;
+            break;
+        case "utility":
+            category = ExpenseCategory.UTILITY;
+            break;
+        case "rent":
+            category = ExpenseCategory.RENT;
+            break;
+        case "others":
+            category = ExpenseCategory.OTHERS;
             break;
         default:
             throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);

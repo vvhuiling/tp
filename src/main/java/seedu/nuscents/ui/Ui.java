@@ -139,6 +139,40 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public static void showFilterMessage(ArrayList<Transaction> filteredTransactions, TransactionCategory category) {
+        System.out.println(LINE);
+        System.out.println("Filtered transactions in the category " + category.toString() + ":");
+        float netBalance = 0;
+        for (Transaction transaction : filteredTransactions) {
+            int index = filteredTransactions.indexOf(transaction) + 1;
+            String additionalInfo = transaction.getAdditionalInfo();
+            String note;
+            if (additionalInfo.isEmpty()) {
+                note = "-";
+            } else {
+                note = additionalInfo;
+            }
+            System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Allowance",
+                    "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
+                    transaction.getDescription(), note);
+            if (transaction instanceof Allowance) {
+                netBalance += transaction.getAmount();
+            } else if (transaction instanceof Expense) {
+                netBalance -= transaction.getAmount();
+            }
+        }
+        System.out.println(LINE);
+        System.out.println("Net Balance = " + String.format("%.2f", netBalance));
+        System.out.println(LINE);
+    }
+
+    public static void showFilterNotFoundMessage(TransactionCategory category) {
+        System.out.println(LINE);
+        System.out.println("No transactions found in the category " + category.toString());
+        System.out.println(LINE);
+    }
+
+
     public static void showHelpMenu() {
         System.out.println(LINE);
         System.out.println(Messages.HELP_MENU);
