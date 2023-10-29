@@ -95,12 +95,30 @@ public class ParserTest {
     }
 
     @Test
-    public void parseAllowance_missingArguments_exceptionThrown() {
-        String input = "allowance /amt 100.0 /desc Pocket Money";
+    public void parseAllowance_emptyArguments_exceptionThrown() {
+        String input = "allowance";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
         assertEquals("OOPS!!! Invalid input format for adding an allowance.", exception.getMessage());
+    }
+
+    @Test
+    public void parseAllowance_missingArguments_exceptionThrown() {
+        String input = "allowance /amt 50.0 /desc Dinner";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseCommand(input, null);
+        });
+        assertEquals(Messages.MESSAGE_EMPTY_ALLOWANCE, exception.getMessage());
+    }
+
+    @Test
+    public void parseAllowance_invalidAmount_exceptionThrown() {
+        String input = "allowance /amt fifty /date 14-02-2023 /desc Gift";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseCommand(input, null);
+        });
+        assertEquals(Messages.MESSAGE_INVALID_AMOUNT, exception.getMessage());
     }
 
     @Test
@@ -110,6 +128,24 @@ public class ParserTest {
             Parser.parseCommand(input, null);
         });
         assertEquals("OOPS!!! Invalid input format for adding an expense.", exception.getMessage());
+    }
+
+    @Test
+    public void parseExpense_emptyArguments_exceptionThrown() {
+        String input = "expense";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseCommand(input, null);
+        });
+        assertEquals(Messages.MESSAGE_EMPTY_EXPENSE, exception.getMessage());
+    }
+
+    @Test
+    public void parseExpense_invalidAmount_exceptionThrown() {
+        String input = "expense /amt fifty /date 15-02-2023 /desc Dinner";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseCommand(input, null);
+        });
+        assertEquals(Messages.MESSAGE_INVALID_AMOUNT, exception.getMessage());
     }
 
     @Test
@@ -123,7 +159,7 @@ public class ParserTest {
 
     @Test
     public void parseExpense_invalidDateTime_exceptionThrown() {
-        String input = "expense /amt 50.0 /date 16.10.2023 /desc Dinner";
+        String input = "expense /amt 50.0 /date 16-13-2023 /desc Dinner";
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseCommand(input, null);
         });
