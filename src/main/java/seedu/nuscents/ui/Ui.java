@@ -1,10 +1,6 @@
 package seedu.nuscents.ui;
 
-import seedu.nuscents.data.transaction.Transaction;
-import seedu.nuscents.data.transaction.Allowance;
-import seedu.nuscents.data.transaction.Expense;
-import seedu.nuscents.data.transaction.TransactionCategory;
-import seedu.nuscents.data.transaction.ExpenseCategory;
+import seedu.nuscents.data.transaction.*;
 import seedu.nuscents.data.TransactionList;
 
 import java.util.ArrayList;
@@ -95,9 +91,16 @@ public class Ui {
                 note = additionalInfo;
             }
             if (transaction instanceof Allowance) {
-                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Allowance",
+                TransactionCategory allowanceCategory = transaction.getCategory();
+                String category;
+                if (allowanceCategory == AllowanceCategory.NO_ALLOWANCE_CATEGORY) {
+                    category = "-";
+                } else {
+                    category = allowanceCategory.toString();
+                }
+                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s %-5s %n", index, "Allowance",
                         "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
-                        transaction.getDescription(), note);
+                        transaction.getDescription(), note, category);
                 netBalance += transaction.getAmount();
             } else if (transaction instanceof Expense) {
                 TransactionCategory expenseCategory = transaction.getCategory();

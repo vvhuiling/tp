@@ -32,7 +32,8 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FILTER;
-import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_CATEGORY;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_EXPENSE_CATEGORY;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
@@ -52,7 +53,7 @@ public class Parser {
     private static final String NOTE_PATTERN = "/note ([^/]+)";
     private static final String CATEGORY_PATTERN = "/cat ([^/]+)";
 
-    public static <TaskList> Command parseCommand(String text, TaskList tasks) throws NuscentsException,
+    public static <TransactionList> Command parseCommand(String text, TransactionList transactions) throws NuscentsException,
             ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
         String commandType = commandTypeAndArgs[0];
@@ -199,11 +200,12 @@ public class Parser {
             category = ExpenseCategory.OTHERS;
             break;
         case "":
+            // fallthrough
         case "no_expense_category":
             category = ExpenseCategory.NO_EXPENSE_CATEGORY;
             break;
         default:
-            throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);
+            throw new NuscentsException(MESSAGE_UNKNOWN_EXPENSE_CATEGORY);
         }
         return category;
     }
@@ -212,14 +214,28 @@ public class Parser {
         String allowanceCategoryLowerCase = allowanceCategory.toLowerCase();
         AllowanceCategory category = null;
         switch (allowanceCategoryLowerCase) {
-        case "work":
+        case "salary":
+            category = AllowanceCategory.SALARY;
+            break;
+        case "allowance":
+            category = AllowanceCategory.ALLOWANCE;
+            break;
+        case "investments":
+            category = AllowanceCategory.INVESTMENTS;
+            break;
+        case "gifts":
+            category = AllowanceCategory.GIFTS;
+            break;
+        case "others":
+            category = AllowanceCategory.OTHERS;
             break;
         case "":
+            // fallthrough
         case "no_allowance_category":
             category = AllowanceCategory.NO_ALLOWANCE_CATEGORY;
             break;
         default:
-            throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);
+            throw new NuscentsException(MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY);
         }
         return category;
     }
@@ -249,7 +265,7 @@ public class Parser {
             category = ExpenseCategory.OTHERS;
             break;
         default:
-            throw new NuscentsException(MESSAGE_UNKNOWN_CATEGORY);
+            throw new NuscentsException(MESSAGE_UNKNOWN_EXPENSE_CATEGORY);
         }
         return category;
     }
