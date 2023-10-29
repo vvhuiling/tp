@@ -144,6 +144,10 @@ public class Parser {
             String format = datePatternValidation(date);
             SimpleDateFormat formatter = new SimpleDateFormat(format);
             Date formattedDate = parseDate(date, format, formatter);
+            assert formattedDate != null;
+            assert description != null;
+            assert additionalInformation != null;
+            assert category != null;
             return new Allowance(amount, formattedDate, description, additionalInformation, allowanceCategory);
         }
     }
