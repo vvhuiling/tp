@@ -72,7 +72,7 @@ public class ParserTest {
 
     @Test
     public void parseAllowance_validInput_success() throws NuscentsException, ParseException {
-        String arguments = "/amt 100.0 /date 15-10-2023 /desc Birthday Gift /note From friends";
+        String arguments = "/amt 100.0 /date 2023-10-15 /desc Birthday Gift /note From friends";
         Allowance allowance = Parser.parseAllowance(arguments);
         assertEquals(100.0, allowance.getAmount());
         SimpleDateFormat formatter = new SimpleDateFormat("d-M-yyyy");

@@ -103,11 +103,7 @@ public class Parser {
     public static Date parseDate(String date, String format, SimpleDateFormat formatter)
             throws NuscentsException, ParseException {
         String separator;
-        if (format.contains("-")) {
-            separator = "-";
-        } else {
-            separator = "/";
-        }
+        separator = "-";
         String[] dateMonthYear = date.split(separator);
         if (Integer.parseInt(dateMonthYear[1]) > 12) {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
