@@ -5,7 +5,6 @@ import seedu.nuscents.commands.ExitCommand;
 import seedu.nuscents.commands.ListCommand;
 import seedu.nuscents.commands.AddCommand;
 import seedu.nuscents.commands.DeleteCommand;
-import seedu.nuscents.commands.FindCommand;
 import seedu.nuscents.commands.HelpCommand;
 import seedu.nuscents.commands.InvalidCommand;
 import seedu.nuscents.commands.ViewCommand;
@@ -75,8 +74,6 @@ public class Parser {
                 return new AddCommand(parseExpense(arguments));
             case COMMAND_DELETE:
                 return new DeleteCommand(parseTaskIndex(arguments));
-            case COMMAND_FIND:
-                return new FindCommand(parseFind(arguments));
             case COMMAND_VIEW:
                 return new ViewCommand(parseTaskIndex(arguments));
             case COMMAND_FILTER:
