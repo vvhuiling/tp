@@ -1,5 +1,7 @@
 package seedu.nuscents.data;
 
+import seedu.nuscents.data.transaction.AllowanceCategory;
+import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.TransactionCategory;
 import seedu.nuscents.ui.Ui;
@@ -48,16 +50,16 @@ public class TransactionList {
                 filteredTransactions.add(transaction);
                 isFound = true;
             }
+
+            // hacky fix
+            if ((transaction.getCategory() == AllowanceCategory.OTHERS) && (category == ExpenseCategory.OTHERS)) {
+                filteredTransactions.add(transaction);
+                isFound = true;
+            }
         }
 
         if (isFound) {
             Ui.showFilterMessage(filteredTransactions, category);
-            System.out.println("Filtered transactions in the category " + category + ":");
-            int transactionCount = 1;
-            for (Transaction transaction : filteredTransactions) {
-                System.out.println(transactionCount + ". " + transaction.getDescription());
-                transactionCount++;
-            }
         } else {
             Ui.showFilterNotFoundMessage(category);
         }

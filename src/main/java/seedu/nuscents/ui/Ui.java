@@ -150,6 +150,10 @@ public class Ui {
     public static void showFilterMessage(ArrayList<Transaction> filteredTransactions, TransactionCategory category) {
         System.out.println(LINE);
         System.out.println("Filtered transactions in the category " + category.toString() + ":");
+        System.out.println(LINE);
+        System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n",
+                "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION", "NOTE", "CATEGORY");
+        System.out.println(LINE);
         float netBalance = 0;
         for (Transaction transaction : filteredTransactions) {
             int index = filteredTransactions.indexOf(transaction) + 1;
@@ -160,9 +164,15 @@ public class Ui {
             } else {
                 note = additionalInfo;
             }
-            System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-5s %n", index, "Allowance",
+            String type = "";
+            if (transaction instanceof Allowance) {
+                type = "Allowance";
+            } else if (transaction instanceof Expense) {
+                type = "Expense";
+            }
+            System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n", index, type,
                     "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
-                    transaction.getDescription(), note);
+                    transaction.getDescription(), note, category);
             if (transaction instanceof Allowance) {
                 netBalance += transaction.getAmount();
             } else if (transaction instanceof Expense) {

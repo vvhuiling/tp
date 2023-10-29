@@ -30,17 +30,18 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FILTER;
-import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_EXPENSE_CATEGORY;
-import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY;
-import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
-import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
+import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
-import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
-import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_EXPENSE_CATEGORY;
+import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_FILTER_CATEGORY;
 
 public class Parser {
     private static final String DATE_PATTERN1 = "\\d{1,2}-\\d{1,2}-\\d{4}"; // dd-mm-yyyy
@@ -76,7 +77,7 @@ public class Parser {
             case COMMAND_VIEW:
                 return new ViewCommand(parseTaskIndex(arguments));
             case COMMAND_FILTER:
-                return new FilterCommand(parseCategory(arguments));
+                return new FilterCommand(parseFilterCategory(arguments));
             case COMMAND_HELP:
                 if (arguments != null) {
                     throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
@@ -236,11 +237,24 @@ public class Parser {
         return category;
     }
 
-    public static TransactionCategory parseCategory(String transactionCategory) throws NuscentsException {
+    public static TransactionCategory parseFilterCategory(String transactionCategory) throws NuscentsException {
+        if (transactionCategory == null) {
+            throw new NuscentsException(MESSAGE_UNKNOWN_FILTER_CATEGORY);
+        }
         String allowanceCategoryLowerCase = transactionCategory.toLowerCase();
         TransactionCategory category = null;
         switch (allowanceCategoryLowerCase) {
-        case "work":
+        case "salary":
+            category = AllowanceCategory.SALARY;
+            break;
+        case "allowance":
+            category = AllowanceCategory.ALLOWANCE;
+            break;
+        case "investments":
+            category = AllowanceCategory.INVESTMENTS;
+            break;
+        case "gifts":
+            category = AllowanceCategory.GIFTS;
             break;
         case "food":
             category = ExpenseCategory.FOOD;
@@ -261,7 +275,7 @@ public class Parser {
             category = ExpenseCategory.OTHERS;
             break;
         default:
-            throw new NuscentsException(MESSAGE_UNKNOWN_EXPENSE_CATEGORY);
+            throw new NuscentsException(MESSAGE_UNKNOWN_FILTER_CATEGORY);
         }
         return category;
     }

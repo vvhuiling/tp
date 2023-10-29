@@ -67,7 +67,7 @@ public class ParserTest {
         String input = "filter food";
         Command result = Parser.parseCommand(input, null);
         assertTrue(result instanceof FilterCommand);
-        assertEquals(ExpenseCategory.FOOD, Parser.parseCategory("food"));
+        assertEquals(ExpenseCategory.FOOD, Parser.parseFilterCategory("food"));
     }
 
     @Test
