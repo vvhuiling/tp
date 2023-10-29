@@ -53,8 +53,8 @@ public class Parser {
     private static final String NOTE_PATTERN = "/note ([^/]+)";
     private static final String CATEGORY_PATTERN = "/cat ([^/]+)";
 
-    public static <TransactionList> Command parseCommand(String text, TransactionList transactions) throws NuscentsException,
-            ParseException {
+    public static <TransactionList> Command parseCommand(String text, TransactionList transactions)
+            throws NuscentsException, ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
         String commandType = commandTypeAndArgs[0];
         String arguments;
