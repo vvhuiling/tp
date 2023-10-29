@@ -38,6 +38,10 @@ public class Messages {
     public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a delete/view command cannot be empty.";
     public static final String MESSAGE_FATAL_ERROR = "OOPS!!! Fatal error occurred...";
     public static final String MESSAGE_READ_ERROR = "OOPS!!! A problem occurred while reading the data file.";
-    public static final String MESSAGE_UNKNOWN_CATEGORY = "OOPS!!! The category you provided is not a valid category.\n"
+    public static final String MESSAGE_UNKNOWN_EXPENSE_CATEGORY = "OOPS!!! The category you provided is not a "
+            + "valid category.\n"
             + "Valid categories are FOOD/ENTERTAINMENT/TRANSPORTATION/UTILITY/RENT/OTHERS.";
+    public static final String MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY = "OOPS!!! The category you provided is not a "
+            + "valid category.\n"
+            + "Valid categories are SALARY/ALLOWANCE/INVESTMENTS/GIFTS/OTHERS.";
 }
