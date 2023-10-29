@@ -1,12 +1,21 @@
 package seedu.nuscents.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.nuscents.data.transaction.Transaction;
-import seedu.nuscents.data.transaction.Allowance;
-import seedu.nuscents.data.transaction.Expense;
-import seedu.nuscents.data.exception.NuscentsException;
 import seedu.nuscents.commands.Command;
+import seedu.nuscents.commands.DeleteCommand;
+import seedu.nuscents.commands.ExitCommand;
+import seedu.nuscents.commands.FilterCommand;
 import seedu.nuscents.commands.HelpCommand;
+import seedu.nuscents.commands.InvalidCommand;
+import seedu.nuscents.commands.ListCommand;
+import seedu.nuscents.commands.ViewCommand;
+import seedu.nuscents.data.exception.NuscentsException;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.AllowanceCategory;
+import seedu.nuscents.data.transaction.Expense;
+import seedu.nuscents.data.transaction.ExpenseCategory;
+import seedu.nuscents.data.transaction.Transaction;
+import seedu.nuscents.ui.Messages;
 
 
 import java.text.ParseException;
@@ -15,8 +24,51 @@ import java.text.SimpleDateFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.nuscents.parser.Parser.parseAllowanceCategory;
+import static seedu.nuscents.parser.Parser.parseExpenseCategory;
 
 public class ParserTest {
+
+    @Test
+    public void parseCommand_invalidCommand_invalidCommandReturned() throws Exception {
+        Command result = Parser.parseCommand("asdf", null);
+        assertTrue(result instanceof InvalidCommand);
+    }
+    @Test
+    public void parseCommand_exitCommand_success() throws Exception {
+        Command result = Parser.parseCommand("exit", null);
+        assertTrue(result instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_listCommand_success() throws Exception {
+        Command result = Parser.parseCommand("list", null);
+        assertTrue(result instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteCommand_success() throws Exception {
+        String input = "delete 1";
+        Command result = Parser.parseCommand(input, null);
+        assertTrue(result instanceof DeleteCommand);
+        assertEquals(1, Parser.parseTaskIndex("1"));
+    }
+
+    @Test
+    public void parseCommand_viewCommand_success() throws Exception {
+        String input = "view 1";
+        Command result = Parser.parseCommand(input, null);
+        assertTrue(result instanceof ViewCommand);
+        assertEquals(1, Parser.parseTaskIndex("1"));
+    }
+
+    @Test
+    public void parseCommand_filterCommand_success() throws Exception {
+        String input = "filter food";
+        Command result = Parser.parseCommand(input, null);
+        assertTrue(result instanceof FilterCommand);
+        assertEquals(ExpenseCategory.FOOD, Parser.parseCategory("food"));
+    }
 
     @Test
     public void parseAllowance_validInput_success() throws NuscentsException, ParseException {
@@ -76,6 +128,47 @@ public class ParserTest {
             Parser.parseCommand(input, null);
         });
         assertEquals("OOPS!!! The format of the date is invalid.", exception.getMessage());
+    }
+
+    @Test
+    public void parseAllowanceCategory_validCategory_success() throws NuscentsException {
+        assertEquals(AllowanceCategory.SALARY, parseAllowanceCategory("sAlARy"));
+        assertEquals(AllowanceCategory.ALLOWANCE, parseAllowanceCategory("allOWANCE"));
+        assertEquals(AllowanceCategory.INVESTMENTS, parseAllowanceCategory("INVESTMEnts"));
+        assertEquals(AllowanceCategory.GIFTS, parseAllowanceCategory("GIFTS"));
+        assertEquals(AllowanceCategory.OTHERS, parseAllowanceCategory("othERS"));
+        assertEquals(AllowanceCategory.NO_ALLOWANCE_CATEGORY, parseAllowanceCategory(""));
+        assertEquals(AllowanceCategory.NO_ALLOWANCE_CATEGORY, parseAllowanceCategory("NO_ALLOWANCE_CATEGORY"));
+    }
+
+    @Test
+    public void parseAllowanceCategory_invalidCategory_exceptionThrown() throws NuscentsException {
+        String input = "asdfjkl";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseAllowanceCategory(input);
+        });
+        assertEquals(Messages.MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY, exception.getMessage());
+    }
+
+    @Test
+    public void parseExpenseCategory_validCategory_success() throws NuscentsException {
+        assertEquals(ExpenseCategory.FOOD, parseExpenseCategory("FOOD"));
+        assertEquals(ExpenseCategory.ENTERTAINMENT, parseExpenseCategory("ENtertainment"));
+        assertEquals(ExpenseCategory.UTILITY, parseExpenseCategory("UTILity"));
+        assertEquals(ExpenseCategory.RENT, parseExpenseCategory("RENT"));
+        assertEquals(ExpenseCategory.TRANSPORTATION, parseExpenseCategory("transportation"));
+        assertEquals(ExpenseCategory.OTHERS, parseExpenseCategory("otHERS"));
+        assertEquals(ExpenseCategory.NO_EXPENSE_CATEGORY, parseExpenseCategory(""));
+        assertEquals(ExpenseCategory.NO_EXPENSE_CATEGORY, parseExpenseCategory("no_expense_category"));
+    }
+
+    @Test
+    public void parseExpenseCategory_invalidCategory_exceptionThrown() throws NuscentsException {
+        String input = "huehue";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseExpenseCategory(input);
+        });
+        assertEquals(Messages.MESSAGE_UNKNOWN_EXPENSE_CATEGORY, exception.getMessage());
     }
 
     @Test

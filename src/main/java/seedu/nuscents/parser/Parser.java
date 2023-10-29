@@ -27,7 +27,6 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_ALLOWANCE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXPENSE;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_DELETE;
-import static seedu.nuscents.commands.ListOfCommands.COMMAND_FIND;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FILTER;

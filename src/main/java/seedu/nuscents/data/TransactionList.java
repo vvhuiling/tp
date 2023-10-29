@@ -6,7 +6,6 @@ import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.nuscents.ui.Messages.LINE;
 
 public class TransactionList {
     private ArrayList<Transaction> transactions;
