@@ -44,4 +44,8 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY = "OOPS!!! The category you provided is not a "
             + "valid category.\n"
             + "Valid categories are SALARY/ALLOWANCE/INVESTMENTS/GIFTS/OTHERS.";
+    public static final String MESSAGE_UNKNOWN_FILTER_CATEGORY = "OOPS!!! The category you provided is not a "
+            + "valid category.\n"
+            + "Valid categories are "
+            + "SALARY/ALLOWANCE/INVESTMENTS/GIFTS/FOOD/ENTERTAINMENT/TRANSPORTATION/UTILITY/RENT/OTHERS.";
 }
