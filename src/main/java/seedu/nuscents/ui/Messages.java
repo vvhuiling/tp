@@ -12,20 +12,19 @@ public class Messages {
     public static final String MESSAGE_EXIT = "Thank you for using NUScents. Hope to see you again soon!";
     public static final String HELP_MENU =
             "- `list` :" + System.lineSeparator() +
-                    "    Show a list of all entries." + System.lineSeparator() +
-                    "- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY " +
-                    "[/note ADDITIONAL_INFORMATION]` :" + System.lineSeparator() +
+                    "    List all entries." + System.lineSeparator() +
+                    "- `allowance /amt AMT /date DATE /desc DESC [/note NOTE] [/cat CAT]` :" + System.lineSeparator() +
                     "    Add an allowance." + System.lineSeparator() +
-                    "- `expense /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY " +
-                    "[/note ADDITIONAL_INFORMATION]` :" + System.lineSeparator() +
+                    "- `expense /amt AMT /date DATE /desc DESC [/note NOTE] [/cat CAT]` :" + System.lineSeparator() +
                     "    Add an expense." + System.lineSeparator() +
-                    "- `delete ENTRY_NUMBER` :" + System.lineSeparator() +
+                    "- `delete INDEX` :" + System.lineSeparator() +
                     "    Delete an entry." + System.lineSeparator() +
-                    "- `view ENTRY_NUMBER` :" + System.lineSeparator() +
-                    "    View an entry detail." + System.lineSeparator() +
+                    "- `filter CATEGORY` :" + System.lineSeparator() +
+                    "    Filter by category." + System.lineSeparator() +
+                    "- `view INDEX` :" + System.lineSeparator() +
+                    "    View entry detail." + System.lineSeparator() +
                     "- `exit` :" + System.lineSeparator() +
-                    "    Exit the program.";
-
+                    "    Exit program.";
     public static final String MESSAGE_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_EMPTY_ALLOWANCE = "OOPS!!! Invalid input format for adding an allowance.";
     public static final String MESSAGE_EMPTY_EXPENSE = "OOPS!!! Invalid input format for adding an expense.";
