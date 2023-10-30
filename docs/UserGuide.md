@@ -2,32 +2,54 @@
 
 ## Introduction
 
-{Give a product intro}
+Welcome to 🪙NUScents🪙, the tailor-made financial tracker for SOC students at
+NUS. It is optimized for use via a Command Line Interface (CLI) to offer a clutter-free
+solution for our users to manage and monitor their financial activities.
+
+## Prerequisite
+Make sure you have Java `11` or above installed on your system.
 
 ## Quick Start
 
-{Give steps to get started quickly}
+1. Download the latest JAR file (`tp.jar`).
+2. Copy the JAR file to the folder you want to use as the **home folder** for your financial tracker.
+3. Open a command terminal, `cd` into the folder you put the jar file in.
+4. Enter the following command to run the program:
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+   ```
+   java -jar tp.jar
+   ```
 
+5. You should see a welcome message as shown below:
+
+   ```
+   Hello from
+    __   __  __   __   ____   _____ _____ __   __ ________   ____
+   |  \ |  |  |  |  |/     / /   __|     |  \ |  |__    __|/     /
+   |   \|  |  |  |  |\   __\|   /  |   __|   \|  |  |  |   \   __\
+   |       |  |  |  | \__   |  |   |   __|       |  |  |    \__   |
+   |       |  |__|  |/      |   \__|     |       |  |  |   /      |
+   |__|\___|________|______/ \_____|_____|__|\___|  |__|   |_____/
+   
+   ---------------------------------------------------------------------------------------------
+   What can I do for you?
+   Hint: To view a list of all possible commands, please enter 'help'.
+   ---------------------------------------------------------------------------------------------
+   ```
+   
 ## Features 
 
-{Give detailed description of each feature}
+- Words in UPPER_CASE are the parameters to be supplied by the user.
+e.g. in `allowance /amt AMOUNT`, `AMOUNT` is a parameter that can be used
+as `allowance /amt 1000`.
+- Items in square brackets are optional.
+e.g. `allowance` can be used with or without `/note`.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Viewing help: `help`
+To view a list of all possible commands, a brief description of their
+functionality and syntax.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
-
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Format: `help`
 
 ## FAQ
 
@@ -37,6 +59,13 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action            | Format, Examples                                                                                                                                                                                      |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Allowance** | `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance` |
+| **Add Expense**   | `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`                     |
+| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                   |
+| **List**          | `list`                                                                                                                                                                                                |
+| **Filter**        | `filter CATEGORY`                                                                                                                                                                                     |
+| **View**          | `view INDEX`                                                                                                                                                                                          |
+| **Help**          | `help`                                                                                                                                                                                                |
+| **Exit**          | `exit`                                                                                                                                                                                                |
