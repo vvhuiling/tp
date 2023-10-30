@@ -12,5 +12,6 @@ public class ListOfCommands {
     public static final String COMMAND_FIND = "find";
     public static final String COMMAND_VIEW = "view";
     public static final String COMMAND_FILTER = "filter";
+    public static final String COMMAND_EDIT = "edit";
     public static final String COMMAND_HELP = "help";
 }

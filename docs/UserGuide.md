@@ -11,7 +11,7 @@ Make sure you have Java `11` or above installed on your system.
 
 ## Quick Start
 
-1. Download the latest JAR file (`tp.jar`).
+1. Download the latest JAR file (`tp.jar`). 
 2. Copy the JAR file to the folder you want to use as the **home folder** for your financial tracker.
 3. Open a command terminal, `cd` into the folder you put the jar file in.
 4. Enter the following command to run the program:

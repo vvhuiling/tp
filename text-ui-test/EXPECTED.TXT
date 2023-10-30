@@ -18,17 +18,19 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
 - `list` :
-    Show a list of all entries.
-- `allowance /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY [/note ADDITIONAL_INFORMATION]` :
+    List all entries.
+- `allowance /amt AMT /date DATE /desc DESC [/note NOTE] [/cat CAT]` :
     Add an allowance.
-- `expense /amt AMOUNT /date DATE /desc DESCRIPTION /cat CATEGORY [/note ADDITIONAL_INFORMATION]` :
+- `expense /amt AMT /date DATE /desc DESC [/note NOTE] [/cat CAT]` :
     Add an expense.
-- `delete ENTRY_NUMBER` :
+- `delete INDEX` :
     Delete an entry.
-- `view ENTRY_NUMBER` :
-    View an entry detail.
+- `filter CATEGORY` :
+    Filter by category.
+- `view INDEX` :
+    View entry detail.
 - `exit` :
-    Exit the program.
+    Exit program.
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
 OOPS!!! Invalid input format for adding an allowance.
