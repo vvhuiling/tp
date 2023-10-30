@@ -11,7 +11,7 @@ Make sure you have Java `11` or above installed on your system.
 
 ## Quick Start
 
-1. Download the latest JAR file (`tp.jar`).
+1. Download the latest JAR file (`tp.jar`). 
 2. Copy the JAR file to the folder you want to use as the **home folder** for your financial tracker.
 3. Open a command terminal, `cd` into the folder you put the jar file in.
 4. Enter the following command to run the program:
@@ -51,6 +51,61 @@ functionality and syntax.
 
 Format: `help`
 
+### Adding an allowance: `allowance`
+
+To add a new allowance entry to the financial tracker, please adhere to the given format!!  
+PS: Do take note that fields with "[ ]" can be omitted.
+
+Format:  
+1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
+e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`  
+2) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION`  
+e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
+
+### Adding an expense: `expense`
+
+To add a new expense entry to the financial tracker, please adhere to the given format!!
+PS: Do take note that fields with "[ ]" can be omitted.
+
+Format:  
+1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
+e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`  
+2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`
+e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
+
+### Deleting an entry: `delete`
+
+To delete an entry from the financial tracker, which can be either an allowance or an expense.
+
+Format: `delete INDEX`  
+e.g., `delete 3`
+
+### Listing all entries: `list`
+
+To list all entries in the financial tracker.
+
+Format: `list`
+
+### Filtering entries by category: `filter`
+
+To filter entries in the financial tracker by category.
+
+Format: `filter CATEGORY`  
+e.g., `filter allowance`
+
+### Viewing an entry: `view`
+
+To view an entry in the financial tracker, which can be either an allowance or an expense.
+
+Format: `view INDEX`  
+e.g., `view 3`
+
+### Exiting the program: `exit`
+
+To exit the program.
+
+Format: `exit`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -61,11 +116,11 @@ Format: `help`
 
 | Action            | Format, Examples                                                                                                                                                                                      |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**          | `help`                                                                                                                                                                                                |
 | **Add Allowance** | `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance` |
 | **Add Expense**   | `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`                     |
 | **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                   |
 | **List**          | `list`                                                                                                                                                                                                |
 | **Filter**        | `filter CATEGORY`                                                                                                                                                                                     |
 | **View**          | `view INDEX`                                                                                                                                                                                          |
-| **Help**          | `help`                                                                                                                                                                                                |
 | **Exit**          | `exit`                                                                                                                                                                                                |
