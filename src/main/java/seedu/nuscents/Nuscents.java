@@ -34,6 +34,7 @@ public class Nuscents {
             if (storageFile.exists()) {
                 Files.delete(storageFile.toPath());
             }
+            Ui.showReadDataError();
             storageFile.getParentFile().mkdirs();
             storageFile.createNewFile();
             transactions = new TransactionList(storage.readDataFromFile());
