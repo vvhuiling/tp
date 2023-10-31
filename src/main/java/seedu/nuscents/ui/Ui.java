@@ -197,4 +197,10 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public static void showFileTamperedMessage() {
+        System.out.println(LINE);
+        System.out.println(Messages.MESSAGE_FILE_TAMPERED_ERROR);
+        System.out.println(LINE);
+    }
+
 }

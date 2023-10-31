@@ -11,6 +11,7 @@ import seedu.nuscents.data.TransactionList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 
 public class Nuscents {
@@ -20,20 +21,40 @@ public class Nuscents {
 
     /**
      * Sets up the required objects and loads up the data from the storage file.
-     * @param filePath path of the file used to store data
+     *
+     * @param storageFilePath path of the file used to store data
+     * @param hmacFilePath path of the file used to store HMAC
      */
-    public Nuscents(String filePath) throws IOException, ParseException {
+    public Nuscents(String storageFilePath, String hmacFilePath) throws IOException, ParseException {
         ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            transactions = new TransactionList(storage.readDataFromFile());
-        } catch (FileNotFoundException e) {
+        storage = new Storage(storageFilePath);
+        File hmacFile = new File(hmacFilePath);
+        if (!hmacFile.exists()) {
+            File storageFile = new File(storageFilePath);
+            if (storageFile.exists()) {
+                Files.delete(storageFile.toPath());
+            }
             Ui.showReadDataError();
-            File file = new File(filePath);
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            storageFile.getParentFile().mkdirs();
+            storageFile.createNewFile();
             transactions = new TransactionList(storage.readDataFromFile());
+        } else {
+            try {
+                if (!storage.isValidHmac(hmacFilePath)) {
+                    // file has been tampered with, exit immediately
+                    Ui.showFileTamperedMessage();
+                    System.exit(0);
+                }
+                transactions = new TransactionList(storage.readDataFromFile());
+            } catch (FileNotFoundException e) {
+                Ui.showReadDataError();
+                File file = new File(storageFilePath);
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                transactions = new TransactionList(storage.readDataFromFile());
+            }
         }
+
     }
 
     /**
@@ -57,6 +78,7 @@ public class Nuscents {
                 command.execute(transactions);
                 isExit = ExitCommand.isExit(command);
                 storage.writeToFile(transactions);
+                storage.storeHmacForStorageFile();
             } catch (NuscentsException e) {
                 ui.showException(e);
             } catch (IOException | ParseException e) {
@@ -70,6 +92,6 @@ public class Nuscents {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
-        new Nuscents("./data/nuscents.txt").run();
+        new Nuscents("./data/nuscents.txt", "./data/hmac").run();
     }
 }
