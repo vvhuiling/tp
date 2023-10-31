@@ -5,6 +5,14 @@
 
 ## Design
 
+### Architecture
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+Given below is a quick overview of main components and how they interact with each other.
+
+<img src="images/ArchitectureDiagram.png" width="300" />
+
+**Main components of the architecture**
+
 ## **Implementation**
 
 ### Add transaction feature
@@ -25,8 +33,6 @@ The following sequence diagram shows how the add transaction operation works:
 <img src="images/AddTransactionSequenceDiagram.png" width="600" />
 
 ### View transaction feature
-In this section, I will describe the implementation of the "View Transaction" feature which allows users to 
-view transaction details by specifying an index.
 
 #### I. Architecture-Level Design
 The "View Transaction" feature primarily involves the following components:
@@ -146,10 +152,23 @@ CLI applications, which are often built to be efficient and clutter-free.
 {Describe the value proposition: what problem does it solve?}
 
 ## User Stories
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...           | I want to ...                                             | So that I can ...                                        |
+|---------|--------------------|-----------------------------------------------------------|----------------------------------------------------------|
+| v1.0    | new user           | access a help command that lists all actions and examples | I can learn how to use the tracker effectively           |
+| v1.0    | university student | add my allowance                                          | I can track how much I get every month                   |
+| v1.0    | university student | add my expenses                                           | I can keep track of my spending habits                   |
+| v1.0    | university student | delete allowance entries                                  | I can remove wrong entries                               |
+| v1.0    | university student | delete expense entries                                    | I can remove wrong entries                               |
+| v1.0    | university student | view a list of all entries                                | I can view my all my income and expenses at a glance     |
+| v2.0    | university student | add details of income or expenses                         | I can know why I made that transaction                   |
+| v2.0    | university student | enquire my net balance                                    | I can see my net balance                                 |
+| v2.0    | university student | edit existing entries                                     | I can correct wrong entries or make updates              |
+| v2.0    | university student | create a budget for my living expenses                    | I can ensure I have enough funds throughout the semester |
+| v2.0    | university student | add details of income or expenses                         | I can see my expenses on different categories            |
+| v2.0    | university student | filter expenses based on categories                       | I can view my expense on a specific category             |
+| v2.0    | university student | filter income based on categories                         | I can view my income from a specific source              |
+| v2.0    | university student | filter expenses based on categories                       | I can view my expense on a specific category             |
+| v2.0    | university student | view details of income or expenses                        | I can have a better understanding of my financial habit  |
 
 ## Non-Functional Requirements
 {Give non-functional requirements}
