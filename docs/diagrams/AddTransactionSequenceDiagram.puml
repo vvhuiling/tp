@@ -5,9 +5,9 @@ skinparam ArrowFontStyle plain
 Actor User as user USER_COLOR
 Participant ":Nuscents" as nuscents UI_COLOR_T1
 Participant ":Parser" as parser PARSER_COLOR
-Participant ":Expense" as expense PARSER_COLOR_T1
+Participant ":Expense" as expense EXPENSE_COLOR
 Participant ":AddCommand" as AddCommand COMMAND_COLOR
-Participant ":TransactionList" as TransactionList UI_COLOR
+Participant ":TransactionList" as TransactionList TRANSACTION_COLOR
 
 user -[USER_COLOR]> nuscents
 activate nuscents UI_COLOR_T1
@@ -16,6 +16,7 @@ activate nuscents UI_COLOR_T1
 nuscents -> parser : parseCommand("expense /amt ...")
 activate parser PARSER_COLOR
 
+create AddCommand
 parser -> AddCommand
 activate AddCommand
 
