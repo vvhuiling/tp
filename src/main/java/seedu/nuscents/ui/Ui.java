@@ -119,7 +119,7 @@ public class Ui {
             }
         }
         System.out.println(LINE);
-        System.out.println("Net Balance = " + String.format("%.2f", transactionList.getNetBalance()));
+        System.out.println("Net Balance = $" + String.format("%.2f", transactionList.getNetBalance()));
         System.out.println(LINE);
     }
 
@@ -152,7 +152,7 @@ public class Ui {
         System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n",
                 "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION", "NOTE", "CATEGORY");
         System.out.println(LINE);
-        float netBalance = 0;
+        float totalAmount = 0;
         for (Transaction transaction : filteredTransactions) {
             int index = filteredTransactions.indexOf(transaction) + 1;
             String additionalInfo = transaction.getAdditionalInfo();
@@ -172,13 +172,13 @@ public class Ui {
                     "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
                     transaction.getDescription(), note, category);
             if (transaction instanceof Allowance) {
-                netBalance += transaction.getAmount();
+                totalAmount += transaction.getAmount();
             } else if (transaction instanceof Expense) {
-                netBalance -= transaction.getAmount();
+                totalAmount -= transaction.getAmount();
             }
         }
         System.out.println(LINE);
-        System.out.println("Net Balance = " + String.format("%.2f", netBalance));
+        System.out.println("Total amount for " + category + " = " + String.format("%.2f", totalAmount));
         System.out.println(LINE);
     }
 
@@ -188,6 +188,29 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public static void showBudgetSet(TransactionList transactionList) {
+        System.out.println(LINE);
+        System.out.println("Budget set to:");
+        System.out.println("  $" + transactionList.getBudget());
+        System.out.println(LINE);
+    }
+
+    public static void showBudgetExpense(TransactionList transactionList) {
+        if (transactionList.getBudget() != 0) {
+            System.out.println("Initial budget set to  = $" + String.format("%.2f", transactionList.getBudget()));
+            System.out.println("Expenses  = $" + String.format("%.2f", transactionList.getTotalExpense()));
+            if (transactionList.isWithinBudget()) {
+                System.out.println("Total expenses are still within budget.");
+                System.out.println("Remaining budget: $" +
+                        String.format("%.2f", (transactionList.getBudget() - transactionList.getTotalExpense())));
+            } else {
+                System.out.println("Total expenses has exceeded budget.");
+                System.out.println("Exceeded budget by: $" +
+                        String.format("%.2f", (transactionList.getTotalExpense() - transactionList.getBudget())));
+            }
+            System.out.println(LINE);
+        }
+    }
 
     public static void showHelpMenu() {
         System.out.println(LINE);

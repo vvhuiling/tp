@@ -1,11 +1,11 @@
 package seedu.nuscents.data;
 
+import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.AllowanceCategory;
+import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.TransactionCategory;
-import seedu.nuscents.data.transaction.Allowance;
-import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class TransactionList {
     private ArrayList<Transaction> transactions;
+    private float budget;
 
     public TransactionList() {
         transactions = new ArrayList<Transaction>();
@@ -82,8 +83,38 @@ public class TransactionList {
         } else {
             Ui.showFilterNotFoundMessage(category);
         }
-
     }
 
-}
+    public void setBudget(float budget) {
+        this.budget = budget;
+        Ui.showBudgetSet(this);
+    }
 
+    public float getBudget() {
+        return this.budget;
+    }
+
+    public float getTotalExpense() {
+        float totalExpense = 0;
+        ArrayList<Transaction> transactions = getTransactions();
+        for (Transaction transaction : transactions) {
+            int index = transactions.indexOf(transaction) + 1;
+            if (transaction instanceof Expense) {
+                totalExpense += transaction.getAmount();
+            }
+        }
+        return totalExpense;
+    }
+
+    public boolean isWithinBudget() {
+        boolean isWithinBudget;
+        float budget = getBudget();
+        float expense = getTotalExpense();
+        if (expense > budget) {
+            isWithinBudget = false;
+        } else {
+            isWithinBudget = true;
+        }
+        return isWithinBudget;
+    }
+}

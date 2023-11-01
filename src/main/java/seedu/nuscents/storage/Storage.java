@@ -221,5 +221,31 @@ public class Storage {
         fis.close();
         return data;
     }
+
+    public void writeBudgetToFile(TransactionList transactionList) throws IOException {
+        File file = new File("./data/budget.txt");
+        FileWriter fw = new FileWriter(file);
+        String budget = Float.toString(transactionList.getBudget());
+        fw.write(budget);
+        fw.close();
+    }
+
+    public String readBudgetFromFile() throws FileNotFoundException, IOException {
+        try {
+            File file = new File("./data/budget.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String budget = sc.nextLine();
+                return budget;
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            Ui.showReadDataError();
+            File file = new File("./data/budget.txt");
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        return "0";
+    }
 }
 

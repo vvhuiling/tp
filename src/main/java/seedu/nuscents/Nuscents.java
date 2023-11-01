@@ -25,7 +25,8 @@ public class Nuscents {
      * @param storageFilePath path of the file used to store data
      * @param hmacFilePath path of the file used to store HMAC
      */
-    public Nuscents(String storageFilePath, String hmacFilePath) throws IOException, ParseException {
+    public Nuscents(String storageFilePath, String budgetFilePath, String hmacFilePath)
+            throws IOException, ParseException {
         ui = new Ui();
         storage = new Storage(storageFilePath);
         File hmacFile = new File(hmacFilePath);
@@ -55,6 +56,11 @@ public class Nuscents {
             }
         }
 
+        File budgetFile = new File(budgetFilePath);
+        if (budgetFile.exists()) {
+            transactions.setBudget(Float.parseFloat(storage.readBudgetFromFile()));
+        }
+
     }
 
     /**
@@ -78,6 +84,7 @@ public class Nuscents {
                 command.execute(transactions);
                 isExit = ExitCommand.isExit(command);
                 storage.writeToFile(transactions);
+                storage.writeBudgetToFile(transactions);
                 storage.storeHmacForStorageFile();
             } catch (NuscentsException e) {
                 ui.showException(e);
@@ -92,6 +99,6 @@ public class Nuscents {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
-        new Nuscents("./data/nuscents.txt", "./data/hmac").run();
+        new Nuscents("./data/nuscents.txt", "./data/budget.txt", "./data/hmac").run();
     }
 }
