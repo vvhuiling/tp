@@ -72,7 +72,6 @@ public class Ui {
     }
 
     public static void showTransactionList(TransactionList transactionList) {
-        float netBalance = 0;
         System.out.println(LINE);
         if (transactionList.getTransactions().isEmpty()) {
             System.out.println(MESSAGE_EMPTY_LIST);
@@ -106,7 +105,6 @@ public class Ui {
                 System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s %-5s %n", index, "Allowance",
                         "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
                         transaction.getDescription(), note, category);
-                netBalance += transaction.getAmount();
             } else if (transaction instanceof Expense) {
                 TransactionCategory expenseCategory = transaction.getCategory();
                 String category;
@@ -118,11 +116,10 @@ public class Ui {
                 System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n", index, "Expense",
                         "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
                         transaction.getDescription(), note, category);
-                netBalance -= transaction.getAmount();
             }
         }
         System.out.println(LINE);
-        System.out.println("Net Balance = " + String.format("%.2f", netBalance));
+        System.out.println("Net Balance = " + String.format("%.2f", transactionList.getNetBalance()));
         System.out.println(LINE);
     }
 

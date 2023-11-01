@@ -4,6 +4,8 @@ import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.TransactionCategory;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;
@@ -39,6 +41,20 @@ public class TransactionList {
     public void viewTransaction(int transactionIndex) {
         Transaction transaction = transactions.get(transactionIndex-1);
         Ui.showTransactionViewMessage(transaction);
+    }
+
+    public float getNetBalance(){
+        float netBalance = 0;
+        ArrayList<Transaction> transactions = getTransactions();
+        for (Transaction transaction : transactions) {
+            int index = transactions.indexOf(transaction) + 1;
+            if (transaction instanceof Allowance) {
+                netBalance += transaction.getAmount();
+            } else if (transaction instanceof Expense) {
+                netBalance -= transaction.getAmount();
+            }
+        }
+        return netBalance;
     }
 
     public void filterTransaction(TransactionCategory category) {
