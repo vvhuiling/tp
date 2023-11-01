@@ -31,6 +31,9 @@ public class TransactionList {
         Ui.showTransactionAddedMessage(transaction);
     }
 
+    public void editTransaction(int transactionIndex, Transaction transaction) {
+        transactions.set(transactionIndex-1, transaction);
+    }
     public void deleteTransaction(int transactionIndex) {
         Transaction transaction = transactions.get(transactionIndex-1);
         transactions.remove(transaction);
