@@ -20,7 +20,7 @@ Make sure you have Java `11` or above installed on your system.
    java -jar tp.jar
    ```
 
-   5. You should see a welcome message as shown below:
+5. You should see a welcome message as shown below:
 
    ```
       Hello from
