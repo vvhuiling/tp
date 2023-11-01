@@ -1,6 +1,8 @@
 package seedu.nuscents.data;
 
+import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.AllowanceCategory;
+import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.TransactionCategory;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 
 public class TransactionList {
     private ArrayList<Transaction> transactions;
+    private float budget;
 
     public TransactionList() {
         transactions = new ArrayList<Transaction>();
@@ -79,7 +82,15 @@ public class TransactionList {
         } else {
             Ui.showFilterNotFoundMessage(category);
         }
+    }
 
+    public void setBudget(float budget) {
+        this.budget = budget;
+        Ui.showBudgetSet(this);
+    }
+
+    public float getBudget() {
+        return this.budget;
     }
 
 }
