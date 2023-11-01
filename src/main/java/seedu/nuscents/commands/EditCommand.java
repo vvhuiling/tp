@@ -7,9 +7,10 @@ import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.ui.Ui;
 
 public class EditCommand extends Command {
+    int index;
     private Expense expense;
     private Allowance allowance;
-    int index;
+    
     public EditCommand(Expense expense, int index) {
         this.expense = expense;
         this.index = index;
@@ -18,6 +19,7 @@ public class EditCommand extends Command {
         this.allowance = allowance;
         this.index = index;
     }
+    
     @Override
     public void execute(TransactionList transactionList) throws NuscentsException {
         if (expense == null && allowance == null) {
