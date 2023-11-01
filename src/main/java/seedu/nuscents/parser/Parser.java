@@ -10,6 +10,7 @@ import seedu.nuscents.commands.InvalidCommand;
 import seedu.nuscents.commands.ViewCommand;
 import seedu.nuscents.commands.FilterCommand;
 import seedu.nuscents.commands.BudgetCommand;
+import seedu.nuscents.commands.EditCommand;
 
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.Allowance;
@@ -32,6 +33,7 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_HELP;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_VIEW;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_FILTER;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_BUDGET;
+import static seedu.nuscents.commands.ListOfCommands.COMMAND_EDIT;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
@@ -84,6 +86,8 @@ public class Parser {
                 return new FilterCommand(parseFilterCategory(arguments));
             case COMMAND_BUDGET:
                 return new BudgetCommand(parseBudget(arguments));
+            case COMMAND_EDIT:
+                return parseEdit(arguments);
             case COMMAND_HELP:
                 if (arguments != null) {
                     throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
@@ -323,6 +327,24 @@ public class Parser {
             }
         } catch (NumberFormatException e) {
             throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+
+    public static EditCommand parseEdit(String arguments) throws NuscentsException, ParseException {
+        if (arguments == null) {
+            throw new NuscentsException(MESSAGE_EMPTY_INDEX);
+        } else {
+            String[] editDetails = arguments.split(" ", 3);
+            if (editDetails.length < 3) {
+                throw new NuscentsException(MESSAGE_EMPTY_INDEX);
+            }
+            int index = parseTaskIndex(editDetails[0]);
+            String type = editDetails[1];
+            if (type.equals("expense")){
+                return new EditCommand(parseExpense(editDetails[2]), index);
+            } else if (type.equals("allowance")) {
+                return new EditCommand(parseAllowance(editDetails[2]), index);
+            } else{
+                throw new NuscentsException(MESSAGE_FATAL_ERROR);
+            }
         }
     }
 

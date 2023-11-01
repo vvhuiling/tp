@@ -141,6 +141,7 @@ public class Ui {
         System.out.println("AMOUNT: " + transaction.getAmount());
         System.out.println("DESCRIPTION: " + transaction.getDescription());
         System.out.println("NOTE: " + transaction.getAdditionalInfo());
+        System.out.println("CATEGORY: " + transaction.getCategory());
         System.out.println(LINE);
     }
 
