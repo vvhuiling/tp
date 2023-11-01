@@ -316,7 +316,11 @@ public class Parser {
         }
         try {
             float budget = Float.parseFloat(arguments);
-            return budget;
+            if (budget > 0) {
+                return budget;
+            } else {
+                throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+            }
         } catch (NumberFormatException e) {
             throw new NuscentsException(MESSAGE_INVALID_BUDGET);
         }

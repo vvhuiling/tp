@@ -120,7 +120,6 @@ public class Ui {
         }
         System.out.println(LINE);
         System.out.println("Net Balance = $" + String.format("%.2f", transactionList.getNetBalance()));
-        System.out.println("Budget  = $" + String.format("%.2f", transactionList.getBudget()));;
         System.out.println(LINE);
     }
 
@@ -193,6 +192,23 @@ public class Ui {
         System.out.println("Budget set to:");
         System.out.println("  $" + transactionList.getBudget());
         System.out.println(LINE);
+    }
+
+    public static void showBudgetExpense(TransactionList transactionList) {
+        if (transactionList.getBudget() != 0) {
+            System.out.println("Initial budget set to  = $" + String.format("%.2f", transactionList.getBudget()));
+            System.out.println("Expenses  = $" + String.format("%.2f", transactionList.getTotalExpense()));
+            if (transactionList.isWithinBudget()) {
+                System.out.println("Total expenses are still within budget.");
+                System.out.println("Remaining budget: $" +
+                        String.format("%.2f", (transactionList.getBudget() - transactionList.getTotalExpense())));
+            } else {
+                System.out.println("Total expenses has exceeded budget.");
+                System.out.println("Exceeded budget by: $" +
+                        String.format("%.2f", (transactionList.getTotalExpense() - transactionList.getBudget())));
+            }
+            System.out.println(LINE);
+        }
     }
 
     public static void showHelpMenu() {

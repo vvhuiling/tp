@@ -7,5 +7,6 @@ public class ListCommand extends Command {
     @Override
     public void execute(TransactionList tasks) {
         Ui.showTransactionList(tasks);
+        Ui.showBudgetExpense(tasks);
     }
 }

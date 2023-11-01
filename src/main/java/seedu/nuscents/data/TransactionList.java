@@ -91,5 +91,26 @@ public class TransactionList {
         return this.budget;
     }
 
+    public float getTotalExpense() {
+        float totalExpense = 0;
+        ArrayList<Transaction> transactions = getTransactions();
+        for (Transaction transaction : transactions) {
+            int index = transactions.indexOf(transaction) + 1;
+            if (transaction instanceof Expense) {
+                totalExpense += transaction.getAmount();
+            }
+        }
+        return totalExpense;
+    }
+    public boolean isWithinBudget() {
+        boolean isWithinBudget;
+        float budget = getBudget();
+        float expense = getTotalExpense();
+        if (expense > budget) {
+            isWithinBudget = false;
+        } else {
+            isWithinBudget = true;
+        }
+        return isWithinBudget;
+    }
 }
-
