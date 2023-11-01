@@ -102,6 +102,7 @@ public class TransactionList {
         }
         return totalExpense;
     }
+
     public boolean isWithinBudget() {
         boolean isWithinBudget;
         float budget = getBudget();
