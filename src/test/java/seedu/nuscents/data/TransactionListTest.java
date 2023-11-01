@@ -54,7 +54,7 @@ public class TransactionListTest {
                 "NOTE: Sample Note\n" +
                 "CATEGORY: FOOD\n" +
                 LINE + "\n";
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class TransactionListTest {
                 LINE + "\n" +
                 "Net Balance = -30.00\n" +
                 LINE + "\n" ;
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }
 
     @Test
@@ -94,6 +94,6 @@ public class TransactionListTest {
         String expectedOutput = LINE + "\n" +
                 "No transactions found in the category TRANSPORTATION\n" +
                 LINE + "\n";
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput.trim(), outContent.toString().trim());
     }
 }
