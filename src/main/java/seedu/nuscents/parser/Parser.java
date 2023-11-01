@@ -327,6 +327,8 @@ public class Parser {
             }
         } catch (NumberFormatException e) {
             throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+        }
+    }
 
     public static EditCommand parseEdit(String arguments) throws NuscentsException, ParseException {
         if (arguments == null) {
