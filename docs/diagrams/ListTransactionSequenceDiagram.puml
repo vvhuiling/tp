@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 !include Style.puml
 skinparam ArrowFontStyle plain
 
