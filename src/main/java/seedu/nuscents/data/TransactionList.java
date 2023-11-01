@@ -29,7 +29,7 @@ public class TransactionList {
         Ui.showTransactionAddedMessage(transaction);
     }
 
-    public void editTransation(int transactionIndex, Transaction transaction) {
+    public void editTransaction(int transactionIndex, Transaction transaction) {
         transactions.set(transactionIndex-1, transaction);
     }
     public void deleteTransaction(int transactionIndex) {
