@@ -25,8 +25,11 @@ public class Messages {
                     "    Filter by category." + System.lineSeparator() +
                     "- `view INDEX` :" + System.lineSeparator() +
                     "    View entry detail." + System.lineSeparator() +
+                    "- `edit INDEX TRANSACTION` :" + System.lineSeparator() +
+                    "    Edit an existing transaction (same format as adding a transaction)." + System.lineSeparator() +
                     "- `exit` :" + System.lineSeparator() +
                     "    Exit program.";
+
     public static final String MESSAGE_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MESSAGE_EMPTY_ALLOWANCE = "OOPS!!! Invalid input format for adding an allowance.";
     public static final String MESSAGE_EMPTY_EXPENSE = "OOPS!!! Invalid input format for adding an expense.";

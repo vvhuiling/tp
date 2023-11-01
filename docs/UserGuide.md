@@ -111,6 +111,16 @@ To view an entry in the financial tracker, which can be either an allowance or a
 Format: `view INDEX`  
 e.g., `view 3`
 
+### Editing an entry: `edit`
+
+To edit an entry in the financial tracker, which can be either an allowance or an expense.
+
+Format:  
+1) `edit INDEX allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
+e.g., `edit 3 allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
+2) `edit INDEX expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
+e.g., `edit 3 expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
+
 ### Exiting the program: `exit`
 
 To exit the program.

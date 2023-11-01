@@ -31,6 +31,8 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
     Filter by category.
 - `view INDEX` :
     View entry detail.
+- `edit INDEX TRANSACTION` :
+    Edit an existing transaction (same format as adding a transaction).
 - `exit` :
     Exit program.
 ---------------------------------------------------------------------------------------------
