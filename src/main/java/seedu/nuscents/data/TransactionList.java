@@ -6,8 +6,6 @@ import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.TransactionCategory;
-import seedu.nuscents.data.transaction.Allowance;
-import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.ui.Ui;
 
 import java.util.ArrayList;

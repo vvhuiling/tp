@@ -2,7 +2,6 @@ package seedu.nuscents.commands;
 
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.data.exception.NuscentsException;
-import seedu.nuscents.data.transaction.TransactionCategory;
 
 public class BudgetCommand extends Command {
 
