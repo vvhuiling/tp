@@ -152,9 +152,9 @@ CLI applications, which are often built to be efficient and clutter-free.
 {Describe the value proposition: what problem does it solve?}
 
 ## User Stories
-Version | As a ...           | I want to ...                                             | So that I can ...
+Version | As a ... | I want to ... | So that I can ...
 -----|--------------------|-----------------------------------------------------------|----------------------------------------------------------
-v1.0 | new user| access a help command that lists all actions and examples | I can learn how to use the tracker effectively
+v1.0 | new user | access a help command that lists all actions and examples | I can learn how to use the tracker effectively
 v1.0 | university student | add my allowance| I can track how much I get every month
 v1.0 | university student | add my expenses| I can keep track of my spending habits
 v1.0 | university student | delete allowance entries| I can remove wrong entries
