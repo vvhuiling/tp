@@ -25,6 +25,8 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
     Add an expense.
 - `delete INDEX` :
     Delete an entry.
+- `budget AMOUNT` :
+    Set a budget amount for expenses.
 - `filter CATEGORY` :
     Filter by category.
 - `view INDEX` :
