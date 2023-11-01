@@ -54,7 +54,7 @@ public class TransactionListTest {
                 "NOTE: Sample Note\n" +
                 "CATEGORY: FOOD\n" +
                 LINE;
-        String actualOutput = outContent.toString().replaceAll("\\r?\\n", "\n").trim();
+        String actualOutput = outContent.toString().replaceAll("\\r\\n", "\n").trim();
 
         assertEquals(expectedOutput, actualOutput);
     }
@@ -83,9 +83,9 @@ public class TransactionListTest {
                 "1      Expense     $30.00   " + new SimpleDateFormat("dd MMMM, yyyy").format(date) +
                 "   Transaction 2    Note 2      ENTERTAINMENT \n" +
                 LINE + "\n" +
-                "Net Balance = -30.00\n" +
+                "Total amount for ENTERTAINMENT = -30.00\n" +
                 LINE;
-        String actualOutput = outContent.toString().replaceAll("\\r?\\n", "\n").trim();
+        String actualOutput = outContent.toString().replaceAll("\\r\\n", "\n").trim();
         assertEquals(expectedOutput, actualOutput);
     }
 
@@ -97,7 +97,7 @@ public class TransactionListTest {
         String expectedOutput = LINE + "\n" +
                 "No transactions found in the category TRANSPORTATION\n" +
                 LINE;
-        String actualOutput = outContent.toString().replaceAll("\\r?\\n", "\n").trim();
+        String actualOutput = outContent.toString().replaceAll("\\r\\n", "\n").trim();
 
         assertEquals(expectedOutput, actualOutput);
     }
