@@ -53,8 +53,8 @@ Format: `help`
 
 ### Adding an allowance: `allowance`
 
-To add a new allowance entry to the financial tracker, please adhere to the given format!!  
-PS: Do take note that fields with "[ ]" can be omitted.
+To add a new allowance entry to the financial tracker, please adhere to the given format!  
+Fields in square brackets "[ ]" can be omitted.
 
 Format:  
 1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
@@ -64,8 +64,8 @@ e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
 
 ### Adding an expense: `expense`
 
-To add a new expense entry to the financial tracker, please adhere to the given format!!
-PS: Do take note that fields with "[ ]" can be omitted.
+To add a new expense entry to the financial tracker, please adhere to the given format!
+Fields in square brackets "[ ]" can be omitted.
 
 Format:  
 1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
@@ -89,6 +89,17 @@ Format: `list`
 ### Filtering entries by category: `filter`
 
 To filter entries in the financial tracker by category.
+The current supported categories are: 
+- SALARY
+- ALLOWANCE
+- INVESTMENTS
+- GIFTS
+- FOOD
+- ENTERTAINMENT
+- TRANSPORTATION
+- UTILITY
+- RENT
+- OTHERS
 
 Format: `filter CATEGORY`  
 e.g., `filter allowance`
@@ -110,7 +121,15 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: There are 2 files used for storage, `./data/nuscents.txt` and `./data/hmac`. Copy both files over to the target
+computer.
+
+**Q**: What happens if I modify the storage file ?
+
+**A**: The application is programmed to exit immediately if it detects that the storage file has been tampered with. 
+You will either need to revert the storage file back to the last known 'good state', or delete both the 
+`./data/nuscents.txt` and `./data/hmac` files and run the program again. Note that deleting the files will cause a loss
+of previously stored data. 
 
 ## Command Summary
 
