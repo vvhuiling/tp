@@ -73,6 +73,13 @@ e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
 2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`
 e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
 
+### Adding a budget: `budget`
+
+To add a budget to your expenses.
+
+Format: `budget AMOUNT`  
+e.g., `budget 200`
+
 ### Deleting an entry: `delete`
 
 To delete an entry from the financial tracker, which can be either an allowance or an expense.
@@ -148,6 +155,7 @@ of previously stored data.
 | **Help**          | `help`                                                                                                                                                                                                |
 | **Add Allowance** | `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance` |
 | **Add Expense**   | `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`                     |
+| **Add Budget**    | `budget AMOUNT`<br> e.g., `budget 200`                                                                                                                                                                |
 | **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                   |
 | **List**          | `list`                                                                                                                                                                                                |
 | **Filter**        | `filter CATEGORY`                                                                                                                                                                                     |
