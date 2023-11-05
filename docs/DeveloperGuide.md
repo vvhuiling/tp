@@ -37,37 +37,38 @@ The following sequence diagram shows how the add transaction operation works:
 #### I. Architecture-Level Design
 The "View Transaction" feature primarily involves the following components:
 
-1. Parser: Responsible for interpreting user input and generating a ViewCommand object.
+1. Parser  
+Responsible for interpreting user input and generating a ViewCommand object.
 
-2. ViewCommand: A subclass of the Command class, created by the Parser to represent the "view" command.
+2. ViewCommand  
+A subclass of the Command class, created by the Parser to represent the "view" command.
 
-3. Nuscents: The main application class that receives and executes commands. It invokes the execute() method of the ViewCommand.
+3. Nuscents  
+The main application class that receives and executes commands. It invokes the execute() method of the ViewCommand.
 
-4. TransactionList: A data structure to store and manage transactions.
+4. TransactionList   
+A data structure to store and manage transactions.
 
-5. Transaction: Represents individual transactions.
+5. Transaction   
+Represents individual transactions.
 
-6. UI: Handles user interface and messaging.
+6. UI   
+Handles user interface and messaging.
 
 #### II. Component-Level Design
 1. Parser
-
 The Parser class identifies the "view" command and extracts the taskIndex (transaction index) from the user's input.
 
 2. ViewCommand
-
 The ViewCommand object is created by the Parser. It encapsulates the user's request to view a specific transaction. This object is passed to the Nuscents class for execution.
 
 3. Nuscents
-
 In the Nuscents class, the execute() method of the ViewCommand is called, and the taskIndex is extracted from the command. It then calls the viewTransaction(taskIndex) method on the TransactionList.
 
 4. TransactionList
-
 The TransactionList contains a list of Transaction objects. The viewTransaction(taskIndex) method retrieves the specific Transaction object based on the taskIndex.
 
 5. Transaction
-
 The Transaction class represents an individual transaction, and it contains all the relevant details of a transaction.
 
 6. UI
@@ -80,7 +81,7 @@ integrating the view transaction functionality directly within the Nuscents clas
 However, we opted for the current design to promote a cleaner separation of concerns and to facilitate future expansions 
 and modifications.
 
-The following sequence diagram shows how the add transaction operation works:
+The following sequence diagram shows how the view transaction operation works:
 <img src="images/ViewSequenceDiagram.png" width="600" />
 
 ### List transactions feature
