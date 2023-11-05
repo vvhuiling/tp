@@ -4,13 +4,13 @@ hide footbox
 skinparam ArrowFontStyle plain
 
 Actor User as user USER_COLOR
-Participant ":Nuscents" as nuscents UI_COLOR_T1
+Participant ":Nuscents" as nuscents MAIN_COLOR
 Participant ":Parser" as parser PARSER_COLOR
 Participant ":ListCommand" as ListCommand COMMAND_COLOR
 Participant ":TransactionList" as TransactionList UI_COLOR
 
 user -[USER_COLOR]> nuscents
-activate nuscents UI_COLOR_T1
+activate nuscents MAIN_COLOR
 
 
 nuscents -> parser : parseCommand("list")
