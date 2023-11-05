@@ -70,7 +70,7 @@ Fields in square brackets "[ ]" can be omitted.
 Format:  
 1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
 e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`  
-2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`
+2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`   
 e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
 
 ### Adding a budget: `budget`
