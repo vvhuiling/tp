@@ -75,7 +75,8 @@ e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
 
 ### Adding a budget: `budget`
 
-To add a budget to your expenses.
+To add a budget to your expenses.   
+Note: The budget must be larger than 0 as it does not make sense to set budget as 0.
 
 Format: `budget AMOUNT`  
 e.g., `budget 200`
