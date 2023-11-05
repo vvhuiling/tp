@@ -134,12 +134,11 @@ The `helpCommand` feature serves as an informative component to assist users unf
 Initially, we pondered over embedding the help details directly within the main application class, `Nuscents`. This would eliminate the need for a separate `HelpCommand` class. However, segregating the `HelpCommand` ensures better modularity, making future expansions or modifications seamless.
 
 ### `helpCommand` Usage Scenario
-
-1. **Step 1**: The user launches the application. The initial screen appears.
-2. **Step 2**: Unsure of the commands, the user inputs the `help` command.
-3. **Step 3**: The application recognizes the command through the `Parser` and creates a `HelpCommand` object.
-4. **Step 4**: The `Nuscents` class invokes the `execute()` method of the `HelpCommand`.
-5. **Step 5**: The `UI` fetches the `HELP_MENU` string and displays the comprehensive list of commands to the user.
+**Step 1**: The user launches the application. The initial screen appears.   
+**Step 2**: Unsure of the commands, the user inputs the `help` command.   
+**Step 3**: The application recognizes the command through the `Parser` and creates a `HelpCommand` object.   
+**Step 4**: The `Nuscents` class invokes the `execute()` method of the `HelpCommand`.   
+**Step 5**: The `UI` fetches the `HELP_MENU` string and displays the comprehensive list of commands to the user.
 
 
 ## Product scope
