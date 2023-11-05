@@ -1,4 +1,22 @@
-# User Guide
+# User Guide 💰
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Prerequisite](#prerequisite)
+- [Quick Start](#quick-start)
+- [Features](#features)
+   - [Viewing help: `help`](#viewing-help-help)
+   - [Adding an allowance: `allowance`](#adding-an-allowance-allowance)
+   - [Adding an expense: `expense`](#adding-an-expense-expense)
+   - [Adding a budget: `budget`](#adding-a-budget-budget)
+   - [Deleting an entry: `delete`](#deleting-an-entry-delete)
+   - [Listing all entries: `list`](#listing-all-entries-list)
+   - [Filtering entries by category: `filter`](#filtering-entries-by-category-filter)
+   - [Viewing an entry: `view`](#viewing-an-entry-view)
+   - [Editing an entry: `edit`](#editing-an-entry-edit)
+   - [Exiting the program: `exit`](#exiting-the-program-exit)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 ## Introduction
 
@@ -11,7 +29,7 @@ Make sure you have Java `11` or above installed on your system.
 
 ## Quick Start
 
-1. Download the latest JAR file (`tp.jar`). 
+1. Download the latest JAR file (`tp.jar`).
 2. Copy the JAR file to the folder you want to use as the **home folder** for your financial tracker.
 3. Open a command terminal, `cd` into the folder you put the jar file in.
 4. Enter the following command to run the program:
@@ -36,14 +54,14 @@ Make sure you have Java `11` or above installed on your system.
       Hint: To view a list of all possible commands, please enter 'help'.
       ---------------------------------------------------------------------------------------------
    ```
-   
-## Features 
+
+## Features
 
 - Words in UPPER_CASE are the parameters to be supplied by the user.
-e.g. in `allowance /amt AMOUNT`, `AMOUNT` is a parameter that can be used
-as `allowance /amt 1000`.
+  e.g. in `allowance /amt AMOUNT`, `AMOUNT` is a parameter that can be used
+  as `allowance /amt 1000`.
 - Items in square brackets are optional.
-e.g. `allowance` can be used with or without `/note`.
+  e.g. `allowance` can be used with or without `/note`.
 
 ### Viewing help: `help`
 To view a list of all possible commands, a brief description of their
@@ -54,24 +72,37 @@ Format: `help`
 ### Adding an allowance: `allowance`
 
 To add a new allowance entry to the financial tracker, please adhere to the given format!  
-Fields in square brackets "[ ]" can be omitted.
+Fields in square brackets "[ ]" can be omitted.   
+Possible categories for allowance are:
+- SALARY
+- ALLOWANCE
+- INVESTMENTS
+- GIFTS
+- NO_ALLOWANCE_CATEGORY
 
-Format:  
+Format:
 1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`  
+   e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
 2) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION`  
-e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
+   e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
 
 ### Adding an expense: `expense`
 
 To add a new expense entry to the financial tracker, please adhere to the given format!
-Fields in square brackets "[ ]" can be omitted.
+Fields in square brackets "[ ]" can be omitted.   
+Possible categories for allowance are:
+- FOOD
+- ENTERTAINMENT
+- TRANSPORTATION
+- UTILITY
+- RENT
+- NO_EXPENSE_CATEGORY
 
-Format:  
+Format:
 1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`  
+   e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
 2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`   
-e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
+   e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
 
 ### Adding a budget: `budget`
 
@@ -97,17 +128,20 @@ Format: `list`
 ### Filtering entries by category: `filter`
 
 To filter entries in the financial tracker by category.
-The current supported categories are: 
-- SALARY
-- ALLOWANCE
-- INVESTMENTS
-- GIFTS
-- FOOD
-- ENTERTAINMENT
-- TRANSPORTATION
-- UTILITY
-- RENT
-- OTHERS
+The current supported categories are:
+- Allowance:
+   - SALARY
+   - ALLOWANCE
+   - INVESTMENTS
+   - GIFTS
+   - NO_ALLOWANCE_CATEGORY
+- Expenses:
+   - FOOD
+   - ENTERTAINMENT
+   - TRANSPORTATION
+   - UTILITY
+   - RENT
+   - NO_EXPENSE_CATEGORY
 
 Format: `filter CATEGORY`  
 e.g., `filter allowance`
@@ -123,11 +157,11 @@ e.g., `view 3`
 
 To edit an entry in the financial tracker, which can be either an allowance or an expense.
 
-Format:  
+Format:
 1) `edit INDEX allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-e.g., `edit 3 allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
+   e.g., `edit 3 allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
 2) `edit INDEX expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-e.g., `edit 3 expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
+   e.g., `edit 3 expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
 
 ### Exiting the program: `exit`
 
@@ -137,17 +171,17 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
 
 **A**: There are 2 files used for storage, `./data/nuscents.txt` and `./data/hmac`. Copy both files over to the target
 computer.
 
 **Q**: What happens if I modify the storage file ?
 
-**A**: The application is programmed to exit immediately if it detects that the storage file has been tampered with. 
-You will either need to revert the storage file back to the last known 'good state', or delete both the 
+**A**: The application is programmed to exit immediately if it detects that the storage file has been tampered with.
+You will either need to revert the storage file back to the last known 'good state', or delete both the
 `./data/nuscents.txt` and `./data/hmac` files and run the program again. Note that deleting the files will cause a loss
-of previously stored data. 
+of previously stored data.
 
 ## Command Summary
 
