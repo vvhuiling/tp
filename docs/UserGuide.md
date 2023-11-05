@@ -1,10 +1,10 @@
 # User Guide 💰
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Prerequisite](#prerequisite)
-- [Quick Start](#quick-start)
-- [Features](#features)
+- [Introduction](#introduction-)
+- [Prerequisite](#prerequisite-)
+- [Quick Start](#quick-start-)
+- [Features](#features-)
    - [Viewing help: `help`](#viewing-help-help)
    - [Adding an allowance: `allowance`](#adding-an-allowance-allowance)
    - [Adding an expense: `expense`](#adding-an-expense-expense)
@@ -15,19 +15,19 @@
    - [Viewing an entry: `view`](#viewing-an-entry-view)
    - [Editing an entry: `edit`](#editing-an-entry-edit)
    - [Exiting the program: `exit`](#exiting-the-program-exit)
-- [FAQ](#faq)
-- [Command Summary](#command-summary)
+- [FAQ](#faq-)
+- [Command Summary](#command-summary-)
 
-## Introduction
+## Introduction 🏦
 
 Welcome to 🪙NUScents🪙, the tailor-made financial tracker for SOC students at
 NUS. It is optimized for use via a Command Line Interface (CLI) to offer a clutter-free
 solution for our users to manage and monitor their financial activities.
 
-## Prerequisite
+## Prerequisite 💵
 Make sure you have Java `11` or above installed on your system.
 
-## Quick Start
+## Quick Start 💷
 
 1. Download the latest JAR file (`tp.jar`).
 2. Copy the JAR file to the folder you want to use as the **home folder** for your financial tracker.
@@ -55,7 +55,7 @@ Make sure you have Java `11` or above installed on your system.
       ---------------------------------------------------------------------------------------------
    ```
 
-## Features
+## Features 📊
 
 - Words in UPPER_CASE are the parameters to be supplied by the user.
   e.g. in `allowance /amt AMOUNT`, `AMOUNT` is a parameter that can be used
@@ -169,7 +169,7 @@ To exit the program.
 
 Format: `exit`
 
-## FAQ
+## FAQ ❓
 
 **Q**: How do I transfer my data to another computer?
 
@@ -183,7 +183,7 @@ You will either need to revert the storage file back to the last known 'good sta
 `./data/nuscents.txt` and `./data/hmac` files and run the program again. Note that deleting the files will cause a loss
 of previously stored data.
 
-## Command Summary
+## Command Summary 💡
 
 | Action            | Format, Examples                                                                                                                                                                                      |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
