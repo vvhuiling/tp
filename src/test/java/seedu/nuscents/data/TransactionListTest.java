@@ -83,7 +83,7 @@ public class TransactionListTest {
                 "1      Expense     $30.00   " + new SimpleDateFormat("dd MMMM, yyyy").format(date) +
                 "   Transaction 2    Note 2      ENTERTAINMENT \n" +
                 LINE + "\n" +
-                "Total amount for ENTERTAINMENT = -30.00\n" +
+                "Total amount for ENTERTAINMENT = 30.00\n" +
                 LINE;
         String actualOutput = outContent.toString().replaceAll("\\r\\n", "\n").trim();
         assertEquals(expectedOutput, actualOutput);
