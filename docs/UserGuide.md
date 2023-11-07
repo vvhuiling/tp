@@ -74,7 +74,10 @@ Format: `help`
 ### Adding an allowance: `allowance`
 
 To add a new allowance entry to the financial tracker, please adhere to the given format!  
-Fields in square brackets "[ ]" can be omitted.   
+
+> 📑 Note   
+> Fields in square brackets `[ ]` can be omitted. 
+
 Possible categories for allowance are:
 - SALARY
 - ALLOWANCE
@@ -91,7 +94,10 @@ Format:
 ### Adding an expense: `expense`
 
 To add a new expense entry to the financial tracker, please adhere to the given format!
-Fields in square brackets "[ ]" can be omitted.   
+
+> 📑 Note   
+> Fields in square brackets `[ ]` can be omitted.
+
 Possible categories for allowance are:
 - FOOD
 - ENTERTAINMENT
