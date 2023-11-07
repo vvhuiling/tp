@@ -80,9 +80,9 @@ Possible categories for allowance are:
 - GIFTS
 - NO_ALLOWANCE_CATEGORY
 
-Format:
+Format:   
 1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-   e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
+   e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`   
 2) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION`  
    e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
 
@@ -98,9 +98,9 @@ Possible categories for allowance are:
 - RENT
 - NO_EXPENSE_CATEGORY
 
-Format:
+Format:   
 1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-   e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
+   e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`   
 2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`   
    e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
 
