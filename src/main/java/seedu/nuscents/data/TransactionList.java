@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 
 public class TransactionList {
-    private ArrayList<Transaction> transactions;
     private static int count = 0;
+    private ArrayList<Transaction> transactions;
+
     private float budget;
 
     public TransactionList() {
