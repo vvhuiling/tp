@@ -8,14 +8,12 @@ import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
-import seedu.nuscents.ui.Messages;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FilterCommandTest {

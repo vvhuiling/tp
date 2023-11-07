@@ -13,7 +13,6 @@ import seedu.nuscents.commands.BudgetCommand;
 import seedu.nuscents.commands.EditCommand;
 
 import seedu.nuscents.data.TransactionList;
-import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
