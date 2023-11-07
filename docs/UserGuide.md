@@ -18,6 +18,8 @@
 - [FAQ](#faq-)
 - [Command Summary](#command-summary-)
 
+-----------------------------------------------------------------------------------------------------------------------
+
 ## Introduction 🏦
 
 Welcome to 🪙NUScents🪙, the tailor-made financial tracker for SOC students at
@@ -72,7 +74,10 @@ Format: `help`
 ### Adding an allowance: `allowance`
 
 To add a new allowance entry to the financial tracker, please adhere to the given format!  
-Fields in square brackets "[ ]" can be omitted.   
+
+> 📑 Note   
+> Fields in square brackets `[ ]` can be omitted. 
+
 Possible categories for allowance are:
 - SALARY
 - ALLOWANCE
@@ -80,16 +85,21 @@ Possible categories for allowance are:
 - GIFTS
 - NO_ALLOWANCE_CATEGORY
 
-Format:
+Format:   
 1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-   e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
+   e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`   
 2) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION`  
    e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
+
+<img src="images/AddAllowanceScreenshot.png" width="757" />
 
 ### Adding an expense: `expense`
 
 To add a new expense entry to the financial tracker, please adhere to the given format!
-Fields in square brackets "[ ]" can be omitted.   
+
+> 📑 Note   
+> Fields in square brackets `[ ]` can be omitted.
+
 Possible categories for allowance are:
 - FOOD
 - ENTERTAINMENT
@@ -98,11 +108,13 @@ Possible categories for allowance are:
 - RENT
 - NO_EXPENSE_CATEGORY
 
-Format:
+Format:   
 1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-   e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
+   e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`   
 2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`   
    e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
+   
+<img src="images/AddExpenseScreenshot.png" width="757" />
 
 ### Adding a budget: `budget`
 
@@ -117,13 +129,17 @@ e.g., `budget 200`
 To delete an entry from the financial tracker, which can be either an allowance or an expense.
 
 Format: `delete INDEX`  
-e.g., `delete 3`
+e.g., `delete 1`
+
+<img src="images/Delete.png" width="752" />
 
 ### Listing all entries: `list`
 
 To list all entries in the financial tracker.
 
 Format: `list`
+
+<img src="images/List.png" width="760" />
 
 ### Filtering entries by category: `filter`
 
@@ -151,7 +167,9 @@ e.g., `filter allowance`
 To view an entry in the financial tracker, which can be either an allowance or an expense.
 
 Format: `view INDEX`  
-e.g., `view 3`
+e.g., `view 2`
+
+<img src="images/View.png" width="759" />
 
 ### Editing an entry: `edit`
 
