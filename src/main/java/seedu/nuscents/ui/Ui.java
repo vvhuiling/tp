@@ -81,19 +81,14 @@ public class Ui {
         assert transactionList.getTransactions() != null;
         System.out.println("Here are the transactions in your list:");
         System.out.println(LINE);
-        System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n",
+        System.out.printf("%-5s  %-10s  %-10s  %-18s  %-15s  %-10s  %-5s %n",
                 "S/N", "TYPE", "AMOUNT", "DATE", "DESCRIPTION", "NOTE", "CATEGORY");
         System.out.println(LINE);
         ArrayList<Transaction> transactions = transactionList.getTransactions();
         for (Transaction transaction : transactions) {
             int index = transactions.indexOf(transaction) + 1;
-            String additionalInfo = transaction.getAdditionalInfo();
-            String note;
-            if (additionalInfo.isEmpty()) {
-                note = "-";
-            } else {
-                note = additionalInfo;
-            }
+            String note = getNote(transaction.getAdditionalInfo());
+            String desc = getDescription(transaction);
             if (transaction instanceof Allowance) {
                 TransactionCategory allowanceCategory = transaction.getCategory();
                 String category;
@@ -102,9 +97,9 @@ public class Ui {
                 } else {
                     category = allowanceCategory.toString();
                 }
-                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s %-5s %n", index, "Allowance",
-                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
-                        transaction.getDescription(), note, category);
+                System.out.printf("%-5s  %-10s  %-10s  %-18s  %-15s  %-10s  %-5s %n", index, "Allowance",
+                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), desc,
+                        note, category);
             } else if (transaction instanceof Expense) {
                 TransactionCategory expenseCategory = transaction.getCategory();
                 String category;
@@ -113,14 +108,36 @@ public class Ui {
                 } else {
                     category = expenseCategory.toString();
                 }
-                System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n", index, "Expense",
-                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
-                        transaction.getDescription(), note, category);
+                System.out.printf("%-5s  %-10s  %-10s  %-18s  %-15s  %-10s  %-5s %n", index, "Expense",
+                        "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), desc,
+                        note, category);
             }
         }
         System.out.println(LINE);
         System.out.println("Net Balance = $" + String.format("%.2f", transactionList.getNetBalance()));
         System.out.println(LINE);
+    }
+
+    private static String getNote(String additionalInfo) {
+        String note;
+        if (additionalInfo.isEmpty()) {
+            note = "-";
+        } else if (additionalInfo.length() > 10) {
+            note = additionalInfo.substring(0,9);
+        } else {
+            note = additionalInfo;
+        }
+        return note;
+    }
+
+    private static String getDescription(Transaction transaction) {
+        String desc;
+        if (transaction.getDescription().length() > 15) {
+            desc = transaction.getDescription().substring(0,14);
+        } else {
+            desc = transaction.getDescription();
+        }
+        return desc;
     }
 
     public static void showReadDataError() {
