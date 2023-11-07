@@ -18,6 +18,8 @@
 - [FAQ](#faq-)
 - [Command Summary](#command-summary-)
 
+-----------------------------------------------------------------------------------------------------------------------
+
 ## Introduction 🏦
 
 Welcome to 🪙NUScents🪙, the tailor-made financial tracker for SOC students at
