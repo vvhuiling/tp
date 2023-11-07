@@ -27,7 +27,7 @@ public class TransactionListTest {
 
     @AfterEach
     public void tearDown() {
-        System.setOut(originalOut); // 重置 System.out 为原始 System.out
+        System.setOut(originalOut);
     }
 
     @Test
