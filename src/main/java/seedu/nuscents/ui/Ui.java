@@ -97,7 +97,7 @@ public class Ui {
                 } else {
                     category = allowanceCategory.toString();
                 }
-                System.out.printf("%-5s  %-10s  %-10s  %-18s  %-15s  %-10s %-5s %n", index, "Allowance",
+                System.out.printf("%-5s  %-10s  %-10s  %-18s  %-15s  %-10s  %-5s %n", index, "Allowance",
                         "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(), desc,
                         note, category);
             } else if (transaction instanceof Expense) {
