@@ -52,7 +52,7 @@ public class Ui {
     }
 
     public static void showTransactionCount( ) {
-        System.out.println("Now you have " + Transaction.getTransactionCount() + " transactions in the list.");
+        System.out.println("Now you have " + TransactionList.getTransactionCount() + " transactions in the list.");
     }
 
     public static void showTransactionAddedMessage(Transaction transaction) {

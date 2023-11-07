@@ -12,6 +12,7 @@ import seedu.nuscents.commands.FilterCommand;
 import seedu.nuscents.commands.BudgetCommand;
 import seedu.nuscents.commands.EditCommand;
 
+import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.Expense;
@@ -297,7 +298,7 @@ public class Parser {
         }
         try {
             int taskIndex = Integer.parseInt(arguments);
-            if (taskIndex > Transaction.getTransactionCount() || taskIndex <= 0) {
+            if (taskIndex > TransactionList.getTransactionCount() || taskIndex <= 0) {
                 throw new IndexOutOfBoundsException(MESSAGE_INVALID_INDEX);
             }
             return taskIndex;
