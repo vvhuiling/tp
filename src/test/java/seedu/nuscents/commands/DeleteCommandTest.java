@@ -34,7 +34,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_transactionDeleted_success() {
         transactionList.clearTransactionList();
-        Date date = new Date(2023, Calendar.NOVEMBER, 30);
+        Date date = new Date(123, Calendar.NOVEMBER, 30);
         testExpense = new Expense(20.0f, date, "Lunch", "Pasta", ExpenseCategory.FOOD);
         transactionList.addTransaction(testExpense);
         DeleteCommand deleteCommand = new DeleteCommand(1);
