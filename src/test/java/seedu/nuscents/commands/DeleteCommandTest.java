@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.data.transaction.Expense;
 import seedu.nuscents.data.transaction.ExpenseCategory;
-import seedu.nuscents.data.transaction.Transaction;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
