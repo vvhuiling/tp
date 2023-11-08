@@ -1,14 +1,9 @@
 package seedu.nuscents.parser;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.nuscents.commands.Command;
-import seedu.nuscents.commands.DeleteCommand;
-import seedu.nuscents.commands.ExitCommand;
-import seedu.nuscents.commands.FilterCommand;
-import seedu.nuscents.commands.HelpCommand;
-import seedu.nuscents.commands.InvalidCommand;
-import seedu.nuscents.commands.ListCommand;
-import seedu.nuscents.commands.ViewCommand;
+import seedu.nuscents.commands.*;
+import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.data.exception.NuscentsException;
 import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.AllowanceCategory;
@@ -18,8 +13,12 @@ import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.ui.Messages;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,6 +27,19 @@ import static seedu.nuscents.parser.Parser.parseAllowanceCategory;
 import static seedu.nuscents.parser.Parser.parseExpenseCategory;
 
 public class ParserTest {
+    private TransactionList transactionList;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() {
+        transactionList = new TransactionList();
+        transactionList.clearTransactionList();
+        Date date = new Date(123, Calendar.NOVEMBER, 30);
+        // Create a test transaction to be used in the tests
+        Expense expense = new Expense(20.0f, date, "Lunch", "Pasta", ExpenseCategory.FOOD);
+        transactionList.addTransaction(expense);
+        System.setOut(new PrintStream(outContent));
+    }
 
     @Test
     public void parseCommand_invalidCommand_invalidCommandReturned() throws Exception {
