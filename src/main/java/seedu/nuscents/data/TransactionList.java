@@ -12,7 +12,9 @@ import java.util.ArrayList;
 
 
 public class TransactionList {
+    private static int count = 0;
     private ArrayList<Transaction> transactions;
+
     private float budget;
 
     public TransactionList() {
@@ -27,8 +29,13 @@ public class TransactionList {
         return transactions;
     }
 
+    public static int getTransactionCount() {
+        return count;
+    }
+
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+        count++;
         Ui.showTransactionAddedMessage(transaction);
     }
 
@@ -38,13 +45,18 @@ public class TransactionList {
     public void deleteTransaction(int transactionIndex) {
         Transaction transaction = transactions.get(transactionIndex-1);
         transactions.remove(transaction);
-        Transaction.decreaseTransactionCountByOne();
+        count--;
         Ui.showTransactionRemovedMessage(transaction);
     }
 
     public void viewTransaction(int transactionIndex) {
         Transaction transaction = transactions.get(transactionIndex-1);
         Ui.showTransactionViewMessage(transaction);
+    }
+
+    public void clearTransactionList() {
+        transactions.clear();
+        count = 0;
     }
 
     public float getNetBalance(){

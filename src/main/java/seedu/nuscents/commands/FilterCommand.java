@@ -11,7 +11,7 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public void execute(TransactionList tasks) {
-        tasks.filterTransaction(category);
+    public void execute(TransactionList transactions) {
+        transactions.filterTransaction(category);
     }
 }

@@ -7,7 +7,6 @@ import java.util.Date;
  * Represents a Transaction in the TransactionList
  */
 public class Transaction {
-    private static int count = 0;
     protected float amount;
     protected Date date;
     protected String description;
@@ -16,14 +15,12 @@ public class Transaction {
 
     public Transaction(String description) {
         this.description = description;
-        count++;
     }
 
     public Transaction(float amount, Date date, String description) {
         this.amount = amount;
         this.date = date;
         this.description = description;
-        count++;
     }
 
     public Transaction(float amount, Date date, String description, String additionalInfo,
@@ -33,7 +30,6 @@ public class Transaction {
         this.description = description;
         this.additionalInfo = additionalInfo;
         this.category = category;
-        count++;
     }
 
     public float getAmount() {
@@ -65,16 +61,4 @@ public class Transaction {
         return getAmount() + " | " + getFormattedDate() + " | " + getDescription() + " | " + getAdditionalInfo()
                 + " | " + getCategory();
     }
-
-    public static int getTransactionCount() {
-        return count;
-    }
-
-    /**
-     * Decrease the task count by one when a task is deleted.
-     */
-    public static void decreaseTransactionCountByOne() {
-        count--;
-    }
-
 }

@@ -22,12 +22,13 @@ public class TransactionListTest {
     @BeforeEach
     public void setUp() {
         transactionList = new TransactionList();
+        transactionList.clearTransactionList();
         System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     public void tearDown() {
-        System.setOut(originalOut); // 重置 System.out 为原始 System.out
+        System.setOut(originalOut);
     }
 
     @Test
@@ -73,7 +74,7 @@ public class TransactionListTest {
         String expectedOutput = LINE + "\n" +
                 "Got it. I've added this transaction:\n" +
                 "  Transaction 2\n" +
-                "Now you have 2 transactions in the list.\n" +
+                "Now you have 1 transactions in the list.\n" +
                 LINE + "\n" +
                 LINE + "\n" +
                 "Filtered transactions in the category ENTERTAINMENT:\n" +
@@ -83,7 +84,7 @@ public class TransactionListTest {
                 "1      Expense     $30.00   " + new SimpleDateFormat("dd MMMM, yyyy").format(date) +
                 "   Transaction 2    Note 2      ENTERTAINMENT \n" +
                 LINE + "\n" +
-                "Total amount for ENTERTAINMENT = -30.00\n" +
+                "Total amount for ENTERTAINMENT = 30.00\n" +
                 LINE;
         String actualOutput = outContent.toString().replaceAll("\\r\\n", "\n").trim();
         assertEquals(expectedOutput, actualOutput);

@@ -52,7 +52,7 @@ public class Ui {
     }
 
     public static void showTransactionCount( ) {
-        System.out.println("Now you have " + Transaction.getTransactionCount() + " transactions in the list.");
+        System.out.println("Now you have " + TransactionList.getTransactionCount() + " transactions in the list.");
     }
 
     public static void showTransactionAddedMessage(Transaction transaction) {
@@ -188,11 +188,7 @@ public class Ui {
             System.out.printf("%-5s  %-10s  %-7s  %-18s  %-15s  %-10s  %-5s %n", index, type,
                     "$" + String.format("%.2f", transaction.getAmount()), transaction.getFormattedDate(),
                     transaction.getDescription(), note, category);
-            if (transaction instanceof Allowance) {
-                totalAmount += transaction.getAmount();
-            } else if (transaction instanceof Expense) {
-                totalAmount -= transaction.getAmount();
-            }
+            totalAmount += transaction.getAmount();
         }
         System.out.println(LINE);
         System.out.println("Total amount for " + category + " = " + String.format("%.2f", totalAmount));
