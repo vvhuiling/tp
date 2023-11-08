@@ -8,7 +8,7 @@ import seedu.nuscents.data.exception.NuscentsException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN;
 
 public class InvalidCommandTest {

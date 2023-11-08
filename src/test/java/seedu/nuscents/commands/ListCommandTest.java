@@ -4,15 +4,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.nuscents.data.TransactionList;
-import seedu.nuscents.data.transaction.*;
-import seedu.nuscents.ui.Messages;
+import seedu.nuscents.data.transaction.Expense;
+import seedu.nuscents.data.transaction.ExpenseCategory;
+import seedu.nuscents.data.transaction.Allowance;
+import seedu.nuscents.data.transaction.AllowanceCategory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_LIST;
 
