@@ -22,6 +22,7 @@ public class TransactionListTest {
     @BeforeEach
     public void setUp() {
         transactionList = new TransactionList();
+        transactionList.clearTransactionList();
         System.setOut(new PrintStream(outContent));
     }
 
@@ -73,7 +74,7 @@ public class TransactionListTest {
         String expectedOutput = LINE + "\n" +
                 "Got it. I've added this transaction:\n" +
                 "  Transaction 2\n" +
-                "Now you have 2 transactions in the list.\n" +
+                "Now you have 1 transactions in the list.\n" +
                 LINE + "\n" +
                 LINE + "\n" +
                 "Filtered transactions in the category ENTERTAINMENT:\n" +
