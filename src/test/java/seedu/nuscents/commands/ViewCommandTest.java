@@ -45,7 +45,8 @@ public class ViewCommandTest {
         transactionList.addTransaction(testAllowance);
         viewCommand = new ViewCommand(1);
         viewCommand.execute(transactionList);
-        String expectedOutput = "---------------------------------------------------------------------------------------------\n"
+        String expectedOutput =
+                "---------------------------------------------------------------------------------------------\n"
                 + "Following are details of the transaction:\n"
                 + "TYPE: EXPENSE\n"
                 + "DATE: 30 November, 2023\n"
