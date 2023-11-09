@@ -40,7 +40,8 @@ public class Messages {
     public static final String MESSAGE_EMPTY_LIST = "You have not made any transactions!";
     public static final String MESSAGE_EMPTY_KEYWORD = "OOPS!!! The keyword of a find command cannot be empty.";
     public static final String MESSAGE_EMPTY_BUDGET = "OOPS!!! The budget amount cannot be empty.";
-    public static final String MESSAGE_INVALID_BUDGET = "OOPS!!! The budget amount requires a +ve valid value.";
+    public static final String MESSAGE_INVALID_BUDGET = "OOPS!!! The budget amount requires a +ve valid float value";
+    public static final String MESSAGE_INVALID_BUDGET_FLOAT_DP = "OOPS!!! The budget amount cannot exceed 2 d.p.";
     public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a delete/view command cannot be empty.";
     public static final String MESSAGE_FATAL_ERROR = "OOPS!!! Fatal error occurred...";
     public static final String MESSAGE_READ_ERROR = "OOPS!!! A problem occurred while reading the data file.";

@@ -40,6 +40,7 @@ import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_BUDGET;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET_FLOAT_DP;
 import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
@@ -320,15 +321,20 @@ public class Parser {
         }
         try {
             float budget = Float.parseFloat(arguments);
-            if (budget > 0) {
-                return budget;
+            if (Math.abs(budget * 100 - Math.floor(budget * 100)) < 1e-6) {
+                if (budget > 0) {
+                    return budget;
+                } else {
+                    throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+                }
             } else {
-                throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+                throw new NuscentsException(MESSAGE_INVALID_BUDGET_FLOAT_DP);
             }
         } catch (NumberFormatException e) {
             throw new NuscentsException(MESSAGE_INVALID_BUDGET);
         }
     }
+
 
     public static EditCommand parseEdit(String arguments) throws NuscentsException, ParseException {
         if (arguments == null) {
