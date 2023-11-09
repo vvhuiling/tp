@@ -41,6 +41,7 @@ import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_BUDGET;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET_FLOAT_DP;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET_SIZE;
 import static seedu.nuscents.ui.Messages.MESSAGE_FATAL_ERROR;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
@@ -134,27 +135,32 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
         } else {
-            float amount = 0;
             try {
-                amount = Float.parseFloat(extractValue("allowance", arguments, AMT_PATTERN, false));
+                float amount = Float.parseFloat(
+                        extractValue("allowance", arguments, AMT_PATTERN, false));
+                if (amount > 0 && amount < 100000 && Math.abs(amount * 100 - Math.floor(amount * 100)) < 1e-6) {
+                    String date = extractValue("allowance", arguments, DATE_PATTERN, false);
+                    String description = extractValue("allowance", arguments, DESC_PATTERN, false);
+                    String additionalInfo = extractValue("allowance", arguments, NOTE_PATTERN, true);
+                    String category = extractValue("allowance", arguments, CATEGORY_PATTERN, true);
+                    AllowanceCategory allowanceCategory = parseAllowanceCategory(category);
+                    String format = datePatternValidation(date);
+                    SimpleDateFormat formatter = new SimpleDateFormat(format);
+                    Date formattedDate = parseDate(date, format, formatter);
+                    assert formattedDate != null;
+                    assert description != null;
+                    assert additionalInfo != null;
+                    assert category != null;
+                    return new Allowance(amount, formattedDate, description, additionalInfo, allowanceCategory);
+                } else {
+                    throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
+                }
             } catch (NumberFormatException e) {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
-            String date = extractValue("allowance", arguments, DATE_PATTERN, false);
-            String description = extractValue("allowance", arguments, DESC_PATTERN, false);
-            String additionalInformation = extractValue("allowance", arguments, NOTE_PATTERN, true);
-            String category = extractValue("allowance", arguments, CATEGORY_PATTERN, true);
-            AllowanceCategory allowanceCategory = parseAllowanceCategory(category);
-            String format = datePatternValidation(date);
-            SimpleDateFormat formatter = new SimpleDateFormat(format);
-            Date formattedDate = parseDate(date, format, formatter);
-            assert formattedDate != null;
-            assert description != null;
-            assert additionalInformation != null;
-            assert category != null;
-            return new Allowance(amount, formattedDate, description, additionalInformation, allowanceCategory);
         }
     }
+
 
     /**
      * Parsers arguments in the context of adding an expense.
@@ -167,23 +173,35 @@ public class Parser {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_EXPENSE);
         } else {
-            float amount = 0;
             try {
-                amount = Float.parseFloat(extractValue("expense", arguments, AMT_PATTERN, false));
+                float amount = Float.parseFloat(
+                            extractValue("expense", arguments, AMT_PATTERN, false));
+                if (amount > 0 && amount < 100000 && Math.abs(amount * 100 - Math.floor(amount * 100)) < 1e-6) {
+                    String date = extractValue("expense", arguments, DATE_PATTERN, false);
+                    String description = extractValue("expense", arguments, DESC_PATTERN, false);
+                    String additionalInfo = extractValue("expense", arguments, NOTE_PATTERN, true);
+                    String category = extractValue("expense", arguments, CATEGORY_PATTERN, true);
+                    ExpenseCategory expenseCategory = parseExpenseCategory(category);
+                    String format = datePatternValidation(date);
+                    SimpleDateFormat formatter = new SimpleDateFormat(format);
+                    Date formattedDate = parseDate(date, format, formatter);
+
+                    // Ensure all necessary fields are present before creating the Expense object
+                    assert formattedDate != null;
+                    assert description != null;
+                    assert additionalInfo != null;
+                    assert category != null;
+
+                    return new Expense(amount, formattedDate, description, additionalInfo, expenseCategory);
+                } else {
+                    throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
+                }
             } catch (NumberFormatException e) {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
-            String date = extractValue("expense", arguments, DATE_PATTERN, false);
-            String description = extractValue("expense", arguments, DESC_PATTERN, false);
-            String additionalInformation = extractValue("expense", arguments, NOTE_PATTERN, true);
-            String category = extractValue("expense", arguments, CATEGORY_PATTERN, true);
-            ExpenseCategory expenseCategory = parseExpenseCategory(category);
-            String format = datePatternValidation(date);
-            SimpleDateFormat formatter = new SimpleDateFormat(format);
-            Date formattedDate = parseDate(date, format, formatter);
-            return new Expense(amount, formattedDate, description, additionalInformation, expenseCategory);
         }
     }
+
 
     public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {
         String expenseCategoryLowercase = expenseCategory.toLowerCase();
@@ -322,10 +340,14 @@ public class Parser {
         try {
             float budget = Float.parseFloat(arguments);
             if (Math.abs(budget * 100 - Math.floor(budget * 100)) < 1e-6) {
-                if (budget > 0) {
-                    return budget;
+                if (budget < 100000) {
+                    if (budget > 0) {
+                        return budget;
+                    } else {
+                        throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+                    }
                 } else {
-                    throw new NuscentsException(MESSAGE_INVALID_BUDGET);
+                    throw new NuscentsException(MESSAGE_INVALID_BUDGET_SIZE);
                 }
             } else {
                 throw new NuscentsException(MESSAGE_INVALID_BUDGET_FLOAT_DP);
