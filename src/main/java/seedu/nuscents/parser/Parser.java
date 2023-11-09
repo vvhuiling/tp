@@ -161,7 +161,6 @@ public class Parser {
         }
     }
 
-
     /**
      * Parsers arguments in the context of adding an expense.
      *
@@ -201,7 +200,6 @@ public class Parser {
             }
         }
     }
-
 
     public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {
         String expenseCategoryLowercase = expenseCategory.toLowerCase();
@@ -356,8 +354,7 @@ public class Parser {
             throw new NuscentsException(MESSAGE_INVALID_BUDGET);
         }
     }
-
-
+    
     public static EditCommand parseEdit(String arguments) throws NuscentsException, ParseException {
         if (arguments == null) {
             throw new NuscentsException(MESSAGE_EMPTY_INDEX);
