@@ -33,6 +33,10 @@ public class TransactionList {
         return count;
     }
 
+    public static void increaseTransactionCount() {
+        count++;
+    }
+
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
         count++;

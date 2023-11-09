@@ -109,6 +109,7 @@ public class Storage {
                     allowanceCategory = parseAllowanceCategory(category);
                 }
                 transactions.add(new Allowance(amount, date, description, note, allowanceCategory));
+                TransactionList.increaseTransactionCount();
                 break;
 
             case 'E':
@@ -125,6 +126,7 @@ public class Storage {
                     expenseCategory = parseExpenseCategory(category);
                 }
                 transactions.add(new Expense(amount, date, description, note, expenseCategory));
+                TransactionList.increaseTransactionCount();
                 break;
 
             default:
