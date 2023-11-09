@@ -99,7 +99,6 @@ public class TransactionList {
 
     public void setBudget(float budget) {
         this.budget = budget;
-        Ui.showBudgetSet(this);
     }
 
     public float getBudget() {

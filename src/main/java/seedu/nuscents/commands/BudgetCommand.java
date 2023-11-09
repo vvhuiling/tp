@@ -2,6 +2,7 @@ package seedu.nuscents.commands;
 
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.data.exception.NuscentsException;
+import seedu.nuscents.ui.Ui;
 
 public class BudgetCommand extends Command {
 
@@ -13,5 +14,6 @@ public class BudgetCommand extends Command {
     @Override
     public void execute(TransactionList transactionList) throws NuscentsException {
         transactionList.setBudget(budget);
+        Ui.showBudgetSet(transactionList);
     }
 }
