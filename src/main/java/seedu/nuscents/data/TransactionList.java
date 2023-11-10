@@ -33,6 +33,10 @@ public class TransactionList {
         return count;
     }
 
+    public static void increaseTransactionCount() {
+        count++;
+    }
+
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
         count++;
@@ -99,7 +103,6 @@ public class TransactionList {
 
     public void setBudget(float budget) {
         this.budget = budget;
-        Ui.showBudgetSet(this);
     }
 
     public float getBudget() {
