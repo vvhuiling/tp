@@ -10,13 +10,16 @@ It is written in Java and has about 3kLoC.
 
 ### Code Contributed
 View my code contributions here: [Reposense](https://nus-cs2113-ay2324s1.github.io/tp-dashboard/#/widget/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=10&chartIndex=2)
+
 ### Enhancements implemented
-A summary of the enhancements you implemented.
+- Feature: Added the ability to add expenses
+- Feature: Added the ability to add allowances
+- Feature: Added the ability to categorise allowances
+- Bugfix: Allow modification of storage file and handle improper file input
 
 ### Contributions to the UG
-- Created a Table of Contents
-- Created Quick Start section to guide new users
-- Added a Command Summary section
+- Created the format for commands in the Features section
+- Ideated the example outputs given
 
 ### Contributions to the DG
 Which sections did you contribute to the DG? Which UML diagrams did you add/updated?
