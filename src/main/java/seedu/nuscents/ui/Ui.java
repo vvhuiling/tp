@@ -231,9 +231,15 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public static void showFileTamperedMessage() {
+    public static void showFileAccessErrorMessage() {
         System.out.println(LINE);
-        System.out.println(Messages.MESSAGE_FILE_TAMPERED_ERROR);
+        System.out.println(Messages.MESSAGE_FILE_ACCESS_ERROR);
+        System.out.println(LINE);
+    }
+
+    public static void showFatalErrorMessage() {
+        System.out.println(LINE);
+        System.out.println(Messages.MESSAGE_FATAL_ERROR);
         System.out.println(LINE);
     }
 
