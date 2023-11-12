@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 
 import static seedu.nuscents.parser.Parser.parseAllowanceCategory;
+import static seedu.nuscents.parser.Parser.parseBudget;
 import static seedu.nuscents.parser.Parser.parseExpenseCategory;
 
 public class Storage {
@@ -171,12 +172,13 @@ public class Storage {
         fw.close();
     }
 
-    public String readBudgetFromFile() throws FileNotFoundException, IOException {
+    public float readBudgetFromFile() throws FileNotFoundException, IOException {
         try {
             File file = new File("./data/budget.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                String budget = sc.nextLine();
+                String arguments = sc.nextLine();
+                float budget = parseBudget(arguments);
                 return budget;
             }
             sc.close();
@@ -185,8 +187,10 @@ public class Storage {
             File file = new File("./data/budget.txt");
             file.getParentFile().mkdirs();
             file.createNewFile();
+        } catch (NuscentsException e) {
+            Ui.showException(e);
         }
-        return "0";
+        return 0;
     }
 }
 
