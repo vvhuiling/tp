@@ -49,16 +49,11 @@ public class Storage {
      * @return an arraylist of tasks
      * @throws FileNotFoundException If the storage file does not exist.
      */
-    public ArrayList<Transaction> readDataFromFile() throws FileNotFoundException, ParseException {
+    public ArrayList<Transaction> readDataFromFile() throws FileNotFoundException {
         ArrayList<Transaction> transactions = new ArrayList<>();
         File file = new File(filePath);
         logger.log(Level.INFO, "Creating a File object to read data from file");
-        try {
-            transactionDecoder(file, transactions);
-        } catch (ParseException | NuscentsException e) {
-            logger.log(Level.WARNING, "Something went wrong when reading data from file");
-            Ui.showException(e);
-        }
+        transactionDecoder(file, transactions);
         logger.log(Level.INFO, "Loading from data file finished");
         return transactions;
     }
@@ -71,72 +66,49 @@ public class Storage {
      * @throws FileNotFoundException If the storage data file does not exist.
      */
     private static void transactionDecoder(File file, ArrayList<Transaction> transactions)
-            throws FileNotFoundException, ParseException, NuscentsException {
+            throws FileNotFoundException {
         Scanner data = new Scanner(file);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
         while (data.hasNext()) {
             String transactionDetails = data.nextLine();
             char transactionType = transactionDetails.charAt(0);
-            String[] columns;
-            float amount;
-            Date date;
-            String description = "";
-            String note = "";
-            String category = "";
-            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy");
-            switch (transactionType) {
-            case 'A':
-                try {
-                    String arguments = "";
-                    columns = transactionDetails.split("\\s*\\|\\s*");
-                    arguments += "/amt " + columns[1];
-                    date = formatter.parse(columns[2]);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    String dateString = dateFormat.format(date);
-                    arguments += " /date " + dateString;
-                    arguments += " /desc " + columns[3];
-                    if (columns.length > 4) {
-                        arguments += " /note " + columns[4];
-                    }
-                    if (columns.length > 5) {
-                        arguments += " /cat " + columns[5];
-                    }
+            try {
+                String arguments = buildArguments(transactionDetails, formatter, dateFormat);
+                switch (transactionType) {
+                case 'A':
                     transactions.add(parseAllowance(arguments));
-                } catch (ParseException | NuscentsException e) {
-                    Ui.showException(e);
-                    Ui.showDataCorruptedError();
-                    continue;
-                }
-                break;
-
-            case 'E':
-                try {
-                    String arguments = "";
-                    columns = transactionDetails.split("\\s*\\|\\s*");
-                    arguments += "/amt " + columns[1];
-                    date = formatter.parse(columns[2]);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    String dateString = dateFormat.format(date);
-                    arguments += " /date " + dateString;
-                    arguments += " /desc " + columns[3];
-                    if (columns.length > 4) {
-                        arguments += " /note " + columns[4];
-                    }
-                    if (columns.length > 5) {
-                        arguments += " /cat " + columns[5];
-                    }
+                    break;
+                case 'E':
                     transactions.add(parseExpense(arguments));
-                } catch (ParseException | NuscentsException e) {
-                    Ui.showException(e);
+                    break;
+                default:
                     Ui.showDataCorruptedError();
-                    continue;
+                    break;
                 }
-                break;
-
-            default:
+            } catch (ParseException | NuscentsException e) {
+                logger.log(Level.WARNING, "Something went wrong when reading data from file");
+                Ui.showException(e);
                 Ui.showDataCorruptedError();
-                break;
             }
         }
+    }
+
+    private static String buildArguments(String transactionDetails, SimpleDateFormat formatter,
+                                         SimpleDateFormat dateFormat)
+            throws ParseException {
+        String[] columns = transactionDetails.split("\\s*\\|\\s*");
+        Date date = formatter.parse(columns[2]);
+        String dateString = dateFormat.format(date);
+        String arguments = "/amt " + columns[1] + " /date " + dateString + " /desc " + columns[3];
+        if (columns.length > 4) {
+            arguments += " /note " + columns[4];
+        }
+        if (columns.length > 5) {
+            arguments += " /cat " + columns[5];
+        }
+        return arguments;
     }
 
     /**
