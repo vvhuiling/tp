@@ -45,7 +45,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showException(Exception e) {
+    public static void showException(Exception e) {
         System.out.println(LINE);
         System.out.println(e.getMessage());
         System.out.println(LINE);

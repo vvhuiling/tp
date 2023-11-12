@@ -39,7 +39,7 @@ public class Nuscents {
 
         File budgetFile = new File(budgetFilePath);
         if (budgetFile.exists()) {
-            transactions.setBudget(Float.parseFloat(storage.readBudgetFromFile()));
+            transactions.setBudget(storage.readBudgetFromFile());
         }
 
     }
