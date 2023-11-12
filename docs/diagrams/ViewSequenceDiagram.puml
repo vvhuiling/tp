@@ -8,6 +8,7 @@ Participant ":Nuscents" as nuscents MAIN_COLOR
 Participant ":Parser" as parser PARSER_COLOR
 Participant ":ViewCommand" as ViewCommand COMMAND_COLOR
 Participant ":TransactionList" as TransactionList UI_COLOR
+Participant ":UI" as UI
 
 user -[USER_COLOR]> nuscents
 activate nuscents MAIN_COLOR
@@ -31,6 +32,12 @@ activate ViewCommand
 
 ViewCommand -> TransactionList : viewTransaction()
 activate TransactionList
+
+TransactionList -> UI : showTransactionViewMessage(transaction)
+activate UI
+
+UI --> TransactionList
+deactivate UI
 
 TransactionList --> ViewCommand
 deactivate TransactionList
