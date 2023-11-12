@@ -64,12 +64,37 @@ Make sure you have Java `11` or above installed on your system.
   as `allowance /amt 1000`.
 - Items in square brackets are optional.
   e.g. `allowance` can be used with or without `/note`.
+- The commands provided in the following examples are presented in a sequential order, and their expected outputs are for illustrative purposes only. It is important to note that using these commands in a different order may result in outputs that do not exactly match those shown in this guide. However, any such variations would still be consistent with the logical use of the application.
 
 ### Viewing help: `help`
 To view a list of all possible commands, a brief description of their
 functionality and syntax.
 
 Format: `help`
+
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+- `list` :
+  List all entries.
+- `allowance /amt AMT /date DATE /desc DESC [/note NOTE] [/cat CAT]` :
+  Add an allowance.
+- `expense /amt AMT /date DATE /desc DESC [/note NOTE] [/cat CAT]` :
+  Add an expense.
+- `delete INDEX` :
+  Delete an entry.
+- `budget AMOUNT` :
+  Set a budget amount for expenses.
+- `filter CATEGORY` :
+  Filter by category.
+- `view INDEX` :
+  View entry detail.
+- `edit INDEX TRANSACTION` :
+  Edit an existing transaction (same format as adding a transaction).
+- `exit` :
+  Exit program.
+---------------------------------------------------------------------------------------------
+```
 
 ### Adding an allowance: `allowance`
 
@@ -83,15 +108,32 @@ Possible categories for allowance are:
 - ALLOWANCE
 - INVESTMENTS
 - GIFTS
-- NO_ALLOWANCE_CATEGORY
+- OTHER_ALLOWANCE
+- NO_ALLOWANCE_CATEGORY: "" or "no_allowance_category"
+Note that letter case doesn't matter.
 
 Format:   
 1) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
    e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`   
+   Expected output:
+```
+---------------------------------------------------------------------------------------------
+Got it. I've added this transaction:
+  pocket money
+Now you have 1 transactions in the list.
+---------------------------------------------------------------------------------------------
+```
+
 2) `allowance /amt AMOUNT /date DATE /desc DESCRIPTION`  
    e.g., `allowance /amt 200 /date 30-10-2023 /desc pocket money`
-
-<img src="images/AddAllowanceScreenshot.png" width="757" />
+   Expected output:
+```
+---------------------------------------------------------------------------------------------
+Got it. I've added this transaction:
+  pocket money
+Now you have 2 transactions in the list.
+---------------------------------------------------------------------------------------------
+```
 
 ### Adding an expense: `expense`
 
@@ -106,15 +148,32 @@ Possible categories for allowance are:
 - TRANSPORTATION
 - UTILITY
 - RENT
-- NO_EXPENSE_CATEGORY
+- OTHER_EXPENSE
+- NO_EXPENSE_CATEGORY:"" or "no_expense_category"
+Note that letter case doesn't matter.
 
 Format:   
 1) `expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
    e.g., `expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`   
+   Expected output:
+```
+---------------------------------------------------------------------------------------------
+Got it. I've added this transaction:
+  lunch
+Now you have 3 transactions in the list.
+---------------------------------------------------------------------------------------------
+```
+
 2) `expense /amt AMOUNT /date DATE /desc DESCRIPTION`   
    e.g., `expense /amt 20 /date 30-10-2023 /desc lunch`
-   
-<img src="images/AddExpenseScreenshot.png" width="757" />
+   Expected output:
+```
+---------------------------------------------------------------------------------------------
+Got it. I've added this transaction:
+  lunch
+Now you have 4 transactions in the list.
+---------------------------------------------------------------------------------------------
+```
 
 ### Adding a budget: `budget`
 
@@ -123,6 +182,13 @@ Note: The budget must be larger than 0 as it does not make sense to set budget a
 
 Format: `budget AMOUNT`  
 e.g., `budget 200`
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+Budget set to:
+  $200.0
+---------------------------------------------------------------------------------------------
+```
 
 ### Deleting an entry: `delete`
 
@@ -130,16 +196,39 @@ To delete an entry from the financial tracker, which can be either an allowance 
 
 Format: `delete INDEX`  
 e.g., `delete 1`
-
-<img src="images/Delete.png" width="752" />
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+Noted. I've removed this transaction:
+  pocket money
+Now you have 3 transactions in the list.
+---------------------------------------------------------------------------------------------
+```
 
 ### Listing all entries: `list`
 
 To list all entries in the financial tracker.
 
 Format: `list`
-
-<img src="images/List.png" width="760" />
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+Here are the transactions in your list:
+---------------------------------------------------------------------------------------------
+S/N    TYPE        AMOUNT      DATE                DESCRIPTION      NOTE        CATEGORY 
+---------------------------------------------------------------------------------------------
+1      Allowance   $200.00     30 October, 2023    pocket money     -           -     
+2      Expense     $20.00      30 October, 2023    lunch            pasta       FOOD  
+3      Expense     $20.00      30 October, 2023    lunch            -           -     
+---------------------------------------------------------------------------------------------
+Net Balance = $160.00
+---------------------------------------------------------------------------------------------
+Initial budget set to  = $200.00
+Expenses  = $40.00
+Total expenses are still within budget.
+Remaining budget: $160.00
+---------------------------------------------------------------------------------------------
+```
 
 ### Filtering entries by category: `filter`
 
@@ -150,6 +239,7 @@ The current supported categories are:
    - ALLOWANCE
    - INVESTMENTS
    - GIFTS
+   - OTHER_ALLOWANCE
    - NO_ALLOWANCE_CATEGORY
 - Expenses:
    - FOOD
@@ -157,10 +247,23 @@ The current supported categories are:
    - TRANSPORTATION
    - UTILITY
    - RENT
+   - OTHER_EXPENSE
    - NO_EXPENSE_CATEGORY
 
 Format: `filter CATEGORY`  
-e.g., `filter allowance`
+e.g., `filter FOOD`
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+Filtered transactions in the category FOOD:
+---------------------------------------------------------------------------------------------
+S/N    TYPE        AMOUNT   DATE                DESCRIPTION      NOTE        CATEGORY 
+---------------------------------------------------------------------------------------------
+1      Expense     $20.00   30 October, 2023    lunch            pasta       FOOD  
+---------------------------------------------------------------------------------------------
+Total amount for FOOD = 20.00
+---------------------------------------------------------------------------------------------
+```
 
 ### Viewing an entry: `view`
 
@@ -168,8 +271,18 @@ To view an entry in the financial tracker, which can be either an allowance or a
 
 Format: `view INDEX`  
 e.g., `view 2`
-
-<img src="images/View.png" width="759" />
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+Following are details of the transaction:
+TYPE: EXPENSE
+DATE: 30 October, 2023
+AMOUNT: 20.0
+DESCRIPTION: lunch
+NOTE: pasta
+CATEGORY: FOOD
+---------------------------------------------------------------------------------------------
+```
 
 ### Editing an entry: `edit`
 
@@ -177,15 +290,49 @@ To edit an entry in the financial tracker, which can be either an allowance or a
 
 Format:
 1) `edit INDEX allowance /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-   e.g., `edit 3 allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`
-2) `edit INDEX expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
-   e.g., `edit 3 expense /amt 20 /date 30-10-2023 /desc lunch /note pasta /cat food`
+   e.g., `edit 1 allowance /amt 150 /date 30-10-2023 /desc pocket money`
+   Expected output:
+```
+---------------------------------------------------------------------------------------------
+Here are the transactions in your list:
+---------------------------------------------------------------------------------------------
+S/N    TYPE        AMOUNT      DATE                DESCRIPTION      NOTE        CATEGORY 
+---------------------------------------------------------------------------------------------
+1      Allowance   $150.00     30 October, 2023    pocket money     -           -     
+2      Expense     $20.00      30 October, 2023    lunch            pasta       FOOD  
+3      Expense     $20.00      30 October, 2023    lunch            -           -     
+---------------------------------------------------------------------------------------------
+Net Balance = $110.00
+---------------------------------------------------------------------------------------------
+```
 
+2) `edit INDEX expense /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]`  
+   e.g., `edit 3 expense /amt 20 /date 30-10-2023 /desc dinner /note noodles /cat food`
+   Expected output:
+```
+---------------------------------------------------------------------------------------------
+Here are the transactions in your list:
+---------------------------------------------------------------------------------------------
+S/N    TYPE        AMOUNT      DATE                DESCRIPTION      NOTE        CATEGORY 
+---------------------------------------------------------------------------------------------
+1      Allowance   $150.00     30 October, 2023    pocket money     -           -     
+2      Expense     $20.00      30 October, 2023    lunch            pasta       FOOD  
+3      Expense     $20.00      30 October, 2023    dinner           noodles     FOOD  
+---------------------------------------------------------------------------------------------
+Net Balance = $110.00
+---------------------------------------------------------------------------------------------
+```
 ### Exiting the program: `exit`
 
 To exit the program.
 
 Format: `exit`
+Expected output:
+```
+---------------------------------------------------------------------------------------------
+Thank you for using NUScents. Hope to see you again soon!
+---------------------------------------------------------------------------------------------
+```
 
 ## FAQ ❓
 
