@@ -45,8 +45,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_BUDGET_SIZE = "OOPS!!! The budget amount cannot exceed 100000";
     public static final String MESSAGE_EMPTY_INDEX = "OOPS!!! The index of a delete/view command cannot be empty.";
     public static final String MESSAGE_FATAL_ERROR = "OOPS!!! Fatal error occurred...";
-    public static final String MESSAGE_READ_ERROR = "OOPS!!! A problem occurred while reading the data file.";
-
+    public static final String MESSAGE_FILE_ACCESS_ERROR = "OOPS!!! A problem occurred while accessing the data file."
+            + " Ensure you have the correct permissions.";
+    public static final String MESSAGE_FILE_PARSE_ERROR = "OOPS!!! A problem occurred while accessing the data file."
+            + " Ensure you have the correct permissions.";
     public static final String MESSAGE_FILE_TAMPERED_ERROR = "OOPS!!! The data file has been tampered with. "
             + "Exiting immediately...";
     public static final String MESSAGE_UNKNOWN_EXPENSE_CATEGORY = "OOPS!!! The category you provided is not a "

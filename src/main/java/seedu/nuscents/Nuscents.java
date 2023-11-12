@@ -78,7 +78,13 @@ public class Nuscents {
         }
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
-        new Nuscents("./data/nuscents.txt", "./data/budget.txt").run();
+    public static void main(String[] args) {
+        try {
+            new Nuscents("./data/nuscents.txt", "./data/budget.txt").run();
+        } catch (IOException e) {
+            Ui.showFileAccessErrorMessage();
+        } catch (ParseException e) {
+            Ui.showFatalErrorMessage();
+        }
     }
 }
