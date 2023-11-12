@@ -4,8 +4,6 @@ import seedu.nuscents.data.exception.NuscentsException;
 import seedu.nuscents.data.transaction.Transaction;
 import seedu.nuscents.data.transaction.Allowance;
 import seedu.nuscents.data.transaction.Expense;
-import seedu.nuscents.data.transaction.ExpenseCategory;
-import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.ui.Ui;
 
@@ -22,9 +20,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 
-import static seedu.nuscents.parser.Parser.parseAllowanceCategory;
+import static seedu.nuscents.parser.Parser.parseAllowance;
 import static seedu.nuscents.parser.Parser.parseBudget;
-import static seedu.nuscents.parser.Parser.parseExpenseCategory;
+import static seedu.nuscents.parser.Parser.parseExpense;
 
 public class Storage {
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
@@ -59,11 +57,9 @@ public class Storage {
             transactionDecoder(file, transactions);
         } catch (ParseException | NuscentsException e) {
             logger.log(Level.WARNING, "Something went wrong when reading data from file");
-            Ui.showLine();
-            System.out.println("Something went wrong: " + e.getMessage());
-            Ui.showLine();
+            Ui.showException(e);
         }
-        logger.log(Level.INFO, "All data successfully loaded");
+        logger.log(Level.INFO, "Loading from data file finished");
         return transactions;
     }
 
@@ -89,41 +85,55 @@ public class Storage {
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM, yyyy");
             switch (transactionType) {
             case 'A':
-                columns = transactionDetails.split("\\s*\\|\\s*");
-                amount = Float.parseFloat(columns[1]);
-                date = formatter.parse(columns[2]);
-                description = columns[3];
-                note = "";
-                if (columns.length > 4) {
-                    note = columns[4];
+                try {
+                    String arguments = "";
+                    columns = transactionDetails.split("\\s*\\|\\s*");
+                    arguments += "/amt " + columns[1];
+                    date = formatter.parse(columns[2]);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    String dateString = dateFormat.format(date);
+                    arguments += " /date " + dateString;
+                    arguments += " /desc " + columns[3];
+                    if (columns.length > 4) {
+                        arguments += " /note " + columns[4];
+                    }
+                    if (columns.length > 5) {
+                        arguments += " /cat " + columns[5];
+                    }
+                    transactions.add(parseAllowance(arguments));
+                } catch (ParseException | NuscentsException e) {
+                    Ui.showException(e);
+                    Ui.showDataCorruptedError();
+                    continue;
                 }
-                AllowanceCategory allowanceCategory = null;
-                if (columns.length > 5) {
-                    category = columns[5];
-                    allowanceCategory = parseAllowanceCategory(category);
-                }
-                transactions.add(new Allowance(amount, date, description, note, allowanceCategory));
-                TransactionList.increaseTransactionCount();
                 break;
 
             case 'E':
-                columns = transactionDetails.split("\\s*\\|\\s*");
-                amount = Float.parseFloat(columns[1]);
-                date = formatter.parse(columns[2]);
-                description = columns[3];
-                if (columns.length > 4) {
-                    note = columns[4];
+                try {
+                    String arguments = "";
+                    columns = transactionDetails.split("\\s*\\|\\s*");
+                    arguments += "/amt " + columns[1];
+                    date = formatter.parse(columns[2]);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    String dateString = dateFormat.format(date);
+                    arguments += " /date " + dateString;
+                    arguments += " /desc " + columns[3];
+                    if (columns.length > 4) {
+                        arguments += " /note " + columns[4];
+                    }
+                    if (columns.length > 5) {
+                        arguments += " /cat " + columns[5];
+                    }
+                    transactions.add(parseExpense(arguments));
+                } catch (ParseException | NuscentsException e) {
+                    Ui.showException(e);
+                    Ui.showDataCorruptedError();
+                    continue;
                 }
-                ExpenseCategory expenseCategory = null;
-                if (columns.length > 5) {
-                    category = columns[5];
-                    expenseCategory = parseExpenseCategory(category);
-                }
-                transactions.add(new Expense(amount, date, description, note, expenseCategory));
-                TransactionList.increaseTransactionCount();
                 break;
 
             default:
+                Ui.showDataCorruptedError();
                 break;
             }
         }
@@ -178,8 +188,11 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String arguments = sc.nextLine();
-                float budget = parseBudget(arguments);
-                return budget;
+                if (!arguments.equals("0.0")) {
+                    float budget = parseBudget(arguments);
+                    return budget;
+                }
+                return 0;
             }
             sc.close();
         } catch (FileNotFoundException e) {

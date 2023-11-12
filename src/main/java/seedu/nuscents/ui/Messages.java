@@ -61,4 +61,5 @@ public class Messages {
             + "valid category.\n"
             + "Valid categories are "
             + "SALARY/ALLOWANCE/INVESTMENTS/GIFTS/FOOD/ENTERTAINMENT/TRANSPORTATION/UTILITY/RENT/OTHERS.";
+    public static final String MESSAGE_CORRUPTED_DATA_ERROR = "Transaction not read from corrupt data file.";
 }
