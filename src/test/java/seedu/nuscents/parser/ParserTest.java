@@ -191,7 +191,7 @@ public class ParserTest {
         assertEquals(AllowanceCategory.ALLOWANCE, parseAllowanceCategory("allOWANCE"));
         assertEquals(AllowanceCategory.INVESTMENTS, parseAllowanceCategory("INVESTMEnts"));
         assertEquals(AllowanceCategory.GIFTS, parseAllowanceCategory("GIFTS"));
-        assertEquals(AllowanceCategory.OTHERS, parseAllowanceCategory("othERS"));
+        assertEquals(AllowanceCategory.OTHER_ALLOWANCE, parseAllowanceCategory("OthER_ALLOWANCE"));
         assertEquals(AllowanceCategory.NO_ALLOWANCE_CATEGORY, parseAllowanceCategory(""));
         assertEquals(AllowanceCategory.NO_ALLOWANCE_CATEGORY, parseAllowanceCategory("NO_ALLOWANCE_CATEGORY"));
     }
@@ -212,7 +212,7 @@ public class ParserTest {
         assertEquals(ExpenseCategory.UTILITY, parseExpenseCategory("UTILity"));
         assertEquals(ExpenseCategory.RENT, parseExpenseCategory("RENT"));
         assertEquals(ExpenseCategory.TRANSPORTATION, parseExpenseCategory("transportation"));
-        assertEquals(ExpenseCategory.OTHERS, parseExpenseCategory("otHERS"));
+        assertEquals(ExpenseCategory.OTHER_EXPENSE, parseExpenseCategory("OTher_EXPENSE"));
         assertEquals(ExpenseCategory.NO_EXPENSE_CATEGORY, parseExpenseCategory(""));
         assertEquals(ExpenseCategory.NO_EXPENSE_CATEGORY, parseExpenseCategory("no_expense_category"));
     }
@@ -258,6 +258,34 @@ public class ParserTest {
             Parser.parseTaskIndex(input);
         });
         assertEquals("OOPS!!! The index of a delete/view command cannot be empty.", exception.getMessage());
+    }
+
+    @Test
+    public void parseTransactionCategory_validCategory_success() throws NuscentsException {
+        assertEquals(ExpenseCategory.FOOD, parseExpenseCategory("FOOD  "));
+        assertEquals(ExpenseCategory.ENTERTAINMENT, parseExpenseCategory("ENtertainment "));
+        assertEquals(ExpenseCategory.UTILITY, parseExpenseCategory("UTILity"));
+        assertEquals(ExpenseCategory.RENT, parseExpenseCategory("RENT "));
+        assertEquals(ExpenseCategory.TRANSPORTATION, parseExpenseCategory("transportation "));
+        assertEquals(ExpenseCategory.OTHER_EXPENSE, parseExpenseCategory("OTher_EXPENSE"));
+        assertEquals(ExpenseCategory.NO_EXPENSE_CATEGORY, parseExpenseCategory(""));
+        assertEquals(ExpenseCategory.NO_EXPENSE_CATEGORY, parseExpenseCategory("no_expense_category"));
+        assertEquals(AllowanceCategory.SALARY, parseAllowanceCategory("sAlARy"));
+        assertEquals(AllowanceCategory.ALLOWANCE, parseAllowanceCategory("allOWANCE"));
+        assertEquals(AllowanceCategory.INVESTMENTS, parseAllowanceCategory("INVESTMEnts"));
+        assertEquals(AllowanceCategory.GIFTS, parseAllowanceCategory("GIFTS"));
+        assertEquals(AllowanceCategory.OTHER_ALLOWANCE, parseAllowanceCategory(" OthER_ALLOWANCE"));
+        assertEquals(AllowanceCategory.NO_ALLOWANCE_CATEGORY, parseAllowanceCategory("  "));
+        assertEquals(AllowanceCategory.NO_ALLOWANCE_CATEGORY, parseAllowanceCategory("  NO_ALLOWANCE_CATEGORY"));
+    }
+
+    @Test
+    public void parseFilterCategory_invalidCategory_exceptionThrown() throws NuscentsException {
+        String input = "asdfjkl";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseFilterCategory(input);
+        });
+        assertEquals(Messages.MESSAGE_UNKNOWN_FILTER_CATEGORY, exception.getMessage());
     }
 
     @Test
