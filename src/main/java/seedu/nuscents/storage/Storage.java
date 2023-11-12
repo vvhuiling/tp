@@ -95,7 +95,8 @@ public class Storage {
         }
     }
 
-    private static String buildArguments(String transactionDetails, SimpleDateFormat formatter, SimpleDateFormat dateFormat)
+    private static String buildArguments(String transactionDetails, SimpleDateFormat formatter,
+                                         SimpleDateFormat dateFormat)
             throws ParseException {
         String[] columns = transactionDetails.split("\\s*\\|\\s*");
         Date date = formatter.parse(columns[2]);
