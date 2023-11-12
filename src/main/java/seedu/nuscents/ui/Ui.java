@@ -243,4 +243,10 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public static void showDataCorruptedError() {
+        System.out.println(LINE);
+        System.out.println(Messages.MESSAGE_CORRUPTED_DATA_ERROR);
+        System.out.println(LINE);
+    }
+
 }
