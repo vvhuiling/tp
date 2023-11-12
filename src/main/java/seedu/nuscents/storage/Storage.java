@@ -9,17 +9,10 @@ import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.TransactionList;
 import seedu.nuscents.ui.Ui;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -168,60 +161,6 @@ public class Storage {
             logger.log(Level.WARNING, "Invalid transaction format");
             return null;
         }
-    }
-
-    private byte[] generateHmac() throws IOException, NoSuchAlgorithmException, InvalidKeyException {
-        String secretKey = "prevent_funny_stuff";
-        byte[] fileContent = readFile(filePath);
-        SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), "HmacSHA256");
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(secretKeySpec);
-        byte[] hmacBytes = mac.doFinal(fileContent);
-        return hmacBytes;
-    }
-
-    public void storeHmacForStorageFile() {
-        try {
-            byte[] hmacBytes = generateHmac();
-            try (FileOutputStream fos = new FileOutputStream("./data/hmac")) {
-                fos.write(hmacBytes);
-                logger.log(Level.INFO, "HMAC has been stored in ./data/hmac");
-            } catch (IOException e) {
-                Ui.showLine();
-                System.out.println("Something went wrong: " + e.getMessage());
-                Ui.showLine();
-            }
-        } catch (IOException | NoSuchAlgorithmException | InvalidKeyException e) {
-            Ui.showLine();
-            System.out.println("Something went wrong: " + e.getMessage());
-            Ui.showLine();
-        }
-    }
-
-    public boolean isValidHmac(String hmacFilePath) throws IOException {
-        try {
-            byte[] storedHmac = readFile(hmacFilePath);
-            byte[] computedHmac = generateHmac();
-            boolean isMatchingHmac = MessageDigest.isEqual(storedHmac, computedHmac);
-            if (isMatchingHmac) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            Ui.showLine();
-            System.out.println("Something went wrong: " + e.getMessage());
-            Ui.showLine();
-        }
-        return false;
-    }
-
-    private byte[] readFile(String filePath) throws IOException {
-        FileInputStream fis = new FileInputStream(filePath);
-        byte[] data = new byte[fis.available()];
-        fis.read(data);
-        fis.close();
-        return data;
     }
 
     public void writeBudgetToFile(TransactionList transactionList) throws IOException {

@@ -30,6 +30,7 @@ public class InvalidCommandTest {
     @Test
     public void execute_invalidCommand_throwsNuscentsException() {
         InvalidCommand invalidCommand = new InvalidCommand();
-        assertThrows(NuscentsException.class, () -> {invalidCommand.execute(transactionList);}, MESSAGE_UNKNOWN);
+        assertThrows(NuscentsException.class, () -> {
+            invalidCommand.execute(transactionList); }, MESSAGE_UNKNOWN);
     }
 }
