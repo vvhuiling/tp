@@ -37,49 +37,56 @@ The following sequence diagram shows how the add transaction operation works:
 #### I. Architecture-Level Design
 The "View Transaction" feature primarily involves the following components:
 
-1. Parser  
-Responsible for interpreting user input and generating a ViewCommand object.
+1. **Parser**: Responsible for interpreting user input and generating a ViewCommand object.
 
-2. ViewCommand  
-A subclass of the Command class, created by the Parser to represent the "view" command.
+2. **ViewCommand**: A subclass of the Command class, created by the Parser to represent the "view" command.
 
-3. Nuscents  
-The main application class that receives and executes commands. It invokes the execute() method of the ViewCommand.
+3. **Nuscents**: he main application class that receives and executes commands. It invokes the execute() method of the ViewCommand.
 
-4. TransactionList   
-A data structure to store and manage transactions.
+4. **TransactionList**: A data structure to store and manage transactions.
 
-5. Transaction   
-Represents individual transactions.
+5. **Transaction**: Represents individual transactions.
 
-6. UI   
-Handles user interface and messaging.
+6. **UI**: Handles user interface and messaging.
 
 #### II. Component-Level Design
-1. Parser
-The Parser class identifies the "view" command and extracts the taskIndex (transaction index) from the user's input.
+1. **Parser**: 
+   The Parser class identifies the "view" command and extracts the taskIndex (transaction index) from the user's input.
 
-2. ViewCommand
-The ViewCommand object is created by the Parser. It encapsulates the user's request to view a specific transaction. This object is passed to the Nuscents class for execution.
+2. **ViewCommand**: 
+   The ViewCommand object is created by the Parser. It encapsulates the user's request to view a specific transaction. This object is passed to the Nuscents class for execution.
 
-3. Nuscents
-In the Nuscents class, the execute() method of the ViewCommand is called, and the taskIndex is extracted from the command. It then calls the viewTransaction(taskIndex) method on the TransactionList.
+3. **Nuscents**: 
+   In the Nuscents class, the execute() method of the ViewCommand is called, and the taskIndex is extracted from the command. It then calls the viewTransaction(taskIndex) method on the TransactionList.
 
-4. TransactionList
-The TransactionList contains a list of Transaction objects. The viewTransaction(taskIndex) method retrieves the specific Transaction object based on the taskIndex.
+4. **TransactionList**: 
+   The TransactionList contains a list of Transaction objects. The viewTransaction(taskIndex) method retrieves the specific Transaction object based on the taskIndex.
 
-5. Transaction
-The Transaction class represents an individual transaction, and it contains all the relevant details of a transaction.
+5. **Transaction**: 
+   The Transaction class represents an individual transaction, and it contains all the relevant details of a transaction.
 
-6. UI
-
-The UI class displays the transaction details using the UI.showTransactionViewMessage method, which receives the Transaction object as input and presents the detailed transaction information to the user.
+6. **UI**: 
+   The UI class displays the transaction details using the UI.showTransactionViewMessage method, which receives the Transaction object as input and presents the detailed transaction information to the user.
 
 #### III. Alternatives Considered
 While the current design is deemed suitable for our application, we did consider alternative approaches, such as 
 integrating the view transaction functionality directly within the Nuscents class without introducing a ViewCommand. 
 However, we opted for the current design to promote a cleaner separation of concerns and to facilitate future expansions 
 and modifications.
+
+#### IV. Usage Scenario Example
+
+**Step 1**: User launches the application. The TransactionList initializes.
+
+**Step 2**: User inputs view 2 to view the second transaction. The Parser identifies the command and extracts 2 as the taskIndex.
+
+**Step 3**: A ViewCommand is created with taskIndex 2. This command is passed to the Nuscents class.
+
+**Step 4**: Nuscents executes the ViewCommand, which invokes the viewTransaction method on TransactionList with taskIndex 2.
+
+**Step 5**: TransactionList retrieves the second Transaction object and returns it to Nuscents.
+
+**Step 6**: Nuscents passes the Transaction object to the UI, which displays the transaction details through the showTransactionViewMessage method.
 
 The following sequence diagram shows how the view transaction operation works:
 <img src="images/ViewSequenceDiagram.png" width="600" />
@@ -133,13 +140,55 @@ The `helpCommand` feature serves as an informative component to assist users unf
 #### III. Alternatives Considered
 Initially, we pondered over embedding the help details directly within the main application class, `Nuscents`. This would eliminate the need for a separate `HelpCommand` class. However, segregating the `HelpCommand` ensures better modularity, making future expansions or modifications seamless.
 
-### `helpCommand` Usage Scenario
+#### `helpCommand` Usage Scenario
 **Step 1**: The user launches the application. The initial screen appears.   
 **Step 2**: Unsure of the commands, the user inputs the `help` command.   
 **Step 3**: The application recognizes the command through the `Parser` and creates a `HelpCommand` object.   
 **Step 4**: The `Nuscents` class invokes the `execute()` method of the `HelpCommand`.   
 **Step 5**: The `UI` fetches the `HELP_MENU` string and displays the comprehensive list of commands to the user.
 
+### `filter` Feature
+#### I. Architecture-Level Design
+This section outlines the components involved in the "Filter Transaction" feature:
+
+1. **Parser**: Interprets user input to identify the filter command.
+
+2. **FilterCommand**: A subclass of the Command class, representing the "filter" command based on a specified category.
+
+3. **Nuscents**: The core application class that executes commands, including FilterCommand.
+
+4. **TransactionList**: Manages transactions, providing functionality to filter them by category.
+
+5. **UI**: Handles user interactions and displays filtered transaction results or not found messages.
+
+#### II. Component-Level Design
+Each component's role is detailed below:
+
+1. **Parser**: 
+   Identifies the "filter" command and extracts the category (e.g., 'entertainment') through the parseFilterCategory method.
+
+2. **FilterCommand**: 
+   Created by the Parser with a specific category (e.g., 'entertainment') to encapsulate the filtering request.
+
+3. **Nuscents**: 
+   Executes the FilterCommand's execute() method, which invokes the filterTransaction method on TransactionList with the specified category.
+
+4. **TransactionList**:
+   Contains a collection of Transaction objects. The filterTransaction method filters transactions based on the given category.
+
+5. **UI**: 
+   Displays the filtered transactions using the showFilterMessage method or a not found message using showFilterNotFoundMessage(category) if no matching transactions are found.
+
+#### III. Usage Scenario Example
+**Step 1**: User inputs filter entertainment to filter transactions by the 'entertainment' category. The Parser identifies the command and uses parseFilterCategory to extract 'entertainment' as the category.
+
+**Step 2**: A FilterCommand object is created with the category set to 'entertainment'. This command is then passed to the Nuscents class.
+**Step 3**: In Nuscents, the execute() method of the FilterCommand is called. It invokes the filterTransaction method on the TransactionList with the category 'entertainment'.
+**Step 4**: TransactionList filters its transactions based on the 'entertainment' category. If matching transactions are found, it returns them; otherwise, it indicates that no transactions are found.
+**Step 5**: Depending on the outcome in Step 4, Nuscents instructs the UI to either display the list of filtered transactions and their net balance (using showFilterMessage) or to show a message indicating no transactions were found in the specified category (using showFilterNotFoundMessage).
+
+The following sequence diagram shows how the view transaction operation works:
+<img src="images/FilterSequenceDiagram.png" width="600" />
 
 ## Product scope
 
