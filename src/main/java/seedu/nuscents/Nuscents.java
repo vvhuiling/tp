@@ -69,9 +69,7 @@ public class Nuscents {
             } catch (NuscentsException e) {
                 ui.showException(e);
             } catch (IOException | ParseException e) {
-                Ui.showLine();
-                System.out.println("Something went wrong: " + e.getMessage());
-                Ui.showLine();
+                Ui.showFatalErrorMessage();
             } catch (IndexOutOfBoundsException e) {
                 ui.showException(e);
             }
