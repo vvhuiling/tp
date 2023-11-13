@@ -16,6 +16,8 @@ Explore my contributions to the codebase here: [Reposense link](https://nus-cs21
 - **Feature: Help Command**: Developed the help command, allowing users to access information on how to use various features of NUScents directly from the CLI.
 - **Feature: Edit Command**: Created the functionality to edit existing financial records without the need to delete and re-add them, enhancing user experience and data accuracy.
 
+<div style="page-break-after: always;"></div>
+
 ### Contributions to the UG
 - **Documentation for Exit Command**: Detailed instructions and expected outcomes to guide users on terminating the application session.
 - **Documentation for Help Command**: Composed comprehensive assistance content for users to navigate the application's features effectively.
