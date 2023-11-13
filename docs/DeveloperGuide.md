@@ -76,7 +76,8 @@ The bulk of the app's work is done by the following five components:
 
 
 **UI Component**   
-The `ui` packages consists of the `Ui` class and the `Messages` class.   
+The `ui` packages consists of the `Ui` class and the `Messages` class.
+
 The UI component prompts and reads commands from the user and sends the command to `Parser` package to be executed.
 The UI component is also responsible for printing output to the user.
 
@@ -110,9 +111,9 @@ The add transaction feature is facilitated by the `Parser` class which parses us
 
 Given below is an example usage scenario and how the add transaction mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `TransactionList` will be initialized.
+**Step 1**: The user launches the application for the first time. The `TransactionList` will be initialized.
 
-Step 2. The user executes `expense /amt 20 /date 24-10-2023 /desc Lunch /note Pasta /cat Food` command to create a
+**Step 2**: The user executes `expense /amt 20 /date 24-10-2023 /desc Lunch /note Pasta /cat Food` command to create a
 transaction. The `expense` command calls `Parser#parseExpense()` to create an `Expense` object. The 
 `AddCommand#execute()` is then called to store the `Expense` object in the `TransactionList`.
 
@@ -128,15 +129,15 @@ to the user.
 
 Given below is the example usage scenario and how the list transaction mechanism behaves at each step.
 
-Step 1. The user launches the application. The `TransactionList` will be initialized with the transactions stored in
+**Step 1**: The user launches the application. The `TransactionList` will be initialized with the transactions stored in
 the `nuscents.txt` file. If the file is empty or does not exist, the `TransactionList` will be empty.
 
-Step 2. The user executes `list` command to list the transactions. The `list` command calls `ListCommand#execute()`,
+**Step 2**: The user executes `list` command to list the transactions. The `list` command calls `ListCommand#execute()`,
 which gets the transactions from the `TransactionList` and displays them to the user.
 
 The following sequence diagram shows how the list transaction operation works:
 
-<img src="images/ListTransactionSequenceDiagram.png" width="600" />
+<img src="images/ListTransactionSequenceDiagram.png" width="500" />
 
 In addition to that, the list transaction feature further computes and displays the net balance amount based on the
 following formula (net balance = total allowance amount - total expense amount). The `showTransactionList()` method in
@@ -171,11 +172,11 @@ However, we opted for the current design to promote a cleaner separation of conc
 and modifications.
 
 #### IV. Usage Scenario Example
-**Step 1**: User launches the application. The TransactionList initializes.
-**Step 2**: User inputs view 2 to view the second transaction. The Parser identifies the command and extracts 2 as the taskIndex.
-**Step 3**: A ViewCommand is created with taskIndex 2. This command is passed to the Nuscents class.
-**Step 4**: Nuscents executes the ViewCommand, which invokes the viewTransaction method on TransactionList with taskIndex 2.
-**Step 5**: TransactionList retrieves the second Transaction object and returns it to Nuscents.
+**Step 1**: User launches the application. The TransactionList initializes.   
+**Step 2**: User inputs view 2 to view the second transaction. The Parser identifies the command and extracts 2 as the taskIndex.   
+**Step 3**: A ViewCommand is created with taskIndex 2. This command is passed to the Nuscents class.   
+**Step 4**: Nuscents executes the ViewCommand, which invokes the viewTransaction method on TransactionList with taskIndex 2.   
+**Step 5**: TransactionList retrieves the second Transaction object and returns it to Nuscents.   
 **Step 6**: Nuscents passes the Transaction object to the UI, which displays the transaction details through the showTransactionViewMessage method.
 
 The following sequence diagram shows how the view transaction operation works:
@@ -220,7 +221,7 @@ An alternative design considered was to have `EditCommand` interact directly wit
 **Step 7**: Upon successful update, `UI` displays a confirmation message. If an error occurs, an error message is shown instead.  
 
 
-### `helpCommand` Feature
+### `help` Feature
 
 #### I. Architecture-Level Design
 The `helpCommand` feature serves as an informative component to assist users unfamiliar with the application commands. It integrates the following components:
@@ -239,7 +240,7 @@ This section describes each component's role for the `help` feature:
 #### III. Alternatives Considered
 Initially, we pondered whether to embed the help details directly within the main application class, `Nuscents`. This would eliminate the need for a separate `HelpCommand` class. However, segregating the `HelpCommand` ensures better modularity, making future expansions or modifications seamless.
 
-#### `helpCommand` Usage Scenario
+#### `help` Usage Scenario
 **Step 1**: The user launches the application. The initial screen appears.   
 **Step 2**: Unsure of the commands, the user inputs the `help` command.   
 **Step 3**: The application recognizes the command through the `Parser` and creates a `HelpCommand` object.   
@@ -272,7 +273,7 @@ This section describes each component's role for the `filter` feature:
 **Step 5**: Depending on the outcome in Step 4, Nuscents instructs the UI to either display the list of filtered transactions and their net balance (using showFilterMessage) or to show a message indicating no transactions were found in the specified category (using showFilterNotFoundMessage).
 
 The following sequence diagram shows how the view transaction operation works:
-<img src="images/FilterSequenceDiagram.png" width="800" />
+<img src="images/FilterSequenceDiagram.png" width="900" />
 
 ### `budget` Feature
 
@@ -408,8 +409,5 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 
 **Transaction Logs:** Define a logging mechanism that captures relevant information for storage functions. Logs should be stored securely and be available for auditing purposes.
 
-## Glossary
-* *glossary item* - Definition
-
 ## Instructions for manual testing
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Please refer to [User Guide](UserGuide.md) for instructions on testing.
