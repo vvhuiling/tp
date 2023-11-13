@@ -20,8 +20,11 @@ import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.transaction.TransactionCategory;
 import seedu.nuscents.data.exception.NuscentsException;
 
+import java.time.Instant;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
@@ -113,7 +116,7 @@ public class Parser {
         }
     }
 
-    public static Date parseDate(String date, String format, SimpleDateFormat formatter)
+    public static Date parseDate(String date, SimpleDateFormat formatter)
             throws NuscentsException, ParseException {
         String separator;
         separator = "-";
@@ -146,7 +149,11 @@ public class Parser {
                     AllowanceCategory allowanceCategory = parseAllowanceCategory(category);
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
-                    Date formattedDate = parseDate(date, format, formatter);
+                    Date formattedDate = parseDate(date, formatter);
+                    boolean isValid  = isDateValid(date, format, formattedDate);
+                    if (!isValid) {
+                        throw new NuscentsException(MESSAGE_INVALID_DATE);
+                    }
                     assert formattedDate != null;
                     assert description != null;
                     assert additionalInfo != null;
@@ -183,8 +190,11 @@ public class Parser {
                     ExpenseCategory expenseCategory = parseExpenseCategory(category);
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
-                    Date formattedDate = parseDate(date, format, formatter);
-
+                    Date formattedDate = parseDate(date, formatter);
+                    boolean isValid  = isDateValid(date, format, formattedDate);
+                    if (!isValid) {
+                        throw new NuscentsException(MESSAGE_INVALID_DATE);
+                    }
                     // Ensure all necessary fields are present before creating the Expense object
                     assert formattedDate != null;
                     assert description != null;
@@ -199,6 +209,19 @@ public class Parser {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
         }
+    }
+
+    private static boolean isDateValid(String date, String format, Date formattedDate) {
+        String[] dateMonthYear = date.split("-");
+        Instant instant = formattedDate.toInstant();
+        // Convert Instant to LocalDate
+        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        if (format.equals(DATE_PATTERN1) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
+            return false;
+        } else if (format.equals(DATE_PATTERN2) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[2])) {
+            return false;
+        }
+        return true;
     }
 
     public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {
