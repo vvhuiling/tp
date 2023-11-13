@@ -20,11 +20,8 @@ import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.transaction.TransactionCategory;
 import seedu.nuscents.data.exception.NuscentsException;
 
-import java.time.Instant;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -66,7 +63,7 @@ public class Parser {
     private static final String NOTE_PATTERN = "/note ([^/]+)";
     private static final String CATEGORY_PATTERN = "/cat ([^/]+)";
 
-    public static <TransactionList> Command parseCommand(String text, TransactionList transactions)
+    public static <TransactionList> Command parseCommand(String text)
             throws NuscentsException, ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
         String commandType = commandTypeAndArgs[0].toLowerCase();
@@ -133,6 +130,19 @@ public class Parser {
             throw new NuscentsException(MESSAGE_INVALID_DATE);
         }
         return formatter.parse(date);
+    }
+
+    private static boolean isDateValid(String date, String format, Date formattedDate) {
+        String[] dateMonthYear = date.split("-");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+        String dayAsString = dayFormat.format(formattedDate);
+        int day = Integer.parseInt(dayAsString);
+        if (format.equals("yyyy-M-d") && day != Integer.parseInt(dateMonthYear[2])) {
+            return false;
+        } else if (format.equals("d-M-yyyy") && day != Integer.parseInt(dateMonthYear[0])) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -217,19 +227,6 @@ public class Parser {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
         }
-    }
-
-    private static boolean isDateValid(String date, String format, Date formattedDate) {
-        String[] dateMonthYear = date.split("-");
-        Instant instant = formattedDate.toInstant();
-        // Convert Instant to LocalDate
-        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        if (format.equals("yyyy-M-d") && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
-            return false;
-        } else if (format.equals("d-M-yyyy") && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[2])) {
-            return false;
-        }
-        return true;
     }
 
     public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {

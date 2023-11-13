@@ -61,7 +61,7 @@ public class Nuscents {
         while (!isExit) {
             try {
                 String fullCommand = ui.getUserCommand();
-                Command command = Parser.parseCommand(fullCommand, transactions);
+                Command command = Parser.parseCommand(fullCommand);
                 command.execute(transactions);
                 isExit = ExitCommand.isExit(command);
                 storage.writeToFile(transactions);
