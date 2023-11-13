@@ -5,6 +5,16 @@ documentation with regards to the design and implementation of the App. In addit
 we added other related information like the product scope, user stories, non-functional
 requirements, glossary and instructions for testing
 
+## Acknowledgements
+
+Referred to [addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html) when drafting this
+Developer Guide.
+
+This project has been heavily modified from [Spaceman Task Manager](https://github.com/spaceman03/ip/).
+
+Thanks to Dr Akshay Narayan (module coordinator) and Irving (TA) for their guidance 
+throughout the course of this project.
+
 ## Design
 
 ### Architecture
