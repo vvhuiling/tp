@@ -1,5 +1,10 @@
 # Developer Guide
 
+Welcome to the Developer Guide of 🪙NUScents🪙 where we have written
+documentation with regards to the design and implementation of the App. In addition,
+we added other related information like the product scope, user stories, non-functional
+requirements, glossary and instructions for testing
+
 ## Design
 
 ### Architecture
