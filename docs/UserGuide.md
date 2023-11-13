@@ -89,7 +89,7 @@ Expected output:
   Filter by category.
 - `view INDEX` :
   View entry detail.
-- `edit INDEX TRANSACTION` :
+- `edit INDEX ENTRY` :
   Edit an existing transaction (same format as adding a transaction).
 - `exit` :
   Exit program.
@@ -360,5 +360,5 @@ of previously stored data.
 | **List**          | `list`                                                                                                                                                                                                |
 | **Filter**        | `filter CATEGORY`                                                                                                                                                                                     |
 | **View**          | `view INDEX`                                                                                                                                                                                          |
-| **Edit**          | `edit INDEX /amt AMOUNT /date DATE /desc DESCRIPTION [/note ADDITIONAL_INFORMATION] [/cat CATEGORY]` <br> e.g., `edit 2 /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`   |
+| **Edit**          | `edit INDEX ENTRY` <br> e.g., `edit 2 allowance /amt 200 /date 30-10-2023 /desc pocket money /note November /cat allowance`                                                                           |
 | **Exit**          | `exit`                                                                                                                                                                                                |
