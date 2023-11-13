@@ -408,8 +408,5 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 
 **Transaction Logs:** Define a logging mechanism that captures relevant information for storage functions. Logs should be stored securely and be available for auditing purposes.
 
-## Glossary
-* *glossary item* - Definition
-
 ## Instructions for manual testing
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Please refer to [User Guide](UserGuide.md) for instructions on testing.
