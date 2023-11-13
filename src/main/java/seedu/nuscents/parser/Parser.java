@@ -149,7 +149,7 @@ public class Parser {
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
                     Date formattedDate = parseDate(date, formatter);
-                    boolean isValid  = isDateValid(date, formattedDate);
+                    boolean isValid  = isDateValid(date, format, formattedDate);
                     if (!isValid) {
                         throw new NuscentsException(MESSAGE_INVALID_DATE);
                     }
@@ -190,7 +190,7 @@ public class Parser {
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
                     Date formattedDate = parseDate(date, formatter);
-                    boolean isValid  = isDateValid(date, formattedDate);
+                    boolean isValid  = isDateValid(date, format, formattedDate);
                     if (!isValid) {
                         throw new NuscentsException(MESSAGE_INVALID_DATE);
                     }
@@ -210,12 +210,14 @@ public class Parser {
         }
     }
 
-    private static boolean isDateValid(String date, Date formattedDate) {
+    private static boolean isDateValid(String date, String format, Date formattedDate) {
         String[] dateMonthYear = date.split("-");
         Instant instant = formattedDate.toInstant();
         // Convert Instant to LocalDate
         LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        if (localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
+        if (format.equals(DATE_PATTERN1) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
+            return false;
+        } else if (format.equals(DATE_PATTERN2) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[2])) {
             return false;
         }
         return true;
