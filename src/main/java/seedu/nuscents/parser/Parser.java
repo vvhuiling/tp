@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_LIST;
@@ -395,8 +396,8 @@ public class Parser {
 
     private static String extractValue(String command, String input, String pattern, boolean isOptional)
             throws NuscentsException {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
-        java.util.regex.Matcher m = p.matcher(input.toLowerCase());
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        java.util.regex.Matcher m = p.matcher(input);
 
         if (m.find()) {
             return m.group(1).trim();
