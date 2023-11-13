@@ -189,6 +189,43 @@ This section describes each component's role for the `filter` feature:
 The following sequence diagram shows how the filter transaction operation works:
 <img src="images/FilterSequenceDiagram.png" width="600" />
 
+### `budget` Feature
+
+The `budget` feature allows users to set a budget by specifying a float value. 
+This budget is then stored persistently in a `budget.txt` file. 
+Here's how it works:
+
+### I. Architecture-Level Design
+This section lists the components involved in the `budget` transaction feature:
+1. **Parser:** Recognizes the `budget` command and extracts the float value.
+2. **BudgetCommand:** A subclass of the Command class, created by the Parser, representing the `budget` command.
+3. **Nuscents:** The main application class that executes commands. It triggers the `execute()` method of the `BudgetCommand`.
+4. **Storage:** Manages the reading and writing of the budget to the `budget.txt` file.
+5. **UI:** Displays messages related to the success or failure of setting the budget.
+
+### II. Component-Level Design
+This section describes each component's role for the `budget` feature:
+1. **Parser:** Identifies the `budget` command and extracts the float value.
+2. **BudgetCommand:** Created by the Parser with the extracted budget value.
+3. **Nuscents:** Executes the `execute()` method of the `BudgetCommand`. It then calls the `setBudget()` method.
+4. **Storage:** Handles the reading and writing of the budget to the `budget.txt` file. It stores the budget persistently.
+5. **UI:** Displays messages to inform the user about the success or failure of setting the budget.
+
+### III. Usage Scenario Example
+**Step 1:** User inputs `budget 50`. The Parser recognizes the command and extracts the budget value of 50.
+**Step 2:** A BudgetCommand object is created with the budget value of 50. This command is then passed to the Nuscents class.
+**Step 3:** Nuscents executes the BudgetCommand, which invokes the `setBudget()` method and sets the budget value of 50.
+**Step 4:** Storage writes the budget value to the `budget.txt` file, making it persistent.
+
+The `list` feature now incorporates information about the budget
+It prompts the user with a message whether they are approaching or exceeding their budget. 
+
+### IV. Persistence and Initialization
+To ensure the persistence of the budget and proper initialization, the following steps are taken:
+1. **Initialization:** When 🪙NUScents🪙 is run, it checks for the existence of the `budget.txt` file. If found, it reads the budget value and initializes the `budget` variable. If not found, there is no budget initialized (set to 0).
+2. **Storage:** Manages the reading and writing of the budget to the `budget.txt` file. It ensures that the budget is persistently stored and can be retrieved when needed.
+These additions provide users with a warning feature, enhancing the financial tracking capabilities of 🪙NUScents🪙. Users can now set a budget, and the application will inform them about their spending status concerning the budget within the `list` feature.
+
 ## Product scope
 
 ### Target user profile
