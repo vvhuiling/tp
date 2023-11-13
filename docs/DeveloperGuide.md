@@ -198,6 +198,30 @@ CLI applications, which are often built to be efficient and clutter-free.
 
 ### Value proposition
 
+**Problem:**
+Managing and monitoring financial activities can sometimes be a hassle for students. With various transactions and expenses throughout the semester, it's possible to lose track and struggle with financial organization.
+
+**Solution:**
+🪙NUScents🪙 offers a tailor-made financial tracking solution for SOC students at NUS. It streamlines financial management through a Command Line Interface (CLI), providing a clutter-free solution for users to efficiently manage and monitor their financial activities.
+
+**Key Features:**
+
+- **Optimized CLI:** A user-friendly CLI ensures a seamless and efficient experience for inputting and retrieving financial data.
+
+- **Customization:** Tailored specifically for SOC students at NUS, the application aligns with the unique financial needs and challenges of the user base.
+
+- **Simplified Financial Tracking:** Through intuitive commands, users can effortlessly add, query, and manage financial transactions, enhancing overall financial organization.
+
+**Benefits:**
+
+- **Efficiency:** Users can perform financial tasks quickly and easily via the CLI, reducing the time and effort required for financial management.
+
+- **Clutter-Free Interface:** The design minimizes distractions, providing a focused environment for users to concentrate on their financial activities.
+
+- **Tailored to Student Needs:** Addressing the specific requirements of SOC students ensures relevance and practicality for the target user base.
+
+🪙NUScents🪙 is not just a financial tracker; it's a streamlined solution crafted to simplify the financial lives of SOC students at NUS, offering efficiency,
+
 ## User Stories
 
 | Version | As a ...           | I want to ...                                             | So that I can ...                                        |
