@@ -1,5 +1,7 @@
 @startuml
 !include style.puml
+hide circle
+hide member
 skinparam arrowThickness 1.1
 
 Package Data as DataPackage <<Rectangle>>{
@@ -7,9 +9,9 @@ Package Data as DataPackage <<Rectangle>>{
     Class Transaction
     Class Allowance
     Class Expense
-    Interface TransactionCategory
-    Enum ExpenseCategory
-    Enum AllowanceCategory
+    Interface TransactionCategory <<interface>>
+    Enum ExpenseCategory <<enumeration>>
+    Enum AllowanceCategory <<enumeration>>
     }
 Class TransactionList
 }

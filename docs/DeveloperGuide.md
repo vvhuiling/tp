@@ -60,12 +60,27 @@ The bulk of the app's work is done by the following five components:
 **UI Component**   
 The `ui` packages consists of the `Ui` class and the `Messages` class.   
 The UI component prompts and reads commands from the user and sends the command to `Parser` package to be executed.
+The UI component is also responsible for printing output to the user.
 
 **Data Component**
+
 <img src="images/DataClassDiagram.png" width="500" />
-The Data component stores the transaction data i.e., all `Transaction` objects in a `TransactionList` object.   
+
+The Data component stores the transaction data i.e., all `Transaction` objects in a `TransactionList` object.
 
 Each `Transaction` object stores the information for an `Allowance` or an `Expense`.
+
+**Command Component**
+
+<img src="images/CommandClassDiagram.png" width="500" />
+
+The Command component holds the different types of commands available. All the commands inherit from the abstract
+`Command` class, which contains the `execute` method.
+
+The `ListOfCommands` is used by `Parser` to determine if the entered command is a valid one or not.
+If it is not valid, an object of class `InvalidCommand` will be constructed. The `execute` method of the 
+`InvalidCommand` class simply raises an exception that an invalid command has been entered, which will be shown 
+to the user.
 
 ## **Implementation**
 
