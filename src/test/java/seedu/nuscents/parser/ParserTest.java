@@ -257,7 +257,7 @@ public class ParserTest {
         Exception exception = assertThrows(NuscentsException.class, () -> {
             Parser.parseTaskIndex(input);
         });
-        assertEquals("OOPS!!! The index of a delete/view command cannot be empty.", exception.getMessage());
+        assertEquals("OOPS!!! The index of a delete/view/edit command cannot be empty.", exception.getMessage());
     }
 
     @Test
