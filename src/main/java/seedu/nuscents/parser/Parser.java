@@ -165,14 +165,6 @@ public class Parser {
         }
     }
 
-    private static boolean isDateValid(String date, Date formattedDate) {
-        String[] dateMonthYear = date.split("-");
-        if (formattedDate.getDate() != Integer.parseInt(dateMonthYear[0])) {
-            return false;
-        }
-        return true;
-    }
-
     /**
      * Parsers arguments in the context of adding an expense.
      *
@@ -214,6 +206,14 @@ public class Parser {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
         }
+    }
+
+    private static boolean isDateValid(String date, Date formattedDate) {
+        String[] dateMonthYear = date.split("-");
+        if (formattedDate.getDate() != Integer.parseInt(dateMonthYear[0])) {
+            return false;
+        }
+        return true;
     }
 
     public static ExpenseCategory parseExpenseCategory(String expenseCategory) throws NuscentsException {
@@ -338,14 +338,6 @@ public class Parser {
             return taskIndex;
         } catch (NumberFormatException e) {
             throw new NuscentsException(MESSAGE_INVALID_INDEX_ARGUMENTS);
-        }
-    }
-
-    public static String parseFind(String arguments) throws NuscentsException {
-        if (arguments == null) {
-            throw new NuscentsException(MESSAGE_EMPTY_KEYWORD);
-        } else {
-            return arguments;
         }
     }
 
