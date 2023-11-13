@@ -363,8 +363,16 @@ Managing and monitoring financial activities can sometimes be a hassle for stude
 | v2.0    | university student | filter income based on categories                         | I can view my income from a specific source              |
 | v2.0    | university student | filter expenses based on categories                       | I can view my expense on a specific category             |
 | v2.0    | university student | view details of income or expenses                        | I can have a better understanding of my financial habit  |
-
-## Non-Functional Requirements
+## Appendix A: Product Scope
+### Target user profile:
+* **Primary Users:** University students with a need to track and manage their financial activities.
+* **Preference for Desktop Applications:** Users who prefer desktop apps over other types.
+* **Typing Proficiency:** Those who possess swift typing skills and prefer keyboard commands for efficiency.
+* **Command Line Interface (CLI) Affinity:** Users who are not only comfortable with but also prefer CLI applications for their speed and minimalism.
+### Value proposition: 
+* **Enhance Transaction Management:** Facilitate quick tracking and management of financial transactions, surpassing the efficiency of traditional mouse or GUI-based applications.
+* **Optimize User Experience:** Provide a user-centric solution that aligns with the fast-paced lifestyle of university students, enabling them to manage their finances with ease and precision.
+## Appendix C: Non-Functional Requirements
 
 ### Performance
 
