@@ -24,8 +24,15 @@ The bulk of the app's work is done by the following four components:
 * **`Data`**: Holds the data of the transactions while the program is running.
 * **`Storage`**: Reads data from, and writes data to, the hard disk.
 
-**UI Component**
+**UI Component**   
+The `ui` packages consists of the `Ui` class and the `Messages` class.   
+The UI component prompts and reads commands from the user and sends the command to `Parser` package to be executed.
 
+**Data Component**
+<img src="images/DataClassDiagram.png" width="500" />
+The Data component stores the transaction data i.e., all `Transaction` objects in a `TransactionList` object.   
+
+Each `Transaction` object stores the information for an `Allowance` or an `Expense`.
 
 ## **Implementation**
 
@@ -194,15 +201,14 @@ Each component's role is detailed below:
    Displays the filtered transactions using the showFilterMessage method or a not found message using showFilterNotFoundMessage(category) if no matching transactions are found.
 
 #### III. Usage Scenario Example
-**Step 1**: User inputs filter entertainment to filter transactions by the 'entertainment' category. The Parser identifies the command and uses parseFilterCategory to extract 'entertainment' as the category.
-
-**Step 2**: A FilterCommand object is created with the category set to 'entertainment'. This command is then passed to the Nuscents class.
-**Step 3**: In Nuscents, the execute() method of the FilterCommand is called. It invokes the filterTransaction method on the TransactionList with the category 'entertainment'.
-**Step 4**: TransactionList filters its transactions based on the 'entertainment' category. If matching transactions are found, it returns them; otherwise, it indicates that no transactions are found.
+**Step 1**: User inputs filter entertainment to filter transactions by the 'entertainment' category. The Parser identifies the command and uses parseFilterCategory to extract 'entertainment' as the category.   
+**Step 2**: A FilterCommand object is created with the category set to 'entertainment'. This command is then passed to the Nuscents class.   
+**Step 3**: In Nuscents, the execute() method of the FilterCommand is called. It invokes the filterTransaction method on the TransactionList with the category 'entertainment'.   
+**Step 4**: TransactionList filters its transactions based on the 'entertainment' category. If matching transactions are found, it returns them; otherwise, it indicates that no transactions are found.   
 **Step 5**: Depending on the outcome in Step 4, Nuscents instructs the UI to either display the list of filtered transactions and their net balance (using showFilterMessage) or to show a message indicating no transactions were found in the specified category (using showFilterNotFoundMessage).
 
 The following sequence diagram shows how the view transaction operation works:
-<img src="images/FilterSequenceDiagram.png" width="600" />
+<img src="images/FilterSequenceDiagram.png" width="800" />
 
 ## Product scope
 
