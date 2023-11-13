@@ -113,7 +113,7 @@ public class Parser {
         }
     }
 
-    public static Date parseDate(String date, String format, SimpleDateFormat formatter)
+    public static Date parseDate(String date, SimpleDateFormat formatter)
             throws NuscentsException, ParseException {
         String separator;
         separator = "-";
@@ -146,7 +146,7 @@ public class Parser {
                     AllowanceCategory allowanceCategory = parseAllowanceCategory(category);
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
-                    Date formattedDate = parseDate(date, format, formatter);
+                    Date formattedDate = parseDate(date, formatter);
                     boolean isValid  = isDateValid(date, formattedDate);
                     if (!isValid) {
                         throw new NuscentsException(MESSAGE_INVALID_DATE);
@@ -195,7 +195,7 @@ public class Parser {
                     ExpenseCategory expenseCategory = parseExpenseCategory(category);
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
-                    Date formattedDate = parseDate(date, format, formatter);
+                    Date formattedDate = parseDate(date, formatter);
                     boolean isValid  = isDateValid(date, formattedDate);
                     if (!isValid) {
                         throw new NuscentsException(MESSAGE_INVALID_DATE);

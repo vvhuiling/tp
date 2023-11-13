@@ -54,7 +54,7 @@ public class StorageTest {
     private TransactionList getTestTransactionList() throws Exception {
         TransactionList transactions = new TransactionList();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date formattedDate = parseDate("23-10-2023", "dd-MM-yyyy", formatter);
+        Date formattedDate = parseDate("23-10-2023", formatter);
         transactions.addTransaction(new Expense(50, formattedDate, "Lunch", "Pasta",
                 ExpenseCategory.FOOD));
         return transactions;
