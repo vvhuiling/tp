@@ -1,4 +1,7 @@
-# NUScents
+---
+layout: page
+title: NUScents
+---
 
 Welcome to 🪙NUScents🪙, the tailor-made financial tracker for SOC students at
 NUS. It is optimized for use via a Command Line Interface (CLI) to offer a clutter-free
