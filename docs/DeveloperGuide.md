@@ -1,28 +1,61 @@
 # Developer Guide
 
-## Acknowledgements
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Welcome to the Developer Guide of 🪙NUScents🪙 where we have written
+documentation with regards to the design and implementation of the App. In addition,
+we added other related information like the product scope, user stories, non-functional
+requirements, glossary and instructions for testing
 
 ## Design
 
 ### Architecture
-The ***Architecture Diagram*** given above explains the high-level design of the App.   
-Given below is a quick overview of main components and how they interact with each other.
+
+The ***Architecture Diagram*** given below explains the high-level design of the 🪙NUScents🪙 App.
+It depicts and provides a quick overview of how the core components interact with each other.
 
 <img src="images/ArchitectureDiagram.png" width="300" />
 
-**Main components of the architecture**   
+### Main Components:
 [**`Nuscents`**](https://github.com/AY2324S1-CS2113-T18-4/tp/blob/master/src/main/java/seedu/nuscents/Nuscents.java)  is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+The bulk of the app's work is done by the following five components:
 
-* **`UI`**: The UI of the App.
-* **`Parser`**: Processes the input command of a user.
-* **`Commands`**: The command executor.
-* **`Data`**: Holds the data of the transactions while the program is running.
-* **`Storage`**: Reads data from, and writes data to, the hard disk.
+1. **User Interface (UI):**
+    - Optimized for use via a Command Line Interface (CLI).
+
+2. **Commands:**
+    - Represents user-entered commands for financial tasks.
+
+3. **Parser:**
+    - Interprets and processes user commands, extracting relevant information.
+
+4. **Data:**
+    - Manages financial data and performs operations based on user commands.
+
+5. **Storage:**
+    - Persists financial data to a file or database.
+
+### Interaction Flow:
+
+- **User Interaction with UI:**
+    - Users interact with the CLI, entering commands for financial tasks.
+
+- **UI Interaction with Commands and Data:**
+    - The UI forwards user commands to the Commands component.
+
+- **Commands through the Parser:**
+    - The Commands component sends user commands to the Parser.
+    - The Parser processes commands, extracting relevant information.
+
+- **NUScents Interaction with UI, Commands, Parser, and Storage:**
+    - NUScents receives processed commands from the Parser.
+    - NUScents directs commands to the Data for execution.
+    - NUScents interacts with the UI to provide user feedback.
+    - NUScents interacts with Storage to read/write financial data.
+
+- **Storage Interaction with Data:**
+    - The Storage component interacts with the Data for data retrieval or storage.
 
 **UI Component**   
 The `ui` packages consists of the `Ui` class and the `Messages` class.   
@@ -36,7 +69,8 @@ Each `Transaction` object stores the information for an `Allowance` or an `Expen
 
 ## **Implementation**
 
-### Add transaction feature
+### `add` Transaction Feature
+
 The add transaction feature is facilitated by the `Parser` class which parses user input and creates a `Expense` or
 `Allowance` object which extends from the `Transaction` class. The created `Transaction` object will be stored in a 
 `TransactionList`.
@@ -53,41 +87,49 @@ The following sequence diagram shows how the add transaction operation works:
 
 <img src="images/AddTransactionSequenceDiagram.png" width="600" />
 
-### View transaction feature
+### `list` Transactions Feature
+
+The list transaction feature is facilitated by the `Parser` class which parses user input and creates a new
+`ListCommand` object. The `ListCommand` object will get all the transactions in the `TransactionList` and display them
+to the user.
+
+Given below is the example usage scenario and how the list transaction mechanism behaves at each step.
+
+Step 1. The user launches the application. The `TransactionList` will be initialized with the transactions stored in
+the `nuscents.txt` file. If the file is empty or does not exist, the `TransactionList` will be empty.
+
+Step 2. The user executes `list` command to list the transactions. The `list` command calls `ListCommand#execute()`,
+which gets the transactions from the `TransactionList` and displays them to the user.
+
+The following sequence diagram shows how the list transaction operation works:
+
+<img src="images/ListTransactionSequenceDiagram.png" width="600" />
+
+In addition to that, the list transaction feature further computes and displays the net balance amount based on the
+following formula (net balance = total allowance amount - total expense amount). The `showTransactionList()` method in
+the `Ui` class, it utilizes the float `netBalance` to store the net balance amount. When the `TransactionList` is
+iterated to print the transactions, it does a simple calculation based on whether it is an allowance or expense, to add
+or minus off respectively from the net balance.
+
+### `view` Transaction Feature
 
 #### I. Architecture-Level Design
-The "View Transaction" feature primarily involves the following components:
-
+This section lists the components involved in the `view` transaction feature:
 1. **Parser**: Responsible for interpreting user input and generating a ViewCommand object.
-
 2. **ViewCommand**: A subclass of the Command class, created by the Parser to represent the "view" command.
-
-3. **Nuscents**: he main application class that receives and executes commands. It invokes the execute() method of the ViewCommand.
-
+3. **Nuscents**: The main application class that receives and executes commands. It invokes the execute() method of the ViewCommand.
 4. **TransactionList**: A data structure to store and manage transactions.
-
 5. **Transaction**: Represents individual transactions.
-
 6. **UI**: Handles user interface and messaging.
 
 #### II. Component-Level Design
-1. **Parser**: 
-   The Parser class identifies the "view" command and extracts the taskIndex (transaction index) from the user's input.
-
-2. **ViewCommand**: 
-   The ViewCommand object is created by the Parser. It encapsulates the user's request to view a specific transaction. This object is passed to the Nuscents class for execution.
-
-3. **Nuscents**: 
-   In the Nuscents class, the execute() method of the ViewCommand is called, and the taskIndex is extracted from the command. It then calls the viewTransaction(taskIndex) method on the TransactionList.
-
-4. **TransactionList**: 
-   The TransactionList contains a list of Transaction objects. The viewTransaction(taskIndex) method retrieves the specific Transaction object based on the taskIndex.
-
-5. **Transaction**: 
-   The Transaction class represents an individual transaction, and it contains all the relevant details of a transaction.
-
-6. **UI**: 
-   The UI class displays the transaction details using the UI.showTransactionViewMessage method, which receives the Transaction object as input and presents the detailed transaction information to the user.
+This section describes each component's role for the `view` transaction feature:
+1. **Parser**: The Parser class identifies the "view" command and extracts the taskIndex (transaction index) from the user's input.
+2. **ViewCommand**: The ViewCommand object is created by the Parser. It encapsulates the user's request to view a specific transaction. This object is passed to the Nuscents class for execution.
+3. **Nuscents**: In the Nuscents class, the execute() method of the ViewCommand is called, and the taskIndex is extracted from the command. It then calls the viewTransaction(taskIndex) method on the TransactionList.
+4. **TransactionList**: The TransactionList contains a list of Transaction objects. The viewTransaction(taskIndex) method retrieves the specific Transaction object based on the taskIndex.
+5. **Transaction**: The Transaction class represents an individual transaction, and it contains all the relevant details of a transaction.
+6. **UI**: The UI class displays the transaction details using the UI.showTransactionViewMessage method, which receives the Transaction object as input and presents the detailed transaction information to the user.
 
 #### III. Alternatives Considered
 While the current design is deemed suitable for our application, we did consider alternative approaches, such as 
@@ -96,70 +138,34 @@ However, we opted for the current design to promote a cleaner separation of conc
 and modifications.
 
 #### IV. Usage Scenario Example
-
 **Step 1**: User launches the application. The TransactionList initializes.
-
 **Step 2**: User inputs view 2 to view the second transaction. The Parser identifies the command and extracts 2 as the taskIndex.
-
 **Step 3**: A ViewCommand is created with taskIndex 2. This command is passed to the Nuscents class.
-
 **Step 4**: Nuscents executes the ViewCommand, which invokes the viewTransaction method on TransactionList with taskIndex 2.
-
 **Step 5**: TransactionList retrieves the second Transaction object and returns it to Nuscents.
-
 **Step 6**: Nuscents passes the Transaction object to the UI, which displays the transaction details through the showTransactionViewMessage method.
 
 The following sequence diagram shows how the view transaction operation works:
 <img src="images/ViewSequenceDiagram.png" width="600" />
 
-### List transactions feature
-The list transaction feature is facilitated by the `Parser` class which parses user input and creates a new
-`ListCommand` object. The `ListCommand` object will get all the transactions in the `TransactionList` and display them 
-to the user.
-
-Given below is the example usage scenario and how the list transaction mechanism behaves at each step.
-
-Step 1. The user launches the application. The `TransactionList` will be initialized with the transactions stored in 
-the `nuscents.txt` file. If the file is empty or does not exist, the `TransactionList` will be empty. 
-
-Step 2. The user executes `list` command to list the transactions. The `list` command calls `ListCommand#execute()`, 
-which gets the transactions from the `TransactionList` and displays them to the user.
-
-The following sequence diagram shows how the list transaction operation works:
-
-<img src="images/ListTransactionSequenceDiagram.png" width="600" />
-
-In addition to that, the list transaction feature further computes and displays the net balance amount based on the 
-following formula (net balance = total allowance amount - total expense amount). The `showTransactionList()` method in 
-the `Ui` class, it utilizes the float `netBalance` to store the net balance amount. When the `TransactionList` is
-iterated to print the transactions, it does a simple calculation based on whether it is an allowance or expense, to add
-or minus off respectively from the net balance.
-
 ### `helpCommand` Feature
 
 #### I. Architecture-Level Design
 The `helpCommand` feature serves as an informative component to assist users unfamiliar with the application commands. It integrates the following components:
-
 1. **Parser**: Determines if the user input matches the `help` command.
 2. **HelpCommand**: A subclass of the Command class. Represents the `help` command, and provides command details when executed.
 3. **Nuscents**: The main application class that receives and executes commands. It invokes the `execute()` method of the `HelpCommand`.
 4. **UI**: Manages user interface interactions, such as displaying the help menu.
 
 #### II. Component-Level Design
-1. **Parser**:  
-   The `Parser` class recognizes the user's intention to access the help menu through the `help` keyword.
-
-2. **HelpCommand**:  
-   When the `Parser` identifies a `help` command, it instantiates a `HelpCommand` object. This object encapsulates the user's request to view the command instructions.
-
-3. **Nuscents**:  
-   Upon receiving the `HelpCommand` object, the `Nuscents` class triggers the `execute()` method of the `HelpCommand`.
-
-4. **UI**:  
-   The `UI` class is then responsible for fetching the `HELP_MENU` static string from the `HelpCommand` class and displaying it to the user. This ensures the user receives a comprehensive list of commands available in the application.
+This section describes each component's role for the `help` feature:
+1. **Parser**: The `Parser` class recognizes the user's intention to access the help menu through the `help` keyword.
+2. **HelpCommand**: When the `Parser` identifies a `help` command, it instantiates a `HelpCommand` object. This object encapsulates the user's request to view the command instructions.
+3. **Nuscents**: Upon receiving the `HelpCommand` object, the `Nuscents` class triggers the `execute()` method of the `HelpCommand`.
+4. **UI**: The `UI` class is then responsible for fetching the `HELP_MENU` static string from the `HelpCommand` class and displaying it to the user. This ensures the user receives a comprehensive list of commands available in the application.
 
 #### III. Alternatives Considered
-Initially, we pondered over embedding the help details directly within the main application class, `Nuscents`. This would eliminate the need for a separate `HelpCommand` class. However, segregating the `HelpCommand` ensures better modularity, making future expansions or modifications seamless.
+Initially, we pondered whether to embed the help details directly within the main application class, `Nuscents`. This would eliminate the need for a separate `HelpCommand` class. However, segregating the `HelpCommand` ensures better modularity, making future expansions or modifications seamless.
 
 #### `helpCommand` Usage Scenario
 **Step 1**: The user launches the application. The initial screen appears.   
@@ -169,36 +175,22 @@ Initially, we pondered over embedding the help details directly within the main 
 **Step 5**: The `UI` fetches the `HELP_MENU` string and displays the comprehensive list of commands to the user.
 
 ### `filter` Feature
+
 #### I. Architecture-Level Design
-This section outlines the components involved in the "Filter Transaction" feature:
-
+This section lists the components involved in the `filter` transaction feature:
 1. **Parser**: Interprets user input to identify the filter command.
-
 2. **FilterCommand**: A subclass of the Command class, representing the "filter" command based on a specified category.
-
 3. **Nuscents**: The core application class that executes commands, including FilterCommand.
-
 4. **TransactionList**: Manages transactions, providing functionality to filter them by category.
-
 5. **UI**: Handles user interactions and displays filtered transaction results or not found messages.
 
 #### II. Component-Level Design
-Each component's role is detailed below:
-
-1. **Parser**: 
-   Identifies the "filter" command and extracts the category (e.g., 'entertainment') through the parseFilterCategory method.
-
-2. **FilterCommand**: 
-   Created by the Parser with a specific category (e.g., 'entertainment') to encapsulate the filtering request.
-
-3. **Nuscents**: 
-   Executes the FilterCommand's execute() method, which invokes the filterTransaction method on TransactionList with the specified category.
-
-4. **TransactionList**:
-   Contains a collection of Transaction objects. The filterTransaction method filters transactions based on the given category.
-
-5. **UI**: 
-   Displays the filtered transactions using the showFilterMessage method or a not found message using showFilterNotFoundMessage(category) if no matching transactions are found.
+This section describes each component's role for the `filter` feature:
+1. **Parser**: Identifies the "filter" command and extracts the category (e.g., 'entertainment') through the parseFilterCategory method.
+2. **FilterCommand**: Created by the Parser with a specific category (e.g., 'entertainment') to encapsulate the filtering request.
+3. **Nuscents**: Executes the FilterCommand's execute() method, which invokes the filterTransaction method on TransactionList with the specified category.
+4. **TransactionList**: Contains a collection of Transaction objects. The filterTransaction method filters transactions based on the given category.
+5. **UI**: Displays the filtered transactions using the showFilterMessage method or a not found message using showFilterNotFoundMessage(category) if no matching transactions are found.
 
 #### III. Usage Scenario Example
 **Step 1**: User inputs filter entertainment to filter transactions by the 'entertainment' category. The Parser identifies the command and uses parseFilterCategory to extract 'entertainment' as the category.   
@@ -210,6 +202,43 @@ Each component's role is detailed below:
 The following sequence diagram shows how the view transaction operation works:
 <img src="images/FilterSequenceDiagram.png" width="800" />
 
+### `budget` Feature
+
+The `budget` feature allows users to set a budget by specifying a float value. 
+This budget is then stored persistently in a `budget.txt` file. 
+Here's how it works:
+
+### I. Architecture-Level Design
+This section lists the components involved in the `budget` transaction feature:
+1. **Parser:** Recognizes the `budget` command and extracts the float value.
+2. **BudgetCommand:** A subclass of the Command class, created by the Parser, representing the `budget` command.
+3. **Nuscents:** The main application class that executes commands. It triggers the `execute()` method of the `BudgetCommand`.
+4. **Storage:** Manages the reading and writing of the budget to the `budget.txt` file.
+5. **UI:** Displays messages related to the success or failure of setting the budget.
+
+### II. Component-Level Design
+This section describes each component's role for the `budget` feature:
+1. **Parser:** Identifies the `budget` command and extracts the float value.
+2. **BudgetCommand:** Created by the Parser with the extracted budget value.
+3. **Nuscents:** Executes the `execute()` method of the `BudgetCommand`. It then calls the `setBudget()` method.
+4. **Storage:** Handles the reading and writing of the budget to the `budget.txt` file. It stores the budget persistently.
+5. **UI:** Displays messages to inform the user about the success or failure of setting the budget.
+
+### III. Usage Scenario Example
+**Step 1:** User inputs `budget 50`. The Parser recognizes the command and extracts the budget value of 50.
+**Step 2:** A BudgetCommand object is created with the budget value of 50. This command is then passed to the Nuscents class.
+**Step 3:** Nuscents executes the BudgetCommand, which invokes the `setBudget()` method and sets the budget value of 50.
+**Step 4:** Storage writes the budget value to the `budget.txt` file, making it persistent.
+
+The `list` feature now incorporates information about the budget
+It prompts the user with a message whether they are approaching or exceeding their budget. 
+
+### IV. Persistence and Initialization
+To ensure the persistence of the budget and proper initialization, the following steps are taken:
+1. **Initialization:** When 🪙NUScents🪙 is run, it checks for the existence of the `budget.txt` file. If found, it reads the budget value and initializes the `budget` variable. If not found, there is no budget initialized (set to 0).
+2. **Storage:** Manages the reading and writing of the budget to the `budget.txt` file. It ensures that the budget is persistently stored and can be retrieved when needed.
+These additions provide users with a warning feature, enhancing the financial tracking capabilities of 🪙NUScents🪙. Users can now set a budget, and the application will inform them about their spending status concerning the budget within the `list` feature.
+
 ## Product scope
 
 ### Target user profile
@@ -218,7 +247,30 @@ while balancing aspects of university-life, academics and social activities. SOC
 CLI applications, which are often built to be efficient and clutter-free.
 
 ### Value proposition
-{Describe the value proposition: what problem does it solve?}
+
+**Problem:**
+Managing and monitoring financial activities can sometimes be a hassle for students. With various transactions and expenses throughout the semester, it's possible to lose track and struggle with financial organization.
+
+**Solution:**
+🪙NUScents🪙 offers a tailor-made financial tracking solution for SOC students at NUS. It streamlines financial management through a Command Line Interface (CLI), providing a clutter-free solution for users to efficiently manage and monitor their financial activities.
+
+**Key Features:**
+
+- **Optimized CLI:** A user-friendly CLI ensures a seamless and efficient experience for inputting and retrieving financial data.
+
+- **Customization:** Tailored specifically for SOC students at NUS, the application aligns with the unique financial needs and challenges of the user base.
+
+- **Simplified Financial Tracking:** Through intuitive commands, users can effortlessly add, query, and manage financial transactions, enhancing overall financial organization.
+
+**Benefits:**
+
+- **Efficiency:** Users can perform financial tasks quickly and easily via the CLI, reducing the time and effort required for financial management.
+
+- **Clutter-Free Interface:** The design minimizes distractions, providing a focused environment for users to concentrate on their financial activities.
+
+- **Tailored to Student Needs:** Addressing the specific requirements of SOC students ensures relevance and practicality for the target user base.
+
+🪙NUScents🪙 is not just a financial tracker; it's a streamlined solution crafted to simplify the financial lives of SOC students at NUS, offering efficiency,
 
 ## User Stories
 
@@ -241,7 +293,48 @@ CLI applications, which are often built to be efficient and clutter-free.
 | v2.0    | university student | view details of income or expenses                        | I can have a better understanding of my financial habit  |
 
 ## Non-Functional Requirements
-{Give non-functional requirements}
+
+### Performance
+
+**Response Time:** The system should respond to CLI commands within a maximum acceptable time of 1 second to ensure users receive quick feedback.
+
+**Throughput:** The system should only be expected to handle one transaction at a time to ensure that there are no conflicts in transactions.
+
+### Reliability
+
+**Availability:** The system should have an availability of at least 99.9%, ensuring it is accessible to users for the majority of the time.
+
+**Error Handling:** The system should demonstrate proper fault tolerance and error handling by recovering gracefully from any failure or unexpected errors, ensuring uninterrupted service.
+
+### Security
+
+**Access Control:** Access to financial data and CLI commands should be restricted based on individual users. 🪙NUScents🪙 is designed to be used by only one person per system. Hence, there is no sharing of financial data or transactions.
+
+### Scalability
+
+**Data Scalability:** The system should be able to scale horizontally to accommodate with the increase in the volume of financial data without a significant impact on performance.
+
+### Usability
+
+**CLI User Interface Design:** The CLI should follow a user-friendly design, with clear and intuitive commands, prompts, and feedback messages to enhance the user experience. In addition, there is a "help" option that guides the user on how to use the different possible commands.
+
+**User Documentation:** We have created a user guide with examples to assist users in understanding and utilizing the features of 🪙NUScents🪙.
+
+### Compatibility & Portability
+
+**Operating System Compatibility:** The CLI should be compatible with major operating systems, including Windows, macOS, and Linux.
+
+**CLI Portability:** Ensure that the CLI is portable across different environments and platforms, allowing users to use 🪙NUScents🪙 consistently regardless of their setup.
+
+**Data Migration:** Establish procedures for migrating financial data when moving the system to a different environment, ensuring data integrity and a smooth transition.
+
+### Maintainability
+
+**Code Maintainability:** Follow industry best practices for coding standards, and maintain clear and well-documented code to facilitate easy understanding and future maintenance.
+
+### Auditability
+
+**Transaction Logs:** Define a logging mechanism that captures relevant information for storage functions. Logs should be stored securely and be available for auditing purposes.
 
 ## Glossary
 * *glossary item* - Definition
