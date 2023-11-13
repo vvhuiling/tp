@@ -13,6 +13,47 @@ It depicts and provides a quick overview of how the core components interact wit
 
 <img src="images/ArchitectureDiagram.png" width="300" />
 
+### Main Components:
+
+1. **User Interface (UI):**
+    - Optimized for use via a Command Line Interface (CLI).
+
+2. **Commands:**
+    - Represents user-entered commands for financial tasks.
+
+3. **Parser:**
+    - Interprets and processes user commands, extracting relevant information.
+
+4. **Model:**
+    - Manages financial data and performs operations based on user commands.
+
+5. **NUScents:**
+    - Central orchestrator coordinating UI, Commands, Parser, and Model.
+
+6. **Storage:**
+    - Persists financial data to a file or database.
+
+### Interaction Flow:
+
+- **User Interaction with UI:**
+    - Users interact with the CLI, entering commands for financial tasks.
+
+- **UI Interaction with Commands and Model:**
+    - The UI forwards user commands to the Commands component.
+
+- **Commands through the Parser:**
+    - The Commands component sends user commands to the Parser.
+    - The Parser processes commands, extracting relevant information.
+
+- **NUScents Interaction with UI, Commands, Parser, and Storage:**
+    - NUScents receives processed commands from the Parser.
+    - NUScents directs commands to the Model for execution.
+    - NUScents interacts with the UI to provide user feedback.
+    - NUScents interacts with Storage to read/write financial data.
+
+- **Storage Interaction with Model:**
+    - The Storage component interacts with the Model for data retrieval or storage.
+
 ## **Implementation**
 
 ### `add` Transaction Feature
