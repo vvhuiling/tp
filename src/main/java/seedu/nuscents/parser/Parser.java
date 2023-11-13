@@ -147,6 +147,10 @@ public class Parser {
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
                     Date formattedDate = parseDate(date, format, formatter);
+                    boolean isValid  = isDateValid(date, formattedDate);
+                    if (!isValid) {
+                        throw new NuscentsException(MESSAGE_INVALID_DATE);
+                    }
                     assert formattedDate != null;
                     assert description != null;
                     assert additionalInfo != null;
@@ -159,6 +163,14 @@ public class Parser {
                 throw new NuscentsException(MESSAGE_INVALID_AMOUNT);
             }
         }
+    }
+
+    private static boolean isDateValid(String date, Date formattedDate) {
+        String[] dateMonthYear = date.split("-");
+        if (formattedDate.getDate() != Integer.parseInt(dateMonthYear[0])) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -184,7 +196,10 @@ public class Parser {
                     String format = datePatternValidation(date);
                     SimpleDateFormat formatter = new SimpleDateFormat(format);
                     Date formattedDate = parseDate(date, format, formatter);
-
+                    boolean isValid  = isDateValid(date, formattedDate);
+                    if (!isValid) {
+                        throw new NuscentsException(MESSAGE_INVALID_DATE);
+                    }
                     // Ensure all necessary fields are present before creating the Expense object
                     assert formattedDate != null;
                     assert description != null;
