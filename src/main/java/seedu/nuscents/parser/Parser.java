@@ -66,7 +66,7 @@ public class Parser {
     public static <TransactionList> Command parseCommand(String text, TransactionList transactions)
             throws NuscentsException, ParseException {
         String[] commandTypeAndArgs = text.split(" ", 2);
-        String commandType = commandTypeAndArgs[0];
+        String commandType = commandTypeAndArgs[0].toLowerCase();
         String arguments;
         if (commandTypeAndArgs.length > 1) {
             arguments = commandTypeAndArgs[1];
@@ -396,12 +396,12 @@ public class Parser {
     private static String extractValue(String command, String input, String pattern, boolean isOptional)
             throws NuscentsException {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(pattern);
-        java.util.regex.Matcher m = p.matcher(input);
+        java.util.regex.Matcher m = p.matcher(input.toLowerCase());
 
         if (m.find()) {
             return m.group(1).trim();
         } else if (!isOptional) {
-            switch (command) {
+            switch (command.toLowerCase()) {
             case "allowance":
                 throw new NuscentsException(MESSAGE_EMPTY_ALLOWANCE);
             case "expense":
