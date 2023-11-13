@@ -44,6 +44,8 @@ import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_DATE;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_HELP;
+import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_LIST;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_INDEX_ARGUMENTS;
 import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_EXPENSE_CATEGORY;
 import static seedu.nuscents.ui.Messages.MESSAGE_UNKNOWN_ALLOWANCE_CATEGORY;
@@ -79,6 +81,7 @@ public class Parser {
             case COMMAND_EXIT:
                 return new ExitCommand();
             case COMMAND_LIST:
+                isArgumentEmpty(arguments, MESSAGE_INVALID_LIST);
                 return new ListCommand();
             case COMMAND_ALLOWANCE:
                 return new AddCommand(parseAllowance(arguments));
@@ -95,15 +98,19 @@ public class Parser {
             case COMMAND_EDIT:
                 return parseEdit(arguments);
             case COMMAND_HELP:
-                if (arguments != null) {
-                    throw new NuscentsException("OOPS!!! The correct format is 'help' alone.");
-                }
+                isArgumentEmpty(arguments, MESSAGE_INVALID_HELP);
                 return new HelpCommand();
             default:
                 return new InvalidCommand();
             }
         } catch (NuscentsException | ParseException e) {
             throw e;
+        }
+    }
+
+    private static void isArgumentEmpty(String arguments, String message) throws NuscentsException {
+        if (arguments != null) {
+            throw new NuscentsException(message);
         }
     }
 
