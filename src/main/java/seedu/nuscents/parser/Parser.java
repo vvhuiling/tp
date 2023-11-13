@@ -224,9 +224,9 @@ public class Parser {
         Instant instant = formattedDate.toInstant();
         // Convert Instant to LocalDate
         LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        if (format.equals(DATE_PATTERN1) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
+        if (format.equals("yyyy-M-d") && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
             return false;
-        } else if (format.equals(DATE_PATTERN2) && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[2])) {
+        } else if (format.equals("d-M-yyyy") && localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[2])) {
             return false;
         }
         return true;
