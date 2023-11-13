@@ -20,8 +20,11 @@ import seedu.nuscents.data.transaction.AllowanceCategory;
 import seedu.nuscents.data.transaction.TransactionCategory;
 import seedu.nuscents.data.exception.NuscentsException;
 
+import java.time.Instant;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import static seedu.nuscents.commands.ListOfCommands.COMMAND_EXIT;
@@ -37,7 +40,6 @@ import static seedu.nuscents.commands.ListOfCommands.COMMAND_EDIT;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_ALLOWANCE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_EXPENSE;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_INDEX;
-import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.nuscents.ui.Messages.MESSAGE_EMPTY_BUDGET;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET;
 import static seedu.nuscents.ui.Messages.MESSAGE_INVALID_BUDGET_FLOAT_DP;
@@ -210,7 +212,10 @@ public class Parser {
 
     private static boolean isDateValid(String date, Date formattedDate) {
         String[] dateMonthYear = date.split("-");
-        if (formattedDate.getDate() != Integer.parseInt(dateMonthYear[0])) {
+        Instant instant = formattedDate.toInstant();
+        // Convert Instant to LocalDate
+        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        if (localDate.getDayOfMonth() != Integer.parseInt(dateMonthYear[0])) {
             return false;
         }
         return true;
