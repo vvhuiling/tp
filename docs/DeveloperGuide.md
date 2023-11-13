@@ -163,6 +163,45 @@ and modifications.
 The following sequence diagram shows how the view transaction operation works:
 <img src="images/ViewSequenceDiagram.png" width="600" />
 
+### `edit` Transaction Feature
+
+#### I. Architecture-Level Design
+This section details the components involved in the `edit` transaction feature:
+1. **Parser**: Interprets user input and creates an `EditCommand` object with the appropriate parameters.
+2. **EditCommand**: Inherits from the `Command` class, encapsulating the "edit" action along with the index and the new transaction details.
+3. **Nuscents**: The main class that invokes the `execute()` method of `EditCommand`.
+4. **TransactionList**: Manages a collection of transactions and facilitates the replacement of a specific transaction.
+5. **Transaction**: The superclass for different types of transactions such as `Expense` and `Allowance`.
+6. **UI**: Manages interactions with the user and displays messages regarding the editing process.
+
+#### II. Component-Level Design
+Here's how each component plays a role in the `edit` transaction feature:
+1. **Parser**: Extracts the index and transaction details from the input and uses other parsing methods to create a `Transaction` object.
+2. **EditCommand**: Contains the logic to replace an existing transaction in the `TransactionList`.
+3. **Nuscents**: Calls the `execute()` method of `EditCommand` and handles exceptions that may arise.
+4. **TransactionList**: Provides the `editTransaction(index, transaction)` method to update transactions at a specific index.
+5. **Transaction**: Abstract representation of a financial record that can be edited.
+6. **UI**: Outputs the result of the edit operation and any error messages.
+
+#### III. Alternatives Considered
+An alternative design considered was to have `EditCommand` interact directly with `Transaction` objects to modify their fields. However, this approach was discarded in favor of having a clear separation where `TransactionList` manages all transactions, maintaining encapsulation and single responsibility principles.
+
+#### IV. Usage Scenario Example
+**Step 1**: User starts the application, and `TransactionList` is initialized with existing transactions.
+
+**Step 2**: The user inputs `edit 2 expense /amt 100 /date 01-01-2023 /desc Movie night`. The `Parser` reads the input, separating the index from the rest of the transaction details.
+
+**Step 3**: `Parser` calls `parseExpense` to create an `Expense` object and then constructs an `EditCommand` with the index and the new `Expense`.
+
+**Step 4**: `Nuscents` receives and invokes the `EditCommand`'s `execute()` method.
+
+**Step 5**: Inside `execute()`, `EditCommand` uses `TransactionList`'s `editTransaction(index, transaction)` to replace the existing transaction.
+
+**Step 6**: `TransactionList` updates the transaction at the given index. If the index is invalid, an exception is thrown.
+
+**Step 7**: Upon successful update, `UI` displays a confirmation message. If an error occurs, an error message is shown instead.  
+
+
 ### `helpCommand` Feature
 
 #### I. Architecture-Level Design
