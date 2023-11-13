@@ -39,23 +39,41 @@ The bulk of the app's work is done by the following five components:
 ### Interaction Flow:
 
 - **User Interaction with UI:**
-    - Users interact with the CLI, entering commands for financial tasks.
+    - Users interact with the CLI, entering user input for financial tasks.
 
-- **UI Interaction with Commands and Data:**
-    - The UI forwards user commands to the Commands component.
 
-- **Commands through the Parser:**
-    - The Commands component sends user commands to the Parser.
-    - The Parser processes commands, extracting relevant information.
+- **UI Interaction with NUSCents:**
+    - The UI forwards user input to the NUScents component.
+  
 
-- **NUScents Interaction with UI, Commands, Parser, and Storage:**
-    - NUScents receives processed commands from the Parser.
-    - NUScents directs commands to the Data for execution.
+- **NUSCents Interaction with Parser:**
+    - NUSCents forwards the user input to the Parser for parsing.
+
+
+- **Parser Interaction with Commands:**
+    - After parsing user input, Parser will create a Command object of the relevant command type.
+    - Parser will return this command object back to NUScents.
+
+
+- **NUScents Interaction with Parser, Data, Commands:**
+    - NUScents receives commands from the Parser.
+    - NUScents provides Data to the command and executes it. 
     - NUScents interacts with the UI to provide user feedback.
     - NUScents interacts with Storage to read/write financial data.
 
+
+- **Commands Interaction with Data, UI:**
+    - The Command will access the relevant Data for execution.
+    - The Command will use UI to print out messages to the user.
+
+
+- **NUScents Interaction with Storage:**
+    - NUScents uses the Storage component to read/write financial data to file.
+
+
 - **Storage Interaction with Data:**
-    - The Storage component interacts with the Data for data retrieval or storage.
+    - The Storage component access the Data to store/read to file.
+
 
 **UI Component**   
 The `ui` packages consists of the `Ui` class and the `Messages` class.   
