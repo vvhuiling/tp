@@ -6,12 +6,26 @@
 ## Design
 
 ### Architecture
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the App.   
 Given below is a quick overview of main components and how they interact with each other.
 
 <img src="images/ArchitectureDiagram.png" width="300" />
 
-**Main components of the architecture**
+**Main components of the architecture**   
+[**`Nuscents`**](https://github.com/AY2324S1-CS2113-T18-4/tp/blob/master/src/main/java/seedu/nuscents/Nuscents.java)  is in charge of the app launch and shut down.
+* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+The bulk of the app's work is done by the following four components:
+
+* **`UI`**: The UI of the App.
+* **`Parser`**: Processes the input command of a user.
+* **`Commands`**: The command executor.
+* **`Data`**: Holds the data of the transactions while the program is running.
+* **`Storage`**: Reads data from, and writes data to, the hard disk.
+
+**UI Component**
+
 
 ## **Implementation**
 
