@@ -289,6 +289,17 @@ public class ParserTest {
     }
 
     @Test
+    public void parseEdit_emptyArguments_exceptionThrown() {
+        String input = "edit 2";
+        Exception exception = assertThrows(NuscentsException.class, () -> {
+            Parser.parseEdit(input);
+        });
+        assertEquals(Messages.MESSAGE_EMPTY_EDIT, exception.getMessage());
+    }
+
+
+
+    @Test
     public void parseCommand_helpCommandWithCorrectInput_returnsHelpCommand() throws Exception {
         Command result = Parser.parseCommand("help", null);
         assertTrue(result instanceof HelpCommand);

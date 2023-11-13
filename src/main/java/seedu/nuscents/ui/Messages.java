@@ -38,7 +38,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! This is an invalid transaction index.";
     public static final String MESSAGE_INVALID_INDEX_ARGUMENTS = "OOPS!!! The input should consist only of digits.";
     public static final String MESSAGE_EMPTY_LIST = "You have not made any transactions!";
-    public static final String MESSAGE_EMPTY_KEYWORD = "OOPS!!! The keyword of a find command cannot be empty.";
     public static final String MESSAGE_EMPTY_BUDGET = "OOPS!!! The budget amount cannot be empty.";
     public static final String MESSAGE_INVALID_BUDGET = "OOPS!!! The budget amount requires a +ve valid float value";
     public static final String MESSAGE_INVALID_BUDGET_FLOAT_DP = "OOPS!!! The budget amount cannot exceed 2 d.p.";
