@@ -37,7 +37,7 @@ deactivate parser
 nuscents -> AddCommand : execute()
 activate AddCommand
 
-AddCommand -> TransactionList : add()
+AddCommand -> TransactionList : addTransaction(transaction)
 activate TransactionList
 
 TransactionList --> AddCommand
@@ -47,5 +47,6 @@ AddCommand --> nuscents
 deactivate AddCommand
 
 nuscents --> user
+destroy AddCommand
 deactivate nuscents
 @enduml

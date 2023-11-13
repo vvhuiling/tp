@@ -8,12 +8,18 @@ requirements, glossary and instructions for testing
 ## Design
 
 ### Architecture
+
 The ***Architecture Diagram*** given below explains the high-level design of the 🪙NUScents🪙 App.
 It depicts and provides a quick overview of how the core components interact with each other.
 
 <img src="images/ArchitectureDiagram.png" width="300" />
 
 ### Main Components:
+[**`Nuscents`**](https://github.com/AY2324S1-CS2113-T18-4/tp/blob/master/src/main/java/seedu/nuscents/Nuscents.java)  is in charge of the app launch and shut down.
+* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+The bulk of the app's work is done by the following five components:
 
 1. **User Interface (UI):**
     - Optimized for use via a Command Line Interface (CLI).
@@ -27,10 +33,7 @@ It depicts and provides a quick overview of how the core components interact wit
 4. **Data:**
     - Manages financial data and performs operations based on user commands.
 
-5. **NUScents:**
-    - Central orchestrator coordinating UI, Commands, Parser, and Data.
-
-6. **Storage:**
+5. **Storage:**
     - Persists financial data to a file or database.
 
 ### Interaction Flow:
@@ -53,6 +56,16 @@ It depicts and provides a quick overview of how the core components interact wit
 
 - **Storage Interaction with Data:**
     - The Storage component interacts with the Data for data retrieval or storage.
+
+**UI Component**   
+The `ui` packages consists of the `Ui` class and the `Messages` class.   
+The UI component prompts and reads commands from the user and sends the command to `Parser` package to be executed.
+
+**Data Component**
+<img src="images/DataClassDiagram.png" width="500" />
+The Data component stores the transaction data i.e., all `Transaction` objects in a `TransactionList` object.   
+
+Each `Transaction` object stores the information for an `Allowance` or an `Expense`.
 
 ## **Implementation**
 
@@ -180,14 +193,14 @@ This section describes each component's role for the `filter` feature:
 5. **UI**: Displays the filtered transactions using the showFilterMessage method or a not found message using showFilterNotFoundMessage(category) if no matching transactions are found.
 
 #### III. Usage Scenario Example
-**Step 1**: User inputs filter entertainment to filter transactions by the 'entertainment' category. The Parser identifies the command and uses parseFilterCategory to extract 'entertainment' as the category.
-**Step 2**: A FilterCommand object is created with the category set to 'entertainment'. This command is then passed to the Nuscents class.
-**Step 3**: In Nuscents, the execute() method of the FilterCommand is called. It invokes the filterTransaction method on the TransactionList with the category 'entertainment'.
-**Step 4**: TransactionList filters its transactions based on the 'entertainment' category. If matching transactions are found, it returns them; otherwise, it indicates that no transactions are found.
+**Step 1**: User inputs filter entertainment to filter transactions by the 'entertainment' category. The Parser identifies the command and uses parseFilterCategory to extract 'entertainment' as the category.   
+**Step 2**: A FilterCommand object is created with the category set to 'entertainment'. This command is then passed to the Nuscents class.   
+**Step 3**: In Nuscents, the execute() method of the FilterCommand is called. It invokes the filterTransaction method on the TransactionList with the category 'entertainment'.   
+**Step 4**: TransactionList filters its transactions based on the 'entertainment' category. If matching transactions are found, it returns them; otherwise, it indicates that no transactions are found.   
 **Step 5**: Depending on the outcome in Step 4, Nuscents instructs the UI to either display the list of filtered transactions and their net balance (using showFilterMessage) or to show a message indicating no transactions were found in the specified category (using showFilterNotFoundMessage).
 
-The following sequence diagram shows how the filter transaction operation works:
-<img src="images/FilterSequenceDiagram.png" width="600" />
+The following sequence diagram shows how the view transaction operation works:
+<img src="images/FilterSequenceDiagram.png" width="800" />
 
 ### `budget` Feature
 

@@ -10,7 +10,7 @@ Package " "<<Rectangle>>{
     Class UI UI_COLOR
     Class Parser PARSER_COLOR
     Class Nuscents #FDDA0D
-    Class Model #4169E1
+    Class Data #4169E1
     Class Commands #CCCCFF
     Class Storage STORAGE_COLOR
 }
@@ -23,12 +23,12 @@ Nuscents -[#E4D00A]> UI
 Nuscents -[#E4D00A]> Commands
 Nuscents -[#E4D00A]> Parser
 UI -[#green]-> Commands
-UI -[#green]> Model
+UI -[#green]> Data
 Commands -[#CCCCFF]> Parser
-Commands -[#CCCCFF]> Model
-Parser --[PARSER_COLOR]> Model
+Commands -[#CCCCFF]> Data
+Parser --[PARSER_COLOR]> Data
 
-Storage -up[STORAGE_COLOR].> Model
+Storage -up[STORAGE_COLOR].> Data
 Storage .left[STORAGE_COLOR].>File
 User ..> UI
 @enduml
